@@ -1,0 +1,114 @@
+﻿features
+manifest
+rubric preferences  
+    templates by type and difficulty or mastery level, bloom  
+    point value or weight (grading style, sliding scale)  
+    allow for general attention to detail, with or without cap, pts or pct of total  
+    criticality of values entered, treat as general content vs. "key" value  
+rubric specification        
+starting file(s)  
+solution file(s)  
+supporting file(s)  
+    instructions  
+    images  
+general preferences  
+    LO  
+        domain or subset to scope what's available   
+        concepts  
+        skill level  
+    remediation sources  
+        text  
+        tool  
+        custom URI  
+ontology
+application (excel)  
+    nouns  
+    verbs  
+learning objectives  
+    step/task templates for various LOs   
+        simplify creation of projects  
+        could be usage domain specific  
+        support compound steps(snippets)  
+create explorer studio  
+dependency z-tree  
+    concepts  
+    bloom skill level  
+z-studio
+learning mode  
+maintain rubric schema  
+make each area its own dockable control that can be dynamically docked and viewed  
+consider selecting steps/tasks by name (similar to the way controls are in vs)  
+step/task names  
+    auto number according to displayed order  
+    assign ZUIDs  
+    allow user to override  
+    save as snippets  
+custom controls  
+    step  
+    task  
+    answers  
+view formulas in excel
+select cells in excel and import scenario
+when a scenario is selected, populate excel with “values"
+show name of scenario in excel frame titlebar, highlight/select cells in excel, maybe draw some box or frame around cells
+OPERATOR Precedence
+9) reference. : (colon), (single space), (comma)
+8) – Negation (as in –1)
+7) % Percent
+6) ^ Exponentiation
+5) * and / Multiplication and division
+4) + and – Addition and subtraction
+3) & Connects two strings of text (concatenation)
+0) comparison =, < >, <=, >=, <>
+parse inside out looking for operands of operators that have an alternate order equivalent
+define markup to associate portions of a step with a task, this will facilitate breaking them up
+create my own hyperlinks  
+show halo around associated content  
+look at using colors, ala excel, to delineate subtasks of a step http://www.codestructs.com/2011/11/syntax-highlighting-in-richtextbox_23.html  
+error type classification
+typo  
+conceptual  
+    use correct formula to produce results, but do not use requested method  
+    use cell references in formula, but not in requested form, absolute references, copy/paste/edit instead of autofill  
+    use of functions when simple formula is sufficient  
+application/usage  
+    right function/feature, incorrect options - omitting false expression, choosing wrong font  
+    improper use of subordinate LO - malformed expression in an if statement  
+    including extra cells in range  
+FAIL  
+    end result appears correct, but entered as value instead of formula  
+    use literal values in formulas in lieu of appropriate cell references  
+    any act of deception that attempts to give illusion of correct results  
+weighting classifications
+learning objective ranking(s)  
+    major  
+    minor  
+general  
+    typos  
+    omissions  
+error types (pct of task)  
+paste options
+content (value, formula)  
+formatting  
+    as cells  
+    as range/region  
+        borders  
+        all have same settings  
+LCAs
+mark  
+location  
+    literal location  
+    relative location  
+    logical (provide rules for identifying region)  
+formulas  
+    literal  
+    relative (use relative notation, esp. helpful in copy/paste or autofill)  
+    logical (like column sum in table)  
+        * this could also be associated with LO     
+index
+handling images
+facilitate specification of “bulk” data
+http://rubistar.4teachers.org/index.php?screen=CustomizeTemplate&bank_rubric_id=24&section_id=7&
+No virus found in this message.
+Checked by AVG - www.avg.com
+Version: 2012.0.2197 / Virus Database: 2437/5149 - Release Date: 07/23/12

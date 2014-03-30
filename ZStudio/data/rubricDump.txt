@@ -1,0 +1,60 @@
+Steps[0].02:pts:2.25 - Create a VLOOKUP function to calculate the bonus amount for each employee.
+Steps[0].02.Tasks[0].a:pts:2.25 - a. Click the Employees sheet tab, and select I4.
+    answer: 
+        type: Content
+        literalValue: 0.01
+        expression: =VLOOKUP(H4,Bonus!$A$4:$B$8,2)  =VLOOKUP(H4,Bonus!A4:B8,2)
+Steps[0].02.Tasks[0].a.Args[0].Function - Create a VLOOKUP function to calculate the bonus amount for each employee.
+        VLOOKUP
+Steps[0].02.Tasks[0].a.Args[1].Lookup_value - b. Type a formula to reference the Base Monthly Salary amount as the lookup_value.
+        H4
+Steps[0].02.Tasks[0].a.Args[2].Table_array - c. Click the Bonus sheet tab for the table_array argument.
+        $A$4:$B$8
+Steps[0].02.Tasks[0].a.Args[3].Col_index_num - d. Use the second column of the table for the col_index_num.
+        2
+Steps[0].02.Tasks[0].a.Args[4].Range_lookup - e. Verify that the formula syntax is =VLOOKUP(H4,Bonus!A4:B8,2).
+        <NULL>
+Steps[0].02.Tasks[0].a.Scenarios[0]:deductPts:0.5625 - SpecifiedRange_lookupDefaultValue
+    answer: 
+        type: Content
+        literalValue: 
+        expression: =VLOOKUP(H4,$A$4:$B$8,2,TRUE)
+Steps[0].02.Tasks[0].a.Scenarios[1]:deductPts:1.125 - SpecifiedRange_lookupIncorrectValue
+    answer: 
+        type: Content
+        literalValue: 
+        expression: =VLOOKUP(H4,$A$4:$B$8,2,FALSE)
+Steps[1].03:pts:1.5 - Select the formula in I4 and apply absolute values to the cell references in the table_array argument.
+Steps[1].03.Tasks[0].-:pts:1.5 - Select the formula in I4 and apply absolute values to the cell references in the table_array argument.
+    answer: 
+        type: Content
+        literalValue: 0.01
+        expression: =VLOOKUP(H4,Bonus!$A$4:$B$8,2)
+Steps[1].03.Tasks[0].-.Args[0].Function - 
+        VLOOKUP
+Steps[1].03.Tasks[0].-.Args[1].Lookup_value - 
+        H4
+Steps[1].03.Tasks[0].-.Args[2].Table_array - 
+        $A$4:$B$8
+Steps[1].03.Tasks[0].-.Args[3].Col_index_num - 
+        2
+Steps[1].03.Tasks[0].-.Args[4].Range_lookup - 
+        <NULL>
+Steps[1].03.Tasks[0].-.Scenarios[0]:deductPts:1.5 - NoChange
+    answer: 
+        type: Content
+        literalValue: 
+        expression: /Keys[{^Key}].Beg.Worksheets[{^Target.Location.Context}].Cells[^Target.Location.Address}].{^Target.Type}.{{^Target.Property}
+Steps[2].04:pts:1.5 - Copy the formula in I4 to I5:I13.
+Steps[2].04.Tasks[0].-:pts:1.5 - Copy the formula in I4 to I5:I13.
+    answer: 
+        type: Content
+        literalValue: 0.01
+        expression: =VLOOKUP(RC[-1],Bonus!R4C1:R8C2,2)
+Steps[2].04.Tasks[0].-.Scenarios[0]:deductPts:1.5 - NoChange
+    answer: 
+        type: Content
+        literalValue: 
+        expression: This was - Original.Expression, should be able to 'flag' this somehow.
+   type:, name:NordellEx2IP4
+======================================

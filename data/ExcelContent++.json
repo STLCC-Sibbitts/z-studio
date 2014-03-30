@@ -1,0 +1,496 @@
+/*
+ * typos
+ *     text - LD of 1 - neatness
+ *     numeric values
+ *     dates
+ *	Call out the parts of the if
+ */
+{
+   "Content" : [
+	 { "Values" : [
+	    { "Text" : {
+		   "Name" : "{^Name}",
+		   "Text" : "{^Text}",
+		   "Type" : "Content",
+		   "Property" : "Value",
+		   "Value" : "{^Value}",
+			"Scenarios": 
+			[
+				{ "Name":"Typo", 
+				  "Credit":"Full", 
+				  "Deduct":0,
+				  "Type":"Content",
+				  "Feedback":"Correct",
+				  "Answer": {	
+						"Path":"Worksheets[Order Form].Cells[$C$4].Text",
+						"Value":"Kevin Kemper"							
+					}
+				}
+			]
+         } },
+	    { "Number" : {
+		   "Name" : "{^Name}",
+		   "Text" : "{^Text}",
+		   "Type" : "Content",
+		   "Property" : "Value",
+		   "Value" : "{^Value}"
+         } },
+	    { "Date" : {
+		   "Name" : "{^Name}",
+		   "Text" : "{^Text}",
+		   "Type" : "Content",
+		   "Property" : "Value",
+		   "Value" : "{^Value}"
+         } }
+	 ] },
+     { "Functions" : [
+         { "IF" : {
+				  "Logical_test" : "{^Expression(1)}",
+				  "Value_if_true" : "{^Expression(2)}",
+				  "Value_if_false" : "{^Expression(3)}",
+                  "Expression" : "=IF({Logical_test},{Value_if_true},{Value_if_false})",
+                  "Location" : {
+                     "Cells" : "{^Cell}",
+                     "Path" : "Worksheets[{Worksheet].Cells[{Cells}]",
+                     "Type" : "Cell",
+                     "Worksheets" : "{^Worksheet}"
+                  },
+                  "Name" : "{^Name}",
+                  "Property" : "Formula",
+                  "Scenarios" : [
+                     {  "Name" : "MissingFalse",
+                        "Answer" : {
+                           "Expression" : "=IF({^Logical_test},{^Value_if_true})"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 40,
+                        "Feedback" : "Value_if_false omitted, review IF",
+                        "Type" : "Technical"
+                     },
+                     {  "Name" : "NoIf",
+                        "Answer" : {
+                           "Expression" : "={^Value_if_true}"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 80,
+                        "Feedback" : "Need to use IF, not just enter formula...",
+                        "Type" : "Conceptual"
+                     }
+                  ],
+                  "Text" : "{^Text}",
+                  "Type" : "Content",
+                  "Value" : "{^Value}"
+               }
+         }, /* if */
+         { "SUMIF" : {
+				  "Range" : "{^Expression(1)}",
+				  "Criteria" : "{^Expression(2)}",
+				  "Sum_range" : "{^Expression(3)}",
+                  "Expression" : "=SUMIF({Range},{Criteria},{Sum_range})",
+                  "Location" : {
+                     "Cells" : "{^Cell}",
+                     "Path" : "Worksheets[{Worksheet].Cells[{Cells}]",
+                     "Type" : "Cell",
+                     "Worksheets" : "{^Worksheet}"
+                  },
+                  "Name" : "{^Name}",
+                  "Property" : "Formula",
+                  "Scenarios" : [
+                     {  "Name" : "MissingSum_range",
+                        "Answer" : {
+						   "Expression" : "=SUMIF({^Range},{^Criteria})"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 80,
+                        "Feedback" : "Sum_range omitted, review SUMIF",
+                        "Type" : "Technical"
+                     },
+                     {  "Name" : "IncorrectSum_range",
+                        "Answer" : {
+						   "Expression" : "=SUMIF({^Range},{^Criteria},{*})"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 100,
+                        "Feedback" : "Incorrect Sum_range entered, review SUMIF",
+                        "Type" : "Technical"
+                     },
+                     {  "Name" : "NoSUMIf",
+                        "Answer" : {
+                           "Expression" : "={^Range}"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 100,
+                        "Feedback" : "Need to use SUMIF, not just enter range...",
+                        "Type" : "Conceptual"
+                     }
+                  ],
+                  "Text" : "{^Text}",
+                  "Type" : "Content",
+                  "Value" : "{^Value}"
+               }
+         }, /* sumif */
+         { "SUM" : {
+				  "Range" : "{^Expression(1)}",
+                  "Expression" : "=SUM({Range})",
+                  "Location" : {
+                     "Target" : "{^Cell}",
+                     "Path" : "Worksheets[{Worksheet].Cells[{Target}]",
+                     "Type" : "Cell",
+                     "Worksheets" : "{^Worksheet}"
+                  },
+                  "Name" : "{^Name}",
+                  "Property" : "Formula",
+                  "Range" : "{^Range}",
+                  "Scenarios" : [
+                     {  "Name" : "Entered the range with no function",
+                        "Answer" : {
+                           "Expression" : "={^Range}"
+                        },
+                        "Deduct" : 100,
+                        "Feedback" : "Sum requires use of function, not just range",
+                        "Type" : "Technical"
+                     }
+                  ],
+                  "Text" : "{^Text}",
+                  "Type" : "Content",
+                  "Value" : "{^Value}"
+               }
+         },
+         { "VLOOKUP" : [
+			{ "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{Col_index_num},{Range_lookup})",
+			  "Lookup_value": "{^Expression(1)}",
+			  "Table_array": "{^Expression(2)}",
+			  "Col_index_num": "{^Expression(3)}",
+			  "Range_lookup": "{^Expression(4)}",
+              "Name" : "{^Name}",
+              "Property" : "Formula",
+              "Scenarios" : [
+                 { "Name" : "MissingRange_lookup",
+                   "Answer" : {
+					   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{Col_index_num})"
+                   },
+                   "Custom" : false,
+                   "Deduct" : 40,
+                   "Feedback" : "Range_lookup omitted, review VLOOKUP",
+                   "Type" : "Technical"
+                 },
+                 { "Name" : "IncorrectCol_index_num",
+                   "Answer" : {
+						   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{*},{Range_lookup})"
+                   },
+                   "Custom" : false,
+                   "Deduct" : 40,
+                   "Feedback" : "Range_lookup omitted, review VLOOKUP",
+                   "Type" : "Technical"
+                 },
+                 { "Name" : "FALSERange_lookup",
+                        "Answer" : {
+						   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},FALSE)"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 60,
+                        "Feedback" : "Specified incorrect value for Range_lookup, review VLOOKUP",
+                        "Type" : "Technical"
+                     },
+                 { "Name" : "TRUERange_lookup",
+                        "Answer" : {
+						   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},TRUE)"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 60,
+                        "Feedback" : "Specified incorrect value for Range_lookup, review VLOOKUP",
+                        "Type" : "Technical"
+                     }
+              ],
+              "Text" : "{^Text}",
+              "Type" : "Content",
+              "Value" : "{^Value}"
+            },
+			{ "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{Col_index_num})",
+			  "Lookup_value": "{^Expression(1)}",
+			  "Table_array": "{^Expression(2)}",
+			  "Col_index_num": "{^Expression(3)}",
+			  "Range_lookup": "TRUE",             
+              "Name" : "{^Name}",
+              "Property" : "Formula",
+              "Scenarios" : [
+                 { "Name" : "SpecifiedRange_lookupDefaultValue",
+                   "Answer" : {
+						   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{Col_index_num},FALSE)"
+                   },
+                   "Custom" : false,
+                   "Deduct" : 20,
+                   "Feedback" : "Specifying the Range_lookup was not required, review VLOOKUP",
+                   "Type" : "Technical"
+                 },
+                 { "Name" : "SpecifiedRange_lookupTrueValue",
+                        "Answer" : {
+						   "Expression" : "=VLOOKUP({Lookup_value},{Table_array},{Col_index_num},TRUE)"
+                        },
+                        "Custom" : false,
+                        "Deduct" : 80,
+                        "Feedback" : "Specifying the Range_lookup was not required, incorrect Range_lookup value specified, review VLOOKUP",
+                        "Type" : "Technical"
+                     }
+              ],
+              "Text" : "{^Text}",
+              "Type" : "Content",
+              "Value" : "{^Value}"
+            } 
+         ] }
+      ]},
+		/* create stock cell expression json that uses * to dereference-find
+		 * location template
+		 */
+      { "Expressions" : [
+           { "All" : {
+             "Expression" : "{^Expression}",
+             "Location" : {
+                "Target" : "{^Target}",
+                "Path" : "Worksheets[{Worksheet}].Cells[{Target}]",
+                "Type" : "Cell",
+                "Worksheets" : "{^Worksheet}"
+             },
+             "Name" : "{^Name}",
+             "Property" : "Formula",
+             "Scenarios" : [
+                { "Name" : "EnteredValue",
+                        "Answer" : {
+                           "Value" : "{^Value}"
+                        },
+                        "Deduct" : 100,
+                        "Feedback" : "Never enter the value...",
+                        "Type" : "Conceptual.Literal"
+                     }
+             ],
+             "Text" : "{^Text}",
+             "Type" : "Content",
+             "Value" : "{^Value}"
+           } },
+           { "Arithmetic" : {
+             "Expression" : "{^Expression}",
+             "Name" : "{^Name}",
+             "Property" : "Formula",
+             "Scenarios" : [
+                { "Name" : "EnteredValue",
+                        "Answer" : {
+                           "Value" : "{^Value}"
+                        },
+                        "Deduct" : 100,
+                        "Feedback" : "Never enter the value...",
+                        "Type" : "Conceptual.Literal"
+                     }
+             ],
+             "Text" : "{^Text}",
+             "Type" : "Content",
+             "Value" : "{^Value}"
+           } },/*
+				 * make sure expression parser/comparison recognizes >=, <=, <>
+				 */
+           { "Relational" : {
+             "Expression" : "{^Expression}",
+             "Name" : "{^Name}",
+             "Property" : "Formula",
+             "Scenarios" : [
+                { "Name" : "EnteredValue",
+				  "Answer" : {
+                     "Value" : "{^Value}"
+                  },
+                  "Custom" : false,
+                  "Deduct" : 100,
+                  "Feedback" : "Never enter the value when an expression is asked for.",
+                  "Type" : "Conceptual.Literal"
+                }
+             ],
+             "Text" : "{^Text}",
+             "Type" : "Content",
+             "Value" : "{^Value}"
+           } },
+           { "CellReference" : {}
+           },
+           { "RangeReference" : {}
+           }
+         ]
+      }, /* expressions */
+      { "Base" : [
+         { "Cell" : {
+		   "Name" : "{^Name}",
+		   "Location" : {
+			 "Type" : "Cell",
+			 "Target" : "{^Target}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Target}]"
+		   },
+		   "Text" : "{^Text}",
+		   "Type" : "Content",
+		   "Property" : "Formula",
+		   "Value" : "{^Value}"
+         } }, /* cell */
+         { "Range" : {
+		   "Name" : "{^Name}",
+		   "Location" : {
+			 "Type" : "Range",
+			 "Target" : "{^Target}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Target}]"
+		   },
+		   "Text" : "{^Text}",
+		   "Type" : "Content",
+		   "Property" : "Formula",
+		   "Value" : "{^Value}"
+         } }
+      ]} 
+   ],
+   "Format" : [
+      { "Style": {
+          "Name": "{StyleName}"
+      } },
+      { "Font": [
+		 { "Borders": [
+		     { "{^Border}" : {
+               "LineStyle" : "xlContinuous",
+               "Weight" : "xlThin",
+               "ColorIndex": "42",
+               "Color": "91, 155, 213",
+               "ThemeColor": "xlThemeColorAccent1"
+             } }
+		 ]},
+	   { "Fill" : 
+	     { "Color" : 
+		   { "MSO" : "0, 0, 139",
+			 "MSOTheme" : "xlThemeColorDark2",
+			 "MSOThemeRGB" : "3, 0, 0",
+			 "Pattern" : "xlPatternSolid",
+			 "RGB" : "148, 138, 84"
+			}
+		  },
+		  "Range" : "$A$1:$F$2",
+		  "Type" : "Fill"
+	   }
+	 ]}
+  ],
+  "Copy" : [
+	 { "Content": [
+		{ "Cell2Cell": {
+		  "SourceLocation": { 
+			 "Type" : "Cell",
+             "Source":"{^Source}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Source}]"
+          },
+		  "TargetLocation": { 
+			 "Type" : "Cell",
+             "Target":"{^Target}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Target}]"
+          },
+          "Name" : "{^Name}",
+		  "Text" : "{^Text}",
+		  "Type" : "Content",
+          "Property" : "{^Property}",
+		  "SourceValues" : "{^SourceValues}",
+		  "TargetValues" : "{^TargetValues}",
+          "Scenarios" : [
+            { "Name" : "Incomplete copy",
+             "Answer" : {
+			    "Expression" : null,
+			    "Value" : null
+             },
+             "Deduct" : 100,
+             "Feedback" : "Destination cell '{Target}', not populated",
+             "Type" : "Technical"
+            },
+            { "Name" : "Value copied",
+             "Answer" : {
+			    "Expression" : null,
+			    "Value" : "*"
+             },
+             "Deduct" : 100,
+             "Feedback" : "Destination cell '{Target}', contains value instead of expression",
+             "Type" : "Conceptual"
+            }
+          ]
+        }},
+		{ "Cell2Range": {
+		  "SourceLocation": { 
+			 "Type" : "Cell",
+             "Source":"{^Source}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Source}]"
+          },
+		  "TargetLocation": { 
+			 "Type" : "Range",
+             "Target":"{^Target}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Target}]"
+          },
+          "Name" : "{^Name}",
+		  "Text" : "{^Text}",
+		  "Type" : "Content",
+          "Property" : "{^Property}",
+		  "SourceValues" : "{^SourceValues}",
+		  "TargetValues" : "{^TargetValues}",
+          "Scenarios" : [
+            { "Name" : "Incomplete copy",
+              "Answer" : {
+			     "Expression" : null,
+			     "Value" : null
+              },
+              "Deduct" : 100,
+              "Feedback" : "Destination cell '{Target}', not populated",
+              "Type" : "Technical"
+            },
+            { "Name" : "Value copied",
+              "Answer" : {
+			     "Expression" : null,
+			     "Value" : "*"
+              },
+              "Deduct" : 100,
+              "Feedback" : "Destination cell '{Target}', contains value instead of expression",
+              "Type" : "Conceptual"
+            }
+          ]
+        }},
+		{ "Range2Range": {
+		  "SourceLocation": { 
+			 "Type" : "Range",
+             "Source":"{^Source}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Source}]"
+          },
+		  "TargetLocation": { 
+			 "Type" : "Range",
+             "Target":"{^Target}",
+			 "Worksheets" : "{^Worksheet}",
+			 "Path" : "Worksheets[{Worksheet}].Cells[{Target}]"
+          },
+          "Name" : "{^Name}",
+		  "Text" : "{^Text}",
+		  "Type" : "Content",
+          "Property" : "{^Property}",
+		  "SourceValues" : "{^SourceValues}",
+		  "TargetValues" : "{^TargetValues}",
+          "Scenarios" : [
+            { "Name" : "Incomplete copy",
+              "Answer" : {
+			     "Expression" : null,
+			     "Value" : null
+              },
+              "Deduct" : 100,
+              "Feedback" : "Destination cell '{Target}', not populated",
+              "Type" : "Technical"
+            },
+            { "Name" : "Value copied",
+              "Answer" : {
+			     "Expression" : null,
+			     "Value" : "*"
+              },
+              "Deduct" : 100,
+              "Feedback" : "Destination cell '{Target}', contains value instead of expression",
+              "Type" : "Conceptual"
+            }
+          ]
+         }}
+	 ]}
+  ]
+}

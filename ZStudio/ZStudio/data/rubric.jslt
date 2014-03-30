@@ -1,0 +1,20 @@
+{
+	"Name":"",
+	"Text":"",
+	"Settings":
+	{
+		"EvalType":["Literal","Logical"]
+	},
+	"Type":["SpreadSheet"],
+	"Worksheets":[ ],
+	"Pts":"#",
+	"Description":"",
+	"Steps":
+	{
+		"Name":"",
+		"Text":"",
+		"Pts":"#",
+		"Required":["True","False"],
+		"Tasks":""
+	}
+}

@@ -1,0 +1,86 @@
+1a	Open the Wind workbook located in the Excel2\Case3 folder included with your Data Files, and then save the workbook as Wind Farm.
+1b	In the Documentation sheet, enter your name 
+1c	In the Documentation sheet, enter the date
+2a	Go to the Wind Speed Grid worksheet. Merge the range A1:V1
+2b	and then apply the Heading 1 style to the merged cell
+2c	set the font size to 20 points
+3a	Select the range B3:V3, and then change the font style to white text on a black back-ground
+3b	Copy this formatting to the grid coordinates in the range A4:A64
+4a	Select the range B4:V64. The data in this range comprises the wind speed measures for different sensors in Sector 5.
+5	Create a conditional formatting that highlights cells whose value equals 18 with fill color equal to the RGB color value ( 99, 37, 35).
+	Hint:In the Equal To dialog box, select Custom Format in the with box to open the Format Cells dialog box. On the Fill tab, in the Background Color section, click the More Colors button, and then click the Custom tab to enter the RGB color value.
+6	Repeat Step 5 to continue creating conditional formats that set highlight colors for the following wind speed values: Wind Speed RGB Color Value 16 m/s ( 150, 54, 52)
+6a	16 m/s ( 150, 54, 52)
+6b	14 m/s (218, 150, 148) 
+6c	12 m/s (230, 184, 183)
+6d	10 m/s (242, 220, 219) 
+6e	8 m/s (242, 242, 242)
+6f	6 m/s (255, 255, 255) 
+6g	4 m/s (197, 217, 241)
+6h	2 m/s (141, 180, 226)
+6i	0 m/s ( 83, 141, 213)
+7	In the range B4:V64, reduce the font size of the values to 1 point.
+8	Enclose each of the cells in the range B4:V64 in a light gray border
+9	Apply the conditional highlight colors specified in Steps 5 and 6 to the legend values in the cell range X3:X12.
+10a	Merge the range Y3:Y12
+10b	center the contents of the merged cell
+10c	rotate the text down
+10d	Display the text in a bold 18-point font. 
+11	Set the print area of the page to the range A1:Y64
+12	On the Page Layout tab, scale the page to fit on a single page.
+13a	Add a header to the printed page with your name in the top-left header 
+13b	Add a header to the printed page with the file-name in the top-right header
+
+=======================================================================
+1a) Open the Wind workbook located in the Excel2\Case3 folder included with your Data Files, and then save the workbook as Wind Farm. (-1 pt)
+1b) In the Documentation sheet, enter your name  (-1 pt)
+1c) In the Documentation sheet, enter the date (-1 pt)
+2a) Go to the Wind Speed Grid worksheet. Merge the range A1:V1 (-2 pts)
+2b) and then apply the Heading 1 style to the merged cell (-2 pts)
+2c) set the font size to 20 points (-1 pt)
+3a) Select the range B3:V3, and then change the font style to white text on a black background (-2 pts)
+3b) Copy this formatting to the grid coordinates in the range A4:A64 (-2 pts)
+4a) Select the range B4:V64. The data in this range comprises the wind speed measures for different sensors in Sector 5.
+5) Create a conditional formatting that highlights cells whose value equals 18 with fill color equal to the RGB color value ( 99, 37, 35). (-2 pts)
+	Hint:In the Equal To dialog box, select Custom Format in the with box to open the Format Cells dialog box. On the Fill 
+	tab, in the Background Color section, click the More Colors button, and then click the Custom tab to enter the RGB color value.
+6) Repeat Step 5 to continue creating conditional formats that set highlight colors for the following wind speed values:  
+6a) 16 m/s ( 150, 54, 52) (-2 pts)
+6b) 14 m/s (218, 150, 148)  (-2 pts)
+6c) 12 m/s (230, 184, 183) (-2 pts)
+6d) 10 m/s (242, 220, 219)  (-2 pts)
+6e) 8 m/s (242, 242, 242) (-2 pts)
+6f) 6 m/s (255, 255, 255)  (-2 pts)
+6g) 4 m/s (197, 217, 241) (-2 pts)
+6h) 2 m/s (141, 180, 226) (-2 pts)
+6i) 0 m/s ( 83, 141, 213) (-2 pts)
+7) In the range B4:V64, reduce the font size of the values to 1 point. (-1 pt)
+8) Enclose each of the cells in the range B4:V64 in a light gray border (-2 pts)
+9) Apply the conditional highlight colors specified in Steps 5 and 6 to the legend values in the cell range X3:X12. (-2 pts)
+10a) Merge the range Y3:Y12 (-1 pt)
+10b) center the contents of the merged cell (-1 pt)
+10c) rotate the text down (-2 pts)
+10d) Display the text in a bold 18-point font.  (-1 pt)
+11) Set the print area of the page to the range A1:Y64 (-2 pts)
+12) On the Page Layout tab, scale the page to fit on a single page. (-2 pts)
+13a) Add a header to the printed page with your name in the top-left header  (-2 pts)
+13b) Add a header to the printed page with the file-name in the top-right header (-2 pts)
+
+
+Sub DumpSheet()
+    Dim condFmtRule As FormatCondition
+    Dim sht As Worksheet
+    Set sht = ActiveSheet
+    Dim wkbk As Workbook
+    Set wkbk = ActiveWorkbook
+    
+    For Each condFmtRule In sht.Cells.FormatConditions
+        With condFmtRule
+        Debug.Print "Rule:" & .AppliesTo.Address & ", " & .Formula1 & ", " & GetRGB(.Interior.Color)
+        End With
+    Next
+End Sub
+Function GetRGB(c As Long) As String
+    
+    GetRGB = (c Mod 256) & ", " & ((c / 256) Mod 256) & ", " & (c / (256 * 256))
+End Function

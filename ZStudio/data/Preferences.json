@@ -1,0 +1,284 @@
+{
+  "Preferences": [
+    {
+      "PartialCredit": {
+        "Enabled": true,
+        "ZUid": "1d67d48f-775c-450f-84da-02042238b7b3"
+      }
+    },
+    {
+      "Rounding": {
+        "Enabled": true,
+        "Factor": 25
+      }
+    },
+    {
+      "ProjectDefaults": {
+        "TotalPts": 50,
+        "Allocations": [
+          {
+            "NCE": {
+              "Pct": 0.1,
+              "Max": 5,
+              "PPE": 0.5
+            }
+          },
+          {
+            "EE": {
+              "Pct": 0.15,
+              "Max": 7.5,
+              "PPE": 1.0
+            }
+          },
+          {
+            "LO": {
+              "Pct": 0.75,
+              "Max": 37.5,
+              "PPE": 1.5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Difficulties": {
+        "Enabled": true,
+        "BaseValue": 0.5,
+        "Increment": 0.5,
+        "Multipliers": [
+          {
+            "Easy": 0.5
+          },
+          {
+            "Normal": 1.0
+          },
+          {
+            "Hard": 1.5
+          },
+          {
+            "Challenge": 2.0
+          }
+        ]
+      }
+    },
+    {
+      "Deductions": {
+        "Enabled": true,
+        "BaseValue": 0.0,
+        "Increment": 0.25,
+        "Multipliers": [
+          {
+            "None": 0.0
+          },
+          {
+            "Minor": 0.25
+          },
+          {
+            "Moderate": 0.5
+          },
+          {
+            "Major": 0.75
+          },
+          {
+            "Full": 1.0
+          }
+        ],
+        "ZUid": "9f437fbc-d55c-48af-8fd0-5f305286b7e6"
+      }
+    },
+    {
+      "SkillLevels": {
+        "Enabled": false,
+        "BaseValue": 1.0,
+        "Increment": 0.25,
+        "Multipliers": [
+          {
+            "Novice": 1.0
+          },
+          {
+            "Beginner": 1.25
+          },
+          {
+            "Intermediate": 1.5
+          },
+          {
+            "Advanced": 1.75
+          },
+          {
+            "Expert": 2.0
+          }
+        ]
+      }
+    },
+    {
+      "Coverages": {
+        "Enabled": false,
+        "BaseValue": 1.0,
+        "Increment": 0.0,
+        "Multipliers": [
+          {
+            "Review": 1.0
+          },
+          {
+            "Normal": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "Content": {
+        "Typos": {
+          "Enabled": true,
+          "Threshold": 2,
+          "Category": "NCE",
+          "Deduction": {
+            "Type": "Minor"
+          },
+          "Remediation": {
+            "Feedback": "Requested literal value entered incorrectly, found '{found}' instead of '{expected}'. "
+          },
+          "Notes": "How to treat accuracy for string literals as function output arguments."
+        },
+        "Copy": {
+          "Range": {
+            "Enabled": true,
+            "Threshold": 1,
+            "Category": "EE",
+            "Deduction": {
+              "Type": "Moderate"
+            },
+            "Remediation": {
+              "Feedback": "Incomplete copy of range. Partial copying of range, found content copied to: '{found}' instead of: '{expected}'."
+            },
+            "Notes": "Give partial credit if target range copied to skips cells that would result in a non-displayable value"
+          }
+        },
+        "Create": {
+          "Value": {
+            "Notes": "How to treat entry of text values that are used as labels and are not referenced in any expression.",
+            "Text": {
+              "Enabled": true,
+              "Threshold": 2,
+              "Category": "NCE",
+              "Deduction": {
+                "Type": "Minor"
+              },
+              "Remediation": {
+                "Feedback": "Requested value entered incorrectly, found '{found}', expected '{expected}'.",
+                "PartialCreditFeedback": "Partial credit awarded, detected minor discrepancy between value entered, '{found}' and value expected '{expected}'. ",
+                "MissingFeedback": "Requested value missing, expected '{expected}'."
+              },
+              "Notes": "How to treat accuracy for string literals as function output arguments."
+            }
+          },
+          "Function": {
+            "FunctionArgs": {
+              "OutputValue": {
+                "Numeric": {
+                  "Enabled": true,
+                  "Threshold": 1,
+                  "Category": "EE",
+                  "Deduction": {
+                    "Type": "Minor"
+                  },
+                  "Remediation": {
+                    "Feedback": "Requested numeric literal value '{expected}' entered incorrectly '{found}'. "
+                  },
+                  "Notes": "How to treat accuracy for numeric literals as function arguments. May need to define threshold."
+                },
+                "Text": {
+                  "Enabled": true,
+                  "Threshold": 1,
+                  "Category": "EE",
+                  "Deduction": {
+                    "Type": "Minor"
+                  },
+                  "Remediation": {
+                    "Feedback": "Requested string literal value '{expected}' entered incorrectly '{found}'. "
+                  },
+                  "Notes": "How to treat accuracy for string literals as function output arguments."
+                },
+                "Expression": {
+                  "Enabled": true,
+                  "Category": "LO",
+                  "Deduction": {
+                    "Type": "Major"
+                  },
+                  "Remediation": {
+                    "Feedback": "Requested expression '{expected}' entered incorrectly '{found}'. "
+                  },
+                  "Notes": "How to treat accuracy for string literals as function output arguments."
+                }
+              },
+              "Range": {
+                "Bounds": {
+                  "Enabled": true,
+                  "Threshold": 1,
+                  "Category": "EE",
+                  "Deduction": {
+                    "Type": "Moderate"
+                  },
+                  "Remediation": {
+                    "Feedback": "Inclusion of extraneous/empty cells in ranges should be avoided. Found range: '{found}' in expression: '{expression}', does not match the requested range: '{expected}'."
+                  },
+                  "Notes": "Might make this function specific or add other criteria later."
+                }
+              },
+              "Missing": {
+                "Enabled": false,
+                "Category": "EE",
+                "Deduction": {
+                  "Type": "FULL"
+                },
+                "Remediation": {
+                  "Feedback": "Omitted function argument {argName}, review {functionName}"
+                },
+                "Notes": "How to treat entry of default values in functions when not requested to do so."
+              },
+              "DefaultValue": {
+                "Found": {
+                  "Enabled": true,
+                  "Category": "NCE",
+                  "Deduction": {
+                    "Type": "None"
+                  },
+                  "Remediation": {
+                    "Feedback": "Specifying the {argName} was not required, review {functionName}"
+                  },
+                  "Notes": "How to treat entry of default values in functions when not requested to do so."
+                }
+              },
+              "Value": {
+                "Numeric": {
+                  "Enabled": true,
+                  "Threshold": 1,
+                  "Category": "EE",
+                  "Deduction": {
+                    "Type": "Moderate"
+                  },
+                  "Remediation": {
+                    "Feedback": "Requested numeric literal value '{expected}' entered incorrectly '{found}'. "
+                  },
+                  "Notes": "How to treat accuracy for numeric literals as input function arguments, provided resulting value is correct."
+                },
+                "Text": {
+                  "Enabled": true,
+                  "Threshold": 1,
+                  "Category": "EE",
+                  "Deduction": {
+                    "Type": "Moderate"
+                  },
+                  "Remediation": {
+                    "Feedback": "Requested string literal value '{expected}' entered incorrectly '{found}'. "
+                  },
+                  "Notes": "How to treat accuracy for string literals as input function arguments, provided resulting value is correct."
+                }
+              }
+            }
+          }
+        },
+        "ZUid": "3a397d8e-da12-4817-8833-e410310535df"
+      }
+    }
+  ]
+}

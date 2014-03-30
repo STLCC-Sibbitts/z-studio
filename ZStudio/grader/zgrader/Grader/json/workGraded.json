@@ -1,0 +1,65 @@
+{
+  "Name": "ex3c2",
+  "PossiblePoints": "50",
+  "Steps": [
+    {
+      "Name": "Step 3",
+      "Text": "Enter the following values in the indicated cells:",
+      "Results": [
+        {
+          "Name": "3a",
+          "Text": "in cell C4, enter the customer name, Kevin Kemper",
+          "Pts": "0.5",
+          "ScenarioResults": [
+            {
+              "TaskResults": {
+                "Name": "Correct",
+                "Text": "in cell C4, enter the customer name, Kevin Kemper",
+                "Pts": "0.5"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step7",
+      "Text": "In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\". AutoFill this formula into the range F21:F25",
+      "Results": [
+        {
+          "Name": "7a",
+          "Text": "In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\"",
+          "Pts": "5",
+          "ScenarioResults": [
+            {
+              "TaskResults": {
+                "Name": "Correct",
+                "Text": "In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\"",
+                "Pts": "5"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "7b",
+          "Text": "AutoFill this formula into the range F21:F25",
+          "Pts": "5",
+          "ScenarioResults": [
+            {
+              "TaskResults": {
+                "Name": "Correct1",
+                "Text": "AutoFill this formula into the range F21:F25",
+                "Pts": "5",
+                "Error": "Mismatch, looking for[], found[]",
+                "Feedback": "Only filled rows with values",
+                "DeductPts": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "EarnedPoints": "49",
+  "EarnedStepPoints": "0"
+}

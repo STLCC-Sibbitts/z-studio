@@ -1,0 +1,227 @@
+Skills Being Measured
+This exam measures your ability to accomplish the technical tasks listed below.The percentages indicate the relative weight of each major topic area on the exam.
+Managing the Worksheet Environment
+
+    <Navigate> through a [worksheet].
+        This objective may include but is not limited to: 
+			[Hot keys]
+			[name box]
+    <Print> a [worksheet] or [workbook].
+        This objective may include but is not limited to: 
+			printing only [selected worksheets:selection], 
+			printing an entire workbook, 
+			<constructing> [headers] and [footers], 
+			and <applying> [printing options]
+				[scale]
+				[print titles]
+				[page setup]
+				[print area]
+				[gridlines]
+    Personalize environment by using Backstage.
+		This objective may include but is not limited to: 
+			Manipulate the Quick Access Toolbar, 
+			manipulate the ribbon tabs and groups, 
+			manipulate Excel default settings, 
+			import data to Excel, 
+			import data from Excel, 
+			demonstrate how to manipulate workbook properties, 
+			manipulate workbook files and folders. 
+			apply different name and file formats for different uses by 
+				using save and save as features
+
+Creating Cell Data
+
+    Construct cell data.
+        This objective may include but is not limited to: 
+			using paste special
+				formats
+				formulas
+				values
+				preview icons
+				transpose rows and columns
+				operations
+				comments
+				validation
+				paste as a link
+			cutting
+			moving
+			select cell data
+    Apply AutoFill.
+        This objective may include but is not limited to: 
+			Copy data using AutoFill
+			fill series using AutoFill
+			copy or preserve cell format with AutoFill
+			select from drop-down list
+    Apply and manipulate hyperlinks.
+        This objective may include but is not limited to: 
+			Create a hyperlink in a cell
+			modify hyperlinks
+			modify hyperlinked-cell attributes
+			remove a hyperlink
+
+Formatting Cells and Worksheets
+
+    Apply and modify cell formats.
+        This objective may include but is not limited to: 
+			aligning cell content
+			applying a number format
+			wrapping text in a cell
+			and using Format Painter
+    Merge or split cells.
+        This objective may include but is not limited to: 
+			using Merge & Center
+			Merge Across
+			Merge cells
+			and Unmerge Cells
+    Create row and column titles.
+        This objective may include but is not limited to: 
+			Print row and column headings
+			print rows to repeat with titles
+			print columns to repeat with titles
+			configure titles to print only on odd or even pages
+			configure titles to skip the first worksheet page
+    Hide and unhide rows and columns.
+        This objective may include but is not limited to: 
+			Hide a column
+			unhide a column
+			hide a series of columns
+			hide a row
+			unhide a row
+			hide a series of rows
+    Manipulate Page Setup options for worksheets.
+        This objective may include but is not limited to: 
+			Configure page orientation
+			manage page scaling
+			configure page margins
+			change header and footer size
+    Create and apply cell styles.
+        This objective may include but is not limited to: 
+			Apply cell styles
+			construct new cell styles
+
+Managing Worksheets and Workbooks
+
+    Create and format worksheets.
+        This objective may include but is not limited to: 
+			Insert worksheets
+			delete worksheets
+			copy worksheets
+			reposition worksheets
+			copy worksheets
+			move worksheets
+			rename worksheets
+			grouping worksheets
+			apply coloring to worksheet tabs
+			hiding worksheet tabs
+			unhiding worksheet tabs
+    Manipulate window views.
+        This objective may include but is not limited to: 
+			splitting window views
+			arranging window views
+			opening a new window with contents from the current worksheet
+    Manipulate workbook views.
+        This objective may include but is not limited to: 
+			using Normal workbook view
+			using Page Layout workbook view
+			using Page Break workbook view
+			creating custom views
+
+Applying Formulas and Functions
+
+    Create formulas.
+        This objective may include but is not limited to: 
+			Use basic operators
+			revise formulas
+    Enforce precedence.
+        This objective may include but is not limited to: 
+			Order of evaluation
+			precedence using parentheses
+			precedence of operators for percent vs. exponentiation
+    Apply cell references in formulas.
+        This objective may include but is not limited to: 
+			relative cell reference
+			absolute cell reference
+    Apply conditional logic in a formula.
+        This objective may include but is not limited to: 
+			create a formula with values that match your conditions
+			edit defined conditions in a formula
+			use a series of conditional logic values in a formula
+    Apply named ranges in formulas.
+        This objective may include but is not limited to: 
+			define named range
+			edit named range
+			rename named range
+    Apply cell ranges in formulas.
+        This objective may include but is not limited to: 
+			enter a cell range definition in the formula bar
+			define a cell range using the mouse
+			define a cell range using a keyboard shortcut
+
+Presenting Data Visually
+
+    Create charts based on worksheet data.
+    Apply and manipulate illustrations.
+        This objective may include but is not limited to: Clip Art, SmartArt, shapes, screenshots
+    Create and modify images by using the Image Editor.
+        This objective may include but is not limited to: making corrections to an image (sharpen or soften an image, changing brightness and contrast), using picture color tools, and changing artistic effects on an image
+    Apply Sparklines.
+        This objective may include but is not limited to: using Line, Column, and Win/Loss chart types, creating a Sparkline chart, customizing a Sparkline, formatting a Sparkline, and showing or hiding data markers
+
+Sharing worksheet data with other users
+
+    Share spreadsheets by using Backstage.
+        This objective may include but is not limited to: sending a worksheet via E-mail or Skydrive, changing the file type to a different version of Excel, and saving as PDF or XPS
+    Manage comments.
+        This objective may include but is not limited to: inserting, viewing, editing, and deleting comments
+
+Analyzing and Organizing Data
+
+    Filter data.
+        This objective may include but is not limited to: Define, apply, remove, search, filter lists using AutoFilter
+    Sort data.
+        This objective may include but is not limited to: using sort options (values, font color, cell color)
+    Apply conditional formatting.
+        This objective may include but is not limited to: Apply conditional formatting to cells, use the Rule Manager to Apply Conditional Formats, use the IF Function and Apply Conditional Formatting, icon sets, data bars, clear rules
+		
+========================================================
+Expert Excel skills
+========================================================
+Sharing and Maintaining Workbooks
+
+    Apply workbook settings, properties, and data options.
+        This objective may include but is not limited to: setting advanced properties, saving a workbook as a template, and importing and exporting XML data
+    Apply protection and sharing properties to workbooks and worksheets.
+        This objective may include but is not limited to: protecting the current sheet, protecting the workbook structure, restricting permissions, and requiring a password to open a workbook
+    Maintain shared workbooks.
+        This objective may include but is not limited to: merging workbooks and setting Track Changes options
+
+Applying Formulas and Functions
+
+    Audit formulas.
+        This objective may include but is not limited to: tracing formula precedents, dependents, and errors, locating invalid data or formulas, and correcting errors in formulas
+    Manipulate formula options.
+        This objective may include but is not limited to: setting iterative calculation options and enabling or disabling automatic workbook calculation
+    Perform data summary tasks.
+        This objective may include but is not limited to: using an array formula and using a SUMIFS function
+    Apply functions in formulas.
+        This objective may include but is not limited to: finding and correcting errors in functions, applying arrays to functions, and using Statistical, Date and Time, Financial, Text, and Cube functions
+
+Presenting Data Visually
+
+    Apply advanced chart features.
+        This objective may include but is not limited to: using Trend lines, Dual axes, chart templates, and Sparklines
+    Apply data analysis.
+        This objective may include but is not limited to: using automated analysis tools and performing What-If analysis
+    Apply and manipulate PivotTables.
+        This objective may include but is not limited to: manipulating PivotTable data and using the slicer to filter and segment your PivotTable data in multiple layers
+    Apply and manipulate PivotCharts.
+        This objective may include but is not limited to: creating, manipulating, and analyzing PivotChart data
+    Demonstrate how to use the slicer.
+        This objective may include but is not limited to: choosing data sets from external data connections
+
+Working with Macros and Forms
+
+    Create and manipulate macros.
+        This objective may include but is not limited to: running a macro, running a macro when a workbook is opened, running a macro when a button is clicked, recording an action macro, assigning a macro to a command button, creating a custom macro button on the Quick Access Toolbar, and applying modifications to a macro
+    Insert and manipulate form controls.
+        This objective may include but is not limited to: inserting form controls and setting form properties

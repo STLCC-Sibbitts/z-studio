@@ -1,0 +1,14 @@
+          {
+            "$E$7": {
+              "Name": "$E$7","Type": "Cell","Value": "Estimated Cost","Text": "Estimated Cost","Font": {"Name": "Calibri","Size": "11","Italic": "False",
+                "Bold": "True","FontStyle": "Bold","Strikethrough": "False","Subscript": "False","Superscript": "False","Underline": "None",
+                "Color": "31, 73, 125","Background": ""},
+              "Style": {"Name": "Heading 3"},"WordWrap": "True",
+              "NumberFormat": {"Name": "General","Value": "General"},
+"Fill": {"Color": { "RGB": "197, 217, 241","MSOThemeRGB": "4, 0, 0","MSOTheme": "xlThemeColorLight2","MSO": "0, 0, 139","Pattern": "xlPatternSolid"}}}},
+"$E$8": {"Name": "$E$8","Type": "Cell","Value": "2.5","Text": "$2.50",
+              "Font": {"Name": "Calibri","Size": "11","Italic": "False","Bold": "False","FontStyle": "Regular","Strikethrough": "False",
+                "Subscript": "False","Superscript": "False","Underline": "None","Color": "0, 0, 0","Background": ""},
+              "Style": {"Name": "Normal"},"WordWrap": "False",
+			  "NumberFormat": {"Name": "General","Value": "$#,##0.00;[Red]$#,##0.00"},
+"Fill": {"Color": {"RGB": "197, 217, 241","MSOThemeRGB": "4, 0, 0","MSOTheme": "xlThemeColorLight2","MSO": "0, 0, 139","Pattern": "xlPatternSolid"}}}},

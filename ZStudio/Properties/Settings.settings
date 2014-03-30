@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ZStudio.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="appRegistryKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SOFTWARE\z-know\ZStudio</Value>
+    </Setting>
+    <Setting Name="mruFiles" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;C:\Users\Public\Documents\_z-notes\ZStudio\ZStudio\data\rubric.json&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="mruMaxEntries" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="lastDirUsed" Type="System.String" Scope="User">
+      <Value Profile="(Default)">../../data</Value>
+    </Setting>
+    <Setting Name="rubricSchemaFilename" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">../../data/rubric.json.schema</Value>
+    </Setting>
+    <Setting Name="templateDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">../../data</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

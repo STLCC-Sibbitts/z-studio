@@ -1,0 +1,147 @@
+1	save the workbook as WizardWorks Order Form	fileName	WizardWorks Order Form	1
+2a	In the Documentation sheet, enter your name in cell B3	worksheet(Documentation).Cell(B3)	<student name>	1
+2b	In the Documentation sheet, enter the date in cell B4	worksheet(Documentation).Cell(B4)	<date>	1
+3a	in cell C4, enter the customer name, Kevin Kemper	worksheet(Order Form).Cell(C4)	Kevin Kemper	1
+3b	in cell C6, In cell C6, enter the order number: 28314	worksheet(Order Form).Cell(C6)	28314	1
+3c	In C9 enter the following Address1: 315 Avalon Street	worksheet(Order Form).Cell(C9)	315 Avalon Street	1
+3d	In C10 enter the following Address1: ""	worksheet(Order Form).Cell(C10)	""	1
+3e	In C11 enter City: Greenfield	worksheet(Order Form).Cell(C11)	Greenfield	1
+3f	In C12 enter State: IN	worksheet(Order Form).Cell(C12)	IN	1
+3f	In C13 enter Zip: 46140	worksheet(Order Form).Cell(C13)	46140	1
+4	In cell C5, enter a function that displays the current date.	worksheet(Order Form).Cell(C5).Formula	=TODAY()	2
+//    results = CheckValue("5a) In B20 enter Item:", "BF001", "(-.5 pts)", sht.Cells(20, 2))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5b) In C20 enter Name:", "Bucket of Fireworks", "(-.5 pts)", sht.Cells(20, 3))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5c) In D20 enter Price:", "45.75", "(-.5 pts)", sht.Cells(20, 4))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5d) In E20 enter Qty:", "1", "(-.5 pts)", sht.Cells(20, 5))
+//    If Len(results) > 0 Then Debug.Print results
+    
+//' 5e) In B21 enter Item: NAF (-0.5 pts)
+//' 5f) In C21 enter Name: Nightair Fountain (-0.5 pts)
+//' 5g) In D21 enter Price: $ 12.95 (-0.5 pts)
+//' 5h) In E21 enter Qty: 4 (-0.5 pts)
+//    results = CheckValue("5e) In B21 enter Item:", "NAF", "(-.5 pts)", sht.Cells(21, 2))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5f) In C21 enter Name:", "Nightair Fountain", "(-.5 pts)", sht.Cells(21, 3))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5g) In D21 enter Price:", "12.95", "(-.5 pts)", sht.Cells(21, 4))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5h) In E21 enter Qty:", "4", "(-.5 pts)", sht.Cells(21, 5))
+//    If Len(results) > 0 Then Debug.Print results
+//' 5i) In B22 enter Item:  (-0.5 pts)
+//' 5j) In C22 enter Name: Mountain Rockets ( Box 20) (-0.5 pts)
+//' 5k) In D22 enter Price: $ 55.25 (-0.5 pts)
+//' 5l) In E22 enter Qty: 2 , this amount gets changed to 1 in step 15. (-0.5 pts)
+//    results = CheckValue("5i) In B22 enter Item:", "MR20B", "(-.5 pts)", sht.Cells(22, 2))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5j) In C22 enter Name:", "Mountain Rockets (Box 20)", "(-.5 pts)", sht.Cells(22, 3))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5k) In D22 enter Price:", "55.25", "(-.5 pts)", sht.Cells(22, 4))
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckValue("5l) In E22 enter Qty, if not 1, deduct:", "2", "(-.5 pts)", sht.Cells(22, 5))
+//    If sht.Cells(22, 5) <> "1" Then
+//        If Len(results) > 0 Then Debug.Print results
+//    End If
+
+
+//' 6) In cell C15, enter overnight to ship this order overnight. This value gets changed to standard in step 16. (-1 pt)
+//    results = CheckValue("6) In cell C15, enter overnight to ship this order overnight, if not standard deduct:.", "overnight", "(-1 pt)", sht.Cells(15, 3))
+//    If sht.Cells(15, 3) <> "standard" Then
+//        If Len(results) > 0 Then Debug.Print results
+//    End If
+
+//    results = CheckFormula("7a) In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering “”", _
+//        Array( _
+//            "=IF(E20>0,D20*E20,"""")", _
+//            "=IF(E20>0,D20*E20, """")", _
+//            "=IF(E20>0,E20*D20,"""")", _
+//            "=IF(E20>0,E20*D20, """")", _
+//            "=IF(E20>0,D20*E20,"" "")" _
+//            ), "(-5 pts)", sht.Cells(20, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+//' 7b) AutoFill this formula into the range F21:F25 (-4 pts)
+//    results = CheckFormula("7b) AutoFill this formula into the range F21:F25, F21", _
+//            Array( _
+//            "=IF(E21>0,D21*E21,"""")", _
+//            "=IF(E21>0,D21*E21, """")", _
+//            "=IF(E21>0,E21*D21,"""")", _
+//            "=IF(E21>0,E21*D21, """")", _
+//            "=IF(E21>0,D21*E21,"" "")" _
+//            ), "(-1 pt)", sht.Cells(21, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckFormula("7b) AutoFill this formula into the range F21:F25, F22", _
+//            Array( _
+//            "=IF(E22>0,D22*E22,"""")", _
+//            "=IF(E22>0,D22*E22, """")", _
+//            "=IF(E22>0,E22*D22,"""")", _
+//            "=IF(E22>0,E22*D22, """")", _
+//            "=IF(E22>0,D22*E22,"" "")" _
+//            ), "(-1 pt)", sht.Cells(22, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckFormula("7b) AutoFill this formula into the range F21:F25, F23", _
+//            Array( _
+//            "=IF(E23>0,D23*E23, """")", _
+//            "=IF(E23>0,D23*E23,"""")", _
+//            "=IF(E23>0,E23*D23,"""")", _
+//            "=IF(E23>0,E23*D23, """")", _
+//            "=IF(E23>0,D23*E23,"" "")" _
+//            ), "(-1 pt)", sht.Cells(23, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckFormula("7b) AutoFill this formula into the range F21:F25, F24", _
+//            Array( _
+//            "=IF(E24>0,D24*E24,"""")", _
+//            "=IF(E24>0,D24*E24, """")", _
+//            "=IF(E24>0,E24*D24,"""")", _
+//            "=IF(E24>0,E24*D24, """")", _
+//            "=IF(E24>0,D24*E24,"" "")" _
+//            ), "(-1 pt)", sht.Cells(24, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+//    results = CheckFormula("7b) AutoFill this formula into the range F21:F25, F25", _
+//            Array( _
+//            "=IF(E25>0,D25*E25,"""")", _
+//            "=IF(E25>0,D25*E25, """")", _
+//            "=IF(E25>0,E25*D25,"""")", _
+//            "=IF(E25>0,E25*D25, """")", _
+//            "=IF(E25>0,D25*E25,"" "")" _
+//            ), "(-1 pt)", sht.Cells(25, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckFormula("8) In cell F27, calculate the sum of the values in the range F20:F25", "=SUM(F20:F25)", _
+//        "(-2 pts)", sht.Cells(27, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckFormula("9) In cell F28, enter an IF function that tests whether cell F27 is greater than 200. If it is, return the value of cell F27 multiplied by the discount percentage in cell F12; otherwise, return the value 0(zero)", _
+//        "=IF(F27>200,F12*F27,0)", "(-5 pts)", sht.Cells(28, 6).formula)
+//    If Len(results) > 0 Then
+//        ' check alternate forms
+//        results = CheckFormula("9) In cell F28, enter an IF function that tests whether cell F27 is greater than 200. If it is, return the value of cell F27 multiplied by the discount percentage in cell F12; otherwise, return the value 0(zero)", _
+//                "=IF(F27>200,F27*F12,0)", "(-5 pts)", sht.Cells(28, 6).formula)
+//        If Len(results) > 0 Then Debug.Print results
+//    End If
+
+//    results = CheckFormula("10) In cell F29, subtract the discount value in cell F28 from the subtotal value in cell F27", _
+//        Array("=F27-F28", "=(F27-F28)"), "(-2 pts)", sht.Cells(29, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckFormula("11) In cell F31, calculate the sales tax by multiplying the after discount value in cell F29 by the sales tax percentage, 0.05", _
+//        Array("=F29*0.05", "=(F29*0.05)"), "(-2 pts)", sht.Cells(31, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckFormula("12) In cell F32, determine the shipping charge by entering an IF function that tests whether cell C15 equals “standard”. If it does, return the value in cell F9; otherwise, return the value in cell F10.", _
+//        "=IF(C15=""standard"",F9,F10)", "(-5 pts)", sht.Cells(32, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckFormula("13) In cell G32, display the value of cell C15 ", "=C15", "(-2 pts)", sht.Cells(32, 7).formula)
+//    If Len(results) > 0 Then Debug.Print results
+    
+//    results = CheckFormula("14) In cell F34, calculate the total of the after discount value, the sales tax, and the shipping fee", _
+//            Array("=F29+F31+F32", "=SUM(F29,F31,F32)"), "(-2 pts)", sht.Cells(34, 6).formula)
+//    If Len(results) > 0 Then Debug.Print results
+    
+//    results = CheckValue("15) Reduce the quantity of Mountain Rockets boxes from 2 to 1, and then verify that the discount is changed to 0 for the order", "1", "(-1 pt)", sht.Cells(22, 5))
+//    If Len(results) > 0 Then Debug.Print results
+
+//    results = CheckValue("16) Change the shipping option from overnight to standard, and then verify that the shipping fee is changed to the fee for standard shipping.", _
+//        "standard", " (-1 pt)", sht.Cells(15, 3))

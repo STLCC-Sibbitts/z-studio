@@ -1,0 +1,56 @@
+{
+	"Functions": [
+		{"SUMIF": {
+			"Type":"Numeric",
+			"FunctionArgs" : [
+				{	"Range": {
+					"Type":"range",
+					"Text":"range of cells to be evaluated",
+					"Required":true,
+					"Notes":"Anywhere a range can be entered, a tablename is also allowed"
+				}},
+				{	"Criteria": {
+					"Type":"criteria",
+					"Text":"can be a value or a logical rVal expression",
+					"Required":true,
+					"Note":"criteria can be a literal value, expression, or ..."
+				}},
+				{	"Sum_range": {
+					"Type":"range",
+					"Text":"range of values to be summed, if not present, Range is used.",
+					"Required":false
+				}}
+			]
+		} }
+		, {"VLOOKUP": {
+			"Type":"Value",
+			"FunctionArgs" : [
+				{	"Lookup_value": {
+					"Type":"expression",
+					"Text":"can be a value",
+					"Required":true,
+					"Note":"b. Type a formula to reference the Base Monthly Salary amount as the lookup_value."
+				}},
+				{	"Table_array": {
+					"Type":"range",
+					"Text":"range of cells containing values",
+					"Required":true,
+					"Notes":"Anywhere a range can be entered, a tablename is also allowed"
+				}},
+				{	"Col_index_num": {
+					"Type":"numeric",
+					"Text":"number representing column to be retrieved",
+					"Required":true,
+					"Notes":"associated preferences??"
+				}},
+				{	"Range_lookup": {
+					"Type":"boolean",
+					"Text":"can be a value",
+					"Required":false,
+					"DefaultValue":"TRUE",
+					"Notes":"PreferenceOptions allowDefaultValueEntry"
+				}}
+			]
+		} }
+	]
+}

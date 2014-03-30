@@ -1,0 +1,82 @@
+WizardWorks Andrew Howe owns and operates WizardWorks, an online seller of fireworks based in Franklin, Tennessee. 
+Andrew wants you to help him develop an order form for his business. The form needs to contain formulas to calculate 
+the charge for each order. The total charge is based on the quantity and type of items ordered plus the shipping charge 
+and the 5 percent sales tax. Orders can be shipped using standard 3-to 5-day shipping for $3.99 or overnight for $10.99.
+Andrew is also offering a 4 percent discount for orders that exceed $200. Both the shipping option and the discount need 
+to be calculated using formulas based on values entered into the worksheet. Complete the following: 
+1	save the workbook as WizardWorks Order Form.
+2a	In the Documentation sheet, enter your name in cell B3
+2a	In the Documentation sheet, enter the date in cell B4 
+3	In the Order Form worksheet, 
+3a	in cell C4, enter the customer name, Kevin Kemper
+3b	In cell C6, enter the order number, 28314
+3c	In C9 enter the following Address1: 315 Avalon Street
+3d	In C10 enter Address2: <nothing>
+3e	In C11 enter City: Greenfield
+3f	In C12 enter State: IN
+3g	In C13 enter Zip: 46140 
+4	In cell C5, enter a function that displays the current date.
+5	In the range B20:E22, enter the following orders: 
+5	Item Name Price Qty 
+5a	In B20 enter Item: BF001
+5b	In C20 enter Name: Bucket of Fireworks 
+5c	In D20 enter Price: $ 45.75
+5d	In E20 enter Qty: 1 
+5e	In B21 enter Item: NAF
+5f	In C21 enter Name: Nightair Fountain
+5g	In D21 enter Price: $ 12.95
+5h	In E21 enter Qty: 4
+5i	In B22 enter Item: MR20B
+5j	In C22 enter Name: Mountain Rockets ( Box 20)
+5k	In D22 enter Price: $ 55.25
+5l	In E22 enter Qty: 2 
+6	In cell C15, enter overnight to ship this order overnight.
+7a	In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering “”.
+7b	AutoFill this formula into the range F21:F25
+8	In cell F27, calculate the sum of the values in the range F20:F25.
+9	In cell F28, enter an IF function that tests whether cell F27 is greater than 200. If it is, return the value of cell F27 multiplied by the discount percentage in cell F12; otherwise, return the value 0(zero)
+10	In cell F29, subtract the discount value in cell F28 from the subtotal value in cell F27
+11	In cell F31, calculate the sales tax by multiplying the after discount value in cell F29 by the sales tax percentage, 0.05.
+12	In cell F32, determine the shipping charge by entering an IF function that tests whether cell C15 equals “standard”. If it does, return the value in cell F9; otherwise, return the value in cell F10.
+13	In cell G32, display the value of cell C15
+14	In cell F34, calculate the total of the after discount value, the sales tax, and the shipping fee
+15	Reduce the quantity of Mountain Rockets boxes from 2 to 1, and then verify that the discount is changed to 0 for the order
+16	Change the shipping option from overnight to standard, and then verify that the shipping fee is changed to the fee for standard shipping.
+
+' 1) save the workbook as WizardWorks Order Form. (-1 pt)
+' 2a) In the Documentation sheet, enter your name in cell B3 (-1 pt)
+' 2a) In the Documentation sheet, enter the date in cell B4  (-1 pt)
+' 3a) in cell C4, enter the customer name, Kevin Kemper (-1 pt)
+' 3b) In cell C6, enter the order number, 28314 (-1 pt)
+' 3c) In C9 enter the following Address1: 315 Avalon Street (-1 pt)
+' 3d) In C10 enter Address2: 'nothing> (-1 pt)
+' 3e) In C11 enter City: Greenfield (-1 pt)
+' 3f) In C12 enter State: IN (-1 pt)
+' 3g) In C13 enter Zip: 46140  (-1 pt)
+' 4) In cell C5, enter a function that displays the current date. (-2 pts)
+' 5a) In B20 enter Item: BF001 (-0.5 pts)
+' 5b) In C20 enter Name: Bucket of Fireworks  (-0.5 pts)
+' 5c) In D20 enter Price: $ 45.75 (-0.5 pts)
+' 5d) In E20 enter Qty: 1  (-0.5 pts)
+' 5e) In B21 enter Item: NAF (-0.5 pts)
+' 5f) In C21 enter Name: Nightair Fountain (-0.5 pts)
+' 5g) In D21 enter Price: $ 12.95 (-0.5 pts)
+' 5h) In E21 enter Qty: 4 (-0.5 pts)
+' 5i) In B22 enter Item: MR20B (-0.5 pts)
+' 5j) In C22 enter Name: Mountain Rockets ( Box 20) (-0.5 pts)
+' 5k) In D22 enter Price: $ 55.25 (-0.5 pts)
+' 5l) In E22 enter Qty: 2 , this amount gets changed to 1 in step 15. (-0.5 pts)
+' 6) In cell C15, enter overnight to ship this order overnight. This value gets changed to standard in step 16. (-1 pt)
+' 7a) In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering “”. (-5 pts)
+' 7b) AutoFill this formula into the range F21:F25 (-4 pts)
+' 8) In cell F27, calculate the sum of the values in the range F20:F25. (-2 pts)
+' 9) In cell F28, enter an IF function that tests whether cell F27 is greater than 200. If it is, return the value of cell F27 multiplied by the discount percentage in cell F12; otherwise, return the value 0(zero) (-5 pts)
+' 10) In cell F29, subtract the discount value in cell F28 from the subtotal value in cell F27 (-2 pts)
+' 11) In cell F31, calculate the sales tax by multiplying the after discount value in cell F29 by the sales tax percentage, 0.05 (-2 pts)
+' 12) In cell F32, determine the shipping charge by entering an IF function that tests whether cell C15 equals “standard”. If it does, return the value in cell F9; otherwise, return the value in cell F10. (-5 pts)
+' 13) In cell G32, display the value of cell C15 (-2 pts)
+' 14) In cell F34, calculate the total of the after discount value, the sales tax, and the shipping fee (-2 pts)
+' 15) Reduce the quantity of Mountain Rockets boxes from 2 to 1, and then verify that the discount is changed to 0 for the order (-1 pt)
+' 16) Change the shipping option from overnight to standard, and then verify that the shipping fee is changed to the fee for standard shipping. (-1 pt)
+
+    Debug.Print CheckValue("3a) in cell C4, enter the customer name:", "Kevin Kemper", "(-1 pt)", sht.Cells(4, 3))

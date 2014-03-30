@@ -1,0 +1,56 @@
+Session 1.1
+	Understand the use of spreadsheets and Excel
+	Learn the parts of the Excel window
+	Scroll through a worksheet and navigate between worksheets
+	Create and save a workbook file
+	Enter text, numbers, and dates into a worksheet
+	Resize, insert, and remove columns and rows
+Session 1.2
+	Select and move cell ranges
+	Insert formulas and functions
+	Insert, delete, move, and rename worksheets
+	Work with editing tools
+	Preview and print a workbook
+Session 2.1
+	Format text, numbers, and dates
+	Change fonts and font colors
+	Add fill colors and background images
+	Create formulas to add, subtract, and divide values
+	Apply number formats
+	Align, indent, and rotate cell contents
+	Merge a range into a single cell
+	Copy and paste formats
+Session 2.2
+	Apply built-in cell styles
+	Change the theme of a workbook
+	Create formulas to add and subtract values
+	Apply a built-in table style and select table style options
+	Highlight cells with conditional formats
+	Hide worksheet rows
+	Define the print area, insert page breaks, and add print titles
+	Create headers and footers
+	Select page margins
+Session 3.1
+	Copy formulas
+	Build formulas containing relative, absolute, and mixed references
+	Review function syntax
+	Insert a function with the Insert Function dialog box
+	Search for a function
+	Type a function directly in a cell
+Session 3.2
+	Use AutoFill to fill in a formula and complete a series
+	Enter the IF logical function
+	Insert the date with the TODAY function
+	Use the PMT financial function to calculate monthly mortgage payments
+Session 4.1
+	Create an embedded chart
+	Create and format a pie chart
+	Work with chart titles and legends
+	Create and format a column chart
+Session 4.2
+	Create and format a line chart
+	Modify a chart data source
+	Create and format a combined chart
+	Create a 3-D chart
+	Create and format sparklines and data bars
+	Create a chart sheet

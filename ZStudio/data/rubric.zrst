@@ -1,0 +1,17 @@
+{	
+	"Name":"rubric.zrst",
+	"Text":"rubric spreadsheet template",
+	"Type":"SpreadSheet",
+	"Worksheets":[],
+	"Pts":50,
+	"WeightCategories": 
+	[
+		{ "NCE":		{ "Weight":0.05, "Units":0, "Pts":2.5, "PtsPerUnit": 0.0 	}},
+		{ "Accuracy":	{ "Weight":0.15, "Units":0, "Pts":7.5, "PtsPerUnit": 0.0 	}},
+		{ "SLO":		{ "Weight":0.80, "Units":0, "Pts":40.0, "PtsPerUnit": 0.0 	}}
+	],
+	"File":"",
+	"Steps":
+	[
+	]
+}

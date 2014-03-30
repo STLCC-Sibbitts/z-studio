@@ -1,0 +1,311 @@
+{
+	"Name":"ex3c2",
+	"Pts":50,
+	"Steps":
+	[
+		{
+			"Name":"Step 3",
+			"Text":"Enter the following values in the indicated cells:",
+			"Pts":5,
+			"Tasks":
+			[
+				{
+					"Name":"3a",
+					"Text":"in cell C4, enter the customer name, Kevin Kemper",
+					"Pts":0.5,
+					"Required":true,
+					"Location":
+					{
+						"Type":"Cell",
+						"Worksheets":"Order Form", 
+						"Cells":"$C$4",
+						"Path":"Worksheets[Order Form].Cells[$C$4]" 
+					},
+					"Property":"Value",
+					"Scenarios": 
+					[
+						{	
+							"Name":"Correct", 
+							"Type":"Correct", 
+							"Answer": 
+							{	
+								"Value":"Kevin Kemper",
+								"Type":"Text",
+								"Required":true
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"Name":"Step7",
+			"Text":"In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\". AutoFill this formula into the range F21:F25",
+			"Pts":10,
+			"Tasks":
+			[
+				{
+					"Name":"7a",
+					"Text":"In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0(zero). If it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\"",
+					"Pts":5,
+					"Location":
+					{	
+						"Type":"Cell",
+						"Worksheets":"Order Form", 
+						"Cells":"$F$20",
+						"Path":"Worksheets[Order Form].Cells[$F$20]" 
+					},
+					"Property":"Formula",
+					"Scenarios": 
+					[
+						{	
+							"Name":"Correct",
+							"Type":"Correct",
+							"Answer": 
+							{
+								"Path":"Worksheets[Order Form].Cells[$F$20].Formula",
+								"Value":
+								[ 
+									"=IF(E20>0,D20*E20,\"\")",
+									"=IF(E20 > 0, D20*E20, \"\")",
+									"=IF(E20>0,D20*E20, \"\")",
+									"=IF(E20>0,E20*D20,\"\")",
+									"=IF(E20>0,E20*D20, \"\")",
+									"=IF(E20>0,D20*E20,\" \")" 
+								]
+							}
+						},
+						{	
+							"Name":"PartialCredit", 
+							"Type":"PartialCredit", 
+							"Deduct":1,
+							"Feedback":"results are correct, but expression tests the price instead of the order quantity",
+							"Answer":
+							{
+								"Path":"Worksheets[Order Form].Cells[$F$20].Formula",
+								"Value":
+								[ 
+									"=IF(D20 > 0, D20*E20, \"\")",
+									"=IF(D20>0,D20*E20, \"\")",
+									"=IF(D20>0,E20*D20,\"\")",
+									"=IF(D20>0,E20*D20, \"\")",
+									"=IF(D20>0,D20*E20,\" \")" 
+								]
+							}
+						},
+						{
+							"Name":"MissingFalse",
+							"Type":"PartialCredit", 
+							"Deduct":2,
+							"Type":"Technical",
+							"Feedback":"false condition omitted, review IF",
+							"Answer":
+							{
+								"Path":"Worksheets[Order Form].Cells[$F$20].Formula",
+								"Value":
+								[ 
+									"=IF(E20>0,D20*E20)",
+									"=IF(E20 > 0, D20*E20 )",
+									"=IF(E20>0,D20*E20 )",
+									"=IF(E20>0,E20*D20)",
+									"=IF(E20>0,E20*D20 )"
+								]
+							}
+						},
+						{	
+							"Name":"NoIf",
+							"Type":"PartialCredit", 
+							"Deduct":4,
+							"Type":"Conceptual",
+							"Feedback":"Need to use IF, not just enter formula...",
+							"Answer":
+							{
+								"Path":"Worksheets[Order Form].Cells[$F$20].Value",
+								"Value":
+								[
+									"D20*E20",
+									"E20*D20"
+								]
+							}
+						},
+						{	
+							"Name":"EnteredValue",
+							"Type":"NoCredit", 
+							"Deduct":5,
+							"Type":"Conceptual",
+							"Feedback":"Never enter the value...",
+							"Answer":
+							{
+								"Path":"Worksheets[Order Form].Cells[$F$20].Value",
+								"Value":"45.75"
+							}
+						}
+					]
+				},
+				{
+					"Name":"7b",
+					"Text":"AutoFill this formula into the range F21:F25",
+					"Pts":5,
+					"Location":
+					{
+						"Type":"Range",
+						"Worksheets":"Order Form", 
+						"Cells":"$F$21:$F$25",
+						"Path":"Worksheets[Order Form].Cells[$F$21]" 
+					},
+					"Property":"Formula",
+					"Scenarios": 
+					[
+						{
+							"Name":"Correct",
+							"Type":"Correct",
+							"Deduct":0,
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(E20>0,D20*E20,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(E21>0,D21*E21,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(E22>0,D22*E22,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=IF(E23>0,D23*E23,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=IF(E24>0,D24*E24,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=IF(E25>0,D25*E25,\"\")"}
+							]
+						},
+						{
+							"Name":"Correct1",
+							"Type":"Correct",
+							"Deduct":0,
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(E20 > 0, D20*E20, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(E21 > 0, D21*E21, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(E22 > 0, D22*E22, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=IF(E23 > 0, D23*E23, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=IF(E24 > 0, D24*E24, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=IF(E25 > 0, D25*E25, \"\")"}
+							]
+						},
+						{
+							"Name":"Alternate1",
+							"Type":"Correct",
+							"Deduct":0,
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(E20>0,E20*D20,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(E21>0,E21*D21,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(E22>0,E22*D22,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=IF(E23>0,E23*D23,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=IF(E24>0,E24*D24,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=IF(E25>0,E25*D25,\"\")"}
+							]
+						},
+						{
+							"Name":"Alternate2",
+							"Type":"Correct",
+							"Deduct":0,
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(E20>0,D20*E20)"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(E21>0,D21*E21)"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(E22>0,D22*E22)"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=IF(E23>0,D23*E23)"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=IF(E24>0,D24*E24)"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=IF(E25>0,D25*E25)"}
+							]
+						},
+						{
+							"Name":"Alternate3",
+							"Type":"Correct",
+							"Deduct":0,
+							"Feedback":"Although you filled the cells, the empty rows now show 0",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=D20*E20"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=D21*E21"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=D22*E22"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=D23*E23"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=D24*E24"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=D25*E25"}
+							]
+						},
+						{
+							"Name":"Alternate4",
+							"Type":"Correct",
+							"Deduct":0,
+							"Feedback":"Although you filled the cells, the empty rows now show 0",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=E20*D20"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=E21*D21"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=E22*D22"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":"=E23*D23"},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":"=E24*D24"},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":"=E25*D25"}
+							]
+						},
+						{
+							"Name":"Alternate5",
+							"Deduct":4,
+							"Type":"PartialCredit",
+							"Feedback":"The worksheet looks correct, but you didn't follow the instructions.",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=D20*E20"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=D21*E21"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=D22*E22"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":""}
+							]
+						},
+						{
+							"Name":"Alternate6",
+							"Deduct":4,
+							"Type":"PartialCredit",
+							"Feedback":"The worksheet looks correct, but you didn't follow the instructions.",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=E20*D20"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=E21*D21"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=E22*D22"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":""}
+							]
+						},
+						{
+							"Name":"PartialCredit",
+							"Deduct":1,
+							"Type":"PartialCredit",
+							"Feedback":"Only filled rows with values",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(D20>0,D20*E20,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(D21>0,D21*E21,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(D22>0,D22*E22,\"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":""}
+							]
+						},
+						{
+							"Name":"Correct1",
+							"Deduct":1,
+							"Type":"PartialCredit",
+							"Feedback":"Only filled rows with values",
+							"Answer":
+							[
+								{"Path":"Worksheets[Order Form].Cells[$F$20].Formula","Value":"=IF(E20 > 0, D20*E20, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$21].Formula","Value":"=IF(E21 > 0, D21*E21, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$22].Formula","Value":"=IF(E22 > 0, D22*E22, \"\")"},
+								{"Path":"Worksheets[Order Form].Cells[$F$23].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$24].Formula","Value":""},
+								{"Path":"Worksheets[Order Form].Cells[$F$25].Formula","Value":""}
+							]
+						},
+						
+					]
+				}
+			]
+		}
+	]
+}

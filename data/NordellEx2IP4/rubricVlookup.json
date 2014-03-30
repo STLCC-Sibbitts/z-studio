@@ -1,0 +1,527 @@
+{
+	"Project": {
+		"Name":"NordellEx2IP4",
+		"Text":"Just some arbitrary text",
+		"TotalPts":50,
+		"Allocations": [
+			{ "NCE": {
+				"Pct":0.10,
+				"Max":5,
+				"PPE":0.50
+			} },
+			{ "EE": {
+				"Pct":0.15,
+				"Max":7.5,
+				"PPE":1.0
+			} },
+			{ "LO": {
+				"Pct":0.75,
+				"Max":37.5,
+				"PPE":1.50
+			} }
+		],
+		"Preferences": {
+			"SkillLevels":{"Enabled":true},
+			"Coverages":{"Enabled":true},
+			"Difficulties":{"Enabled":true},
+			"Deductions":{"Enabled":true},
+			"PartialCredit":{"Enabled":true},
+			"Content2": {
+				"Typos":{"Enabled":true, "Threshold":1},
+				"Expressions": {
+					"AccuracyForRanges":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Inclusion of extraneous/empty cells in ranges should be avoided. Found range: '{0}' in expression: '{1}', does not match the requested range: '{2}'."
+						}
+					}
+				}
+			},
+			"Content": {
+				"Literal": {
+					"Typos":{
+						"Enabled":true
+						, "Threshold":1
+						,"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "NCE"
+						}
+						,"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Found a typo, ....Incomplete copy of range. Partial copying of range, found content copied to: '{0}' instead of: '{1}'."
+						}
+						,"Notes":"This could be an error, a warning or nothing? For now, anything within the threshold is partial credit."
+					}
+				}
+				,"Action": {
+					"Copy_Range":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Incomplete copy of range. Partial copying of range, found content copied to: '{0}' instead of: '{1}'."
+						}
+						,"Notes":"Give partial credit if target range copied to skips cells that would result in a non-displayable value"
+					}
+				}
+				,"Expression": {
+					"FunctionArg_RangeBounds":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Inclusion of extraneous/empty cells in ranges should be avoided. Found range: '{0}' in expression: '{1}', does not match the requested range: '{2}'."
+						},
+						"Notes" : "Might make this function specific or add other criteria later."
+					},
+					"FunctionArg_DefaultValue_Missing":{
+						"Enabled":false,
+						"Deduction" : {
+							"Type" : "FULL",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Omitted function argument {0}, review {1}"
+						},
+						"Notes" : "How to treat entry of default values in functions when not requested to do so."
+					},
+					"FunctionArg_DefaultValue_Found":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "None",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Specifying the {0} was not required, review {1}"
+						},
+						"Notes" : "How to treat entry of default values in functions when not requested to do so."
+					},
+					"FunctionArg_NumericLiteral_OutputValue":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Requested numeric literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for numeric literals as function arguments. May need to define threshold."
+					},
+					"FunctionArg_StringLiteral_OutputValue":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Requested string literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for string literals as function output arguments."
+					},
+					"FunctionArg_NumericLiteral":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Requested numeric literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for numeric literals as input function arguments, provided resulting value is correct."
+					},
+					"FunctionArg_StringLiteral":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Requested string literal input value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for string literals as input function arguments, provided resulting value is correct."
+					}
+				}
+			}
+		},
+		"Multipliers": {
+			"SkillLevels": [
+				{"Novice":1.0},
+				{"Beginner":1.25},
+				{"Intermediate":1.5},
+				{"Advanced":1.75},
+				{"Expert":2.0}
+			],
+			"Coverages": [
+				{"Review":1.0},
+				{"Normal":1.0}
+			],
+			"Difficulties": [
+				{"Easy":   0.5},
+				{"Normal":   1.0},
+				{"Hard":   1.5},
+				{"Challenging":   2.0}
+			],
+			"Deductions": [
+				{"None": 0.0},
+				{"Minor":0.25},
+				{"Moderate":0.50},
+				{"Major":0.75},
+				{"Full":1.00}
+			]
+		}
+	},
+	"Keys": [
+		{"placeHolder":null }
+	],
+	"Steps":
+	[
+		{	"02": {	
+			"Name":"Step {ParentID}",
+			"Key": "{ParentID}",
+			"Text":"Create a VLOOKUP function to calculate the bonus amount for each employee.",
+			"Tags":[
+				{ "0" : ["Create a ///<{0}VLOOKUP function>/// to calculate the bonus amount for each employee."]},
+				{ "1" : ["a. Click the ///<{0}Employees sheet tab>///, and select ///<{1}I4>///."]},
+				{ "2" : ["b. Type a formula to reference the ///<{0}Base Monthly Salary amount as the lookup_value>///."]},
+				{ "3" : ["c. Click the ///<{0}Bonus sheet tab for the table_array argument>///."]},
+				{ "4" : ["d. Use the ///<{0}second column of the table for the col_index_num>///."]},
+				{ "5" : ["e. Verify that the formula syntax is =VLOOKUP(H4,Bonus!A4:B8,2)."]}
+			],
+			"Tasks":
+			[
+				{	"a": {
+					"Name":"{^Name}{ParentID}",
+					"Text":"{^Text}",
+					"Mapping":	{
+						"Category":"LO",
+						"Difficulty":"Hard",
+						"Action":"Create"
+					},
+					"Target" : {
+						"Text": "{^Text}",
+						"Location": {
+							"Type" : "Cell"
+							,"Address" : "$I$4"
+							,"TaggedAddress": ["///<{1,1}$I$4>///"]
+							,"Context":"Employees"
+							,"TaggedContext": ["///{1,0}Employees>///"]
+						},
+						"Type":"Content",
+						"Property":"Formula"
+					},
+					"Answer": { 
+						"Type": "{^Target.Type}",
+						"LiteralValue":0.01,
+						"Expression":"=VLOOKUP(H4,Bonus!$A$4:$B$8,2)",
+						"BegExpression" : "{/Keys[{^Key}.End].Worksheets[{^Target.Location.Context}].Cells[{^Target.Location.Address}].{^Target.Type}.{^Target.Property}}"
+						,"TaggedExpression":[ 
+							"=///<{0,0}VLOOKUP(>///"
+							,"///<{2,0}H4>///,"
+							,"///<{3,0}Bonus!$A$4:$B$8>///,"
+							,"///<{4,0}2>///)"
+						]
+						,"AltTaggedExpression":[ 
+							"=///<{0}VLOOKUP(>///"
+							,"///<{2}H4>///,"
+							,"///<{3}Bonus!A4:B8>///,"
+							,"///<{4}2>///)"
+						]
+					},
+					"Scenarios" : 
+					[
+						{	"Name" : "SpecifiedRange_lookupIncorrectValue",
+							"Answers" :
+							[
+								{	"Type": "{^Answer.Type}",
+									"Expression" : "={^Args[Function].Expression}({^Args[Lookup_value].Expression},{^Args[Table_array].Expression},{^Args[Col_index_num].Expression},FALSE)"
+								}
+							],
+							"Deduction" : {
+								"Category" : "{^Mapping.Category}",
+								"Type":"Moderate"
+							},
+							"Remediation": {
+								"Category" : "{^Mapping.Category}",
+								"Feedback" : "Specifying the Range_lookup was not required, incorrect Range_lookup value specified, review {^Args[Function].Expression}"
+							},
+							"Notes" : "May modify if correct value not produced."
+						}
+					]
+				}}
+			]
+		}},
+		{	"03": {	
+			"Name":"Step {ParentID}",
+			"Key": "{ParentID}",
+			"Text":"Select the formula in I4 and apply absolute values to the cell references in the table_array argument.",
+			"Tags":[
+				{ "0" : ["Select the formula in I4	and 	apply absolute values to the cell references in the table_array argument."]}
+			],
+			"Tasks":
+			[
+				{	"-": {
+					"Name":"{^Name}{ParentID}",
+					"Text":"{^Text}",
+					"Mapping":	{
+						"Category":"LO",
+						"Difficulty":"Normal",
+						"Action":"Modify"
+					},
+					"Target" : {
+						"Text": "{^Text}",
+						"Location": {
+							"Type" : "Cell"
+							,"Address" : "$I$4"
+							,"TaggedAddress": ["///<{0,0}$I$4>///"]
+							,"Context":"Employees"
+						},
+						"Type":"Content",
+						"Property":"Formula"
+					},
+					"Answer" : {
+						"Type": "{^Target.Type}",
+						"LiteralValue":0.01,
+						"Expression":"=VLOOKUP(H4,Bonus!$A$4:$B$8,2)",
+						"BegExpression":"/Keys[{^Key}].Beg.Worksheets[{^Target.Location.Context}].Cells[^Target.Location.Address}].{^Target.Type}.{{^Target.Property}"
+						,"TaggedExpression":["=VLOOKUP(H4,///<{0,2}Bonus!$A$4:$B$8>///,2)"]
+					},
+					"Scenarios" : 
+					[
+						{	"Name" : "NoChange",
+							"Answers" :
+							[
+								{	"Type": "{^Answer.Type}",
+									"Expression" : "{^Answer.BegExpression}"
+								}
+							],
+							"Deduction" : {
+								"Category" : "{^Mapping.Category}",
+								"Type":"Full"
+							},
+							"Remediation": {
+								"Category" : "{^Mapping.Category}",
+								"Feedback" : "Formula unchanged from original, review absolute cell references."
+							},
+							"Notes" : "This particular scenario is automatically checked based on the action:Modify"
+						}
+					]
+				}}
+			]
+		}},
+		{	"04": {	
+			"Name":"Step {ParentID}",
+			"Key": "{ParentID}",
+			"Text":"Copy the formula in I4 to I5:I13.",
+			"Tags":[
+				{ "0" : ["Copy the	formula	in	I4	 to 	I5:I13"]}
+			],
+			"Tasks":
+			[
+				{	"-": {
+					"Name":"{^Name}{ParentID}",
+					"Text":"{^Text}",
+					"Mapping":	{
+						"Category":"LO",
+						"Review":true,
+						"Difficulty":"Normal",
+						"Action":"Copy"
+					},
+					"Target" : {
+						"Text": "{^Text}",
+						"Location": {
+							"Type" : "Range",
+							"Address" : "$I$5:$I$13",
+							"Context":"Employees"
+							,"TaggedAddress": ["///<{0,5}$I$5:$I$13>///"]
+						},
+						"Type":"Content",
+						"Property" : "FormulaR1C1"
+					},
+					"Source" : {
+						"Text": "{^Text}",
+						"Location" : {
+							"Type" : "Cell",
+							"Address" : "$I$4",
+							"Context":"Employees"
+							,"TaggedAddress": ["///<{0,1}$I$4>///"]
+						},
+						"Type":"Content",
+						"Property" : "FormulaR1C1"
+					},
+					"Answer": {
+						"Type": "{^Target.Type}",
+						"LiteralValue":0.01,
+						"Expression":"=VLOOKUP(RC[-1],Bonus!R4C1:R8C2,2)",
+						"BegExpression":"=VLOOKUP(RC[-1],Bonus!R4C[-8]:R8C[-7],2)"
+						,"PreferenceOptions":[ "AccuracyForRangeCopy" ]
+						,"TaggedExpression": ["///<{0,1}=VLOOKUP(RC[-1],Bonus!R4C1:R8C2,2)>///"]
+						,"Notes":"when evaluating this, use whatever the R1C1 format of the submission is and use that"
+					},
+					"Scenarios" : 
+					[
+						{	"Name" : "NoChange",
+							"Answers" :
+							[
+								{	"Type": "{^Answer.Type}",
+									"Expression" : "This was - Original.Expression, should be able to 'flag' this somehow."
+								}
+							],
+							"Deduction" : {
+								"Category" : "{^Mapping.Category}",
+								"Type":"Full"
+							},
+							"Remediation": {
+								"Category" : "{^Mapping.Category}",
+								"Feedback" : "Formula unchanged from original, review absolute cell references."
+							},
+							"Notes" : "This particular scenario is automatically checked based on the action:Modify. Feedback will be based on 'stock' scenarios/common errors and based on user preferences."
+						}
+					]
+				}}
+
+			]
+		}},
+		{	"05": {	
+			"Name":"Step {ParentID}",
+			"Key": "{ParentID}",
+			"Text":" Type a formula in J4 to calculate the total monthly salary.",
+			"Tags":[
+				{ "0" : ["Type a formula in J4	 to calculate the total monthly salary."]}
+				,{ "1" : ["a. Use parentheses in the formula to calculate the amount of the bonus	 and then add the bonus 	to the Base Monthly Salary."]}
+				,{ "2" : ["b. Copy the 	formula	 in 	J4	 to 	J5:J13."]}
+			],
+
+			"Tasks":
+			[
+				{	"a": {
+					"Name":"{^Name}{ParentID}",
+					"Text":"Use parentheses in the formula to calculate the amount of the bonus and then add the bonus to the Base Monthly Salary.",
+					"Mapping":	{
+						"Category":"LO",
+						"Review":false,
+						"Difficulty":"Normal",
+						"Action":"Create"
+					},
+					"Target" : {
+						"Text": "{^Text}",
+						"Location": {
+							"Type" : "Cell",
+							"Address" : "$J$4",
+							"Context":"Employees"
+							,"TaggedAddress": ["///<{0,0}$J$4>///"]
+						},
+						"Type":"Content",
+						"Property" : "Formula"
+					},
+					"Answer": {
+						"Type": "{^Target.Type}",
+						"LiteralValue":15150,
+						"Expression":"=(H4*I4)+H4"
+						,"TaggedExpression": ["=///<{1,0}(H4*I4)>//////<{1,1}+>//////<{1,2}H4>///"]
+
+					},
+					"Scenarios" : 
+					[
+						{	"Name" : "Alternate form",
+							"Answers" :
+							[
+								{	"Type": "{^Answer.Type}",
+									"Expression" : "=(H4+1)*I4"
+									,"TaggedExpression": ["=///<{1}(H4+1)*I4>///"]
+								}
+							],
+							"Deduction" : {
+								"Category" : "EE",
+								"Type":"Minor"
+							},
+							"Remediation": {
+								"Category" : "{^Mapping.Category}",
+								"Feedback" : "Directions were explicit."
+							},
+							"Notes" : "This may be a common response for those that are algebraically adept."
+						}
+					]
+				}},
+				{	"b": {
+					"Name":"{^Name}{ParentID}",
+					"Text":"Copy the formula in J4 to J5:J13.",
+					"Mapping":	{
+						"Category":"LO",
+						"Review":true,
+						"Difficulty":"Normal",
+						"Action":"Copy"
+					},
+					"Target" : {
+						"Text": "{^Text}",
+						"Location": {
+							"Type" : "Range",
+							"Address" : "$J$5:$J$13",
+							"Context":"Employees"
+							,"TaggedAddress": ["///<{2,5}$J$5:$J$13>///"]
+						},
+						"Type":"Content",
+						"Property" : "FormulaR1C1"
+					},
+					"Source" : {
+						"Text": "{^Text}",
+						"Location" : {
+							"Type" : "Cell",
+							"Address" : "$J$4",
+							"Context":"Employees"
+							,"TaggedAddress": ["///<{2,3}$J$4>///"]
+						},
+						"Type":"Content",
+						"Property" : "FormulaR1C1"
+					},
+					"Answer": {
+						"Type": "{^Target.Type}",
+						"LiteralValue":0.01,
+						"Expression": "=(RC[-2]*RC[-1])+RC[-2]"
+						,"TaggedExpression": ["=///<{2}(RC[-2]*RC[-1])+RC[-2]>///"]
+					},
+					"Scenarios" : 
+					[
+						{	"Name" : "NoChange",
+							"Answers" :
+							[
+								{	"Type": "{^Answer.Type}",
+									"Expression" : "Verify literal value vs. formula."
+								}
+							],
+							"Deduction" : {
+								"Category" : "{^Mapping.Category}",
+								"Type":"Full"
+							},
+							"Remediation": {
+								"Category" : "{^Mapping.Category}",
+								"Feedback" : "Formula unchanged from original, review absolute cell references."
+							},
+							"Notes" : "This particular scenario is automatically checked based on the action:Copy. Feedback will be based on 'stock' scenarios/common errors and based on user preferences."
+						}
+					]
+				}}
+			]
+		}}
+
+	]
+}

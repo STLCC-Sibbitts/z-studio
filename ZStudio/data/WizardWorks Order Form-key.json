@@ -1,0 +1,685 @@
+{
+   "LCAs" : [],
+   "Name" : "WizardWorks Order Form-key.xlsx",
+   "Type" : "Workbook",
+   "Worksheets" : [
+      {
+         "Documentation" : {
+            "Cells" : [
+               {
+                  "$A$1" : {
+                     "Name" : "$A$1",
+                     "Text" : "WizardWorks",
+                     "Type" : "Cell",
+                     "Value" : "WizardWorks"
+                  }
+               },
+               {
+                  "$A$3" : {
+                     "Name" : "$A$3",
+                     "Text" : "Author",
+                     "Type" : "Cell",
+                     "Value" : "Author"
+                  }
+               },
+               {
+                  "$B$3" : {
+                     "Name" : "$B$3",
+                     "Text" : "Andrew Howe",
+                     "Type" : "Cell",
+                     "Value" : "Andrew Howe"
+                  }
+               },
+               {
+                  "$A$4" : {
+                     "Name" : "$A$4",
+                     "Text" : "Date",
+                     "Type" : "Cell",
+                     "Value" : "Date"
+                  }
+               },
+               {
+                  "$B$4" : {
+                     "Name" : "$B$4",
+                     "Text" : "3/1/2013",
+                     "Type" : "Cell",
+                     "Value" : "3/1/2013 12:00:00 AM"
+                  }
+               },
+               {
+                  "$A$5" : {
+                     "Name" : "$A$5",
+                     "Text" : "Purpose",
+                     "Type" : "Cell",
+                     "Value" : "Purpose"
+                  }
+               },
+               {
+                  "$B$5" : {
+                     "Name" : "$B$5",
+                     "Text" : "To enter customer orders for the WizardWorks fireworks company",
+                     "Type" : "Cell",
+                     "Value" : "To enter customer orders for the WizardWorks fireworks company"
+                  }
+               }
+            ],
+            "Name" : "Documentation",
+            "Ranges" : [],
+            "Type" : "Sheet"
+         }
+      },
+      {
+         "Order Form" : {
+            "Cells" : [
+               {
+                  "$A$1" : {
+                     "Name" : "$A$1",
+                     "Text" : "WizardWorks",
+                     "Type" : "Cell",
+                     "Value" : "WizardWorks"
+                  }
+               },
+               {
+                  "$B$2" : {
+                     "Name" : "$B$2",
+                     "Text" : "250 North Avenue\nFranklin, Tennessee  37064\nSales: (615) 555-3287\nOffice: (615) 555-3210",
+                     "Type" : "Cell",
+                     "Value" : "250 North Avenue\nFranklin, Tennessee  37064\nSales: (615) 555-3287\nOffice: (615) 555-3210"
+                  }
+               },
+               {
+                  "$B$4" : {
+                     "Name" : "$B$4",
+                     "Text" : "Customer",
+                     "Type" : "Cell",
+                     "Value" : "Customer"
+                  }
+               },
+               {
+                  "$C$4" : {
+                     "Name" : "$C$4",
+                     "Text" : "Kevin Kemper",
+                     "Type" : "Cell",
+                     "Value" : "Kevin Kemper"
+                  }
+               },
+               {
+                  "$B$5" : {
+                     "Name" : "$B$5",
+                     "Text" : "Date",
+                     "Type" : "Cell",
+                     "Value" : "Date"
+                  }
+               },
+               {
+                  "$C$5" : {
+                     "Dependents" : "None",
+                     "Formula" : "=TODAY()",
+                     "Name" : "$C$5",
+                     "Precedents" : "None",
+                     "Text" : "2/5/2012",
+                     "Type" : "Cell",
+                     "Value" : "2/5/2012 12:00:00 AM"
+                  }
+               },
+               {
+                  "$B$6" : {
+                     "Name" : "$B$6",
+                     "Text" : "Order No.",
+                     "Type" : "Cell",
+                     "Value" : "Order No."
+                  }
+               },
+               {
+                  "$C$6" : {
+                     "Name" : "$C$6",
+                     "Text" : "28314",
+                     "Type" : "Cell",
+                     "Value" : "28314"
+                  }
+               },
+               {
+                  "$B$8" : {
+                     "Name" : "$B$8",
+                     "Text" : "Shipping Address",
+                     "Type" : "Cell",
+                     "Value" : "Shipping Address"
+                  }
+               },
+               {
+                  "$E$8" : {
+                     "Name" : "$E$8",
+                     "Text" : "Shipping Options",
+                     "Type" : "Cell",
+                     "Value" : "Shipping Options"
+                  }
+               },
+               {
+                  "$B$9" : {
+                     "Name" : "$B$9",
+                     "Text" : "Address 1",
+                     "Type" : "Cell",
+                     "Value" : "Address 1"
+                  }
+               },
+               {
+                  "$C$9" : {
+                     "Name" : "$C$9",
+                     "Text" : "315 Avalon Street",
+                     "Type" : "Cell",
+                     "Value" : "315 Avalon Street"
+                  }
+               },
+               {
+                  "$E$9" : {
+                     "Name" : "$E$9",
+                     "Text" : "Standard",
+                     "Type" : "Cell",
+                     "Value" : "Standard"
+                  }
+               },
+               {
+                  "$F$9" : {
+                     "Name" : "$F$9",
+                     "Text" : "$3.99 ",
+                     "Type" : "Cell",
+                     "Value" : "3.99"
+                  }
+               },
+               {
+                  "$B$10" : {
+                     "Name" : "$B$10",
+                     "Text" : "Address 2",
+                     "Type" : "Cell",
+                     "Value" : "Address 2"
+                  }
+               },
+               {
+                  "$E$10" : {
+                     "Name" : "$E$10",
+                     "Text" : "Overnight",
+                     "Type" : "Cell",
+                     "Value" : "Overnight"
+                  }
+               },
+               {
+                  "$F$10" : {
+                     "Name" : "$F$10",
+                     "Text" : "$10.99 ",
+                     "Type" : "Cell",
+                     "Value" : "10.99"
+                  }
+               },
+               {
+                  "$B$11" : {
+                     "Name" : "$B$11",
+                     "Text" : "City",
+                     "Type" : "Cell",
+                     "Value" : "City"
+                  }
+               },
+               {
+                  "$C$11" : {
+                     "Name" : "$C$11",
+                     "Text" : "Greenfield",
+                     "Type" : "Cell",
+                     "Value" : "Greenfield"
+                  }
+               },
+               {
+                  "$B$12" : {
+                     "Name" : "$B$12",
+                     "Text" : "State",
+                     "Type" : "Cell",
+                     "Value" : "State"
+                  }
+               },
+               {
+                  "$C$12" : {
+                     "Name" : "$C$12",
+                     "Text" : "IN",
+                     "Type" : "Cell",
+                     "Value" : "IN"
+                  }
+               },
+               {
+                  "$E$12" : {
+                     "Name" : "$E$12",
+                     "Text" : "Discount*",
+                     "Type" : "Cell",
+                     "Value" : "Discount*"
+                  }
+               },
+               {
+                  "$F$12" : {
+                     "Name" : "$F$12",
+                     "Text" : "4%",
+                     "Type" : "Cell",
+                     "Value" : "0.04"
+                  }
+               },
+               {
+                  "$B$13" : {
+                     "Name" : "$B$13",
+                     "Text" : "Zip",
+                     "Type" : "Cell",
+                     "Value" : "Zip"
+                  }
+               },
+               {
+                  "$C$13" : {
+                     "Name" : "$C$13",
+                     "Text" : "46140",
+                     "Type" : "Cell",
+                     "Value" : "46140"
+                  }
+               },
+               {
+                  "$E$13" : {
+                     "Name" : "$E$13",
+                     "Text" : "*For orders exceeding $200",
+                     "Type" : "Cell",
+                     "Value" : "*For orders exceeding $200"
+                  }
+               },
+               {
+                  "$B$15" : {
+                     "Name" : "$B$15",
+                     "Text" : "Shipping*",
+                     "Type" : "Cell",
+                     "Value" : "Shipping*"
+                  }
+               },
+               {
+                  "$C$15" : {
+                     "Name" : "$C$15",
+                     "Text" : "standard",
+                     "Type" : "Cell",
+                     "Value" : "standard"
+                  }
+               },
+               {
+                  "$B$16" : {
+                     "Name" : "$B$16",
+                     "Text" : "*Enter standard or overnight",
+                     "Type" : "Cell",
+                     "Value" : "*Enter standard or overnight"
+                  }
+               },
+               {
+                  "$B$18" : {
+                     "Name" : "$B$18",
+                     "Text" : "Customer Order",
+                     "Type" : "Cell",
+                     "Value" : "Customer Order"
+                  }
+               },
+               {
+                  "$B$19" : {
+                     "Name" : "$B$19",
+                     "Text" : "Item",
+                     "Type" : "Cell",
+                     "Value" : "Item"
+                  }
+               },
+               {
+                  "$C$19" : {
+                     "Name" : "$C$19",
+                     "Text" : "Name",
+                     "Type" : "Cell",
+                     "Value" : "Name"
+                  }
+               },
+               {
+                  "$D$19" : {
+                     "Name" : "$D$19",
+                     "Text" : "Price",
+                     "Type" : "Cell",
+                     "Value" : "Price"
+                  }
+               },
+               {
+                  "$E$19" : {
+                     "Name" : "$E$19",
+                     "Text" : "Qty",
+                     "Type" : "Cell",
+                     "Value" : "Qty"
+                  }
+               },
+               {
+                  "$F$19" : {
+                     "Name" : "$F$19",
+                     "Text" : "Charge",
+                     "Type" : "Cell",
+                     "Value" : "Charge"
+                  }
+               },
+               {
+                  "$B$20" : {
+                     "Name" : "$B$20",
+                     "Text" : "BF001",
+                     "Type" : "Cell",
+                     "Value" : "BF001"
+                  }
+               },
+               {
+                  "$C$20" : {
+                     "Name" : "$C$20",
+                     "Text" : "Bucket of Fireworks",
+                     "Type" : "Cell",
+                     "Value" : "Bucket of Fireworks"
+                  }
+               },
+               {
+                  "$D$20" : {
+                     "Name" : "$D$20",
+                     "Text" : "$45.75 ",
+                     "Type" : "Cell",
+                     "Value" : "45.75"
+                  }
+               },
+               {
+                  "$E$20" : {
+                     "Name" : "$E$20",
+                     "Text" : "1",
+                     "Type" : "Cell",
+                     "Value" : "1"
+                  }
+               },
+               {
+                  "$F$20" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E20 > 0, D20*E20, \"\")",
+                     "Name" : "$F$20",
+                     "Precedents" : "$D$20:$E$20",
+                     "Text" : "$45.75 ",
+                     "Type" : "Cell",
+                     "Value" : "45.75"
+                  }
+               },
+               {
+                  "$B$21" : {
+                     "Name" : "$B$21",
+                     "Text" : "NAF",
+                     "Type" : "Cell",
+                     "Value" : "NAF"
+                  }
+               },
+               {
+                  "$C$21" : {
+                     "Name" : "$C$21",
+                     "Text" : "Nightair Fountain",
+                     "Type" : "Cell",
+                     "Value" : "Nightair Fountain"
+                  }
+               },
+               {
+                  "$D$21" : {
+                     "Name" : "$D$21",
+                     "Text" : "$12.95 ",
+                     "Type" : "Cell",
+                     "Value" : "12.95"
+                  }
+               },
+               {
+                  "$E$21" : {
+                     "Name" : "$E$21",
+                     "Text" : "4",
+                     "Type" : "Cell",
+                     "Value" : "4"
+                  }
+               },
+               {
+                  "$F$21" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E21 > 0, D21*E21, \"\")",
+                     "Name" : "$F$21",
+                     "Precedents" : "$D$21:$E$21",
+                     "Text" : "$51.80 ",
+                     "Type" : "Cell",
+                     "Value" : "51.8"
+                  }
+               },
+               {
+                  "$B$22" : {
+                     "Name" : "$B$22",
+                     "Text" : "MR20B",
+                     "Type" : "Cell",
+                     "Value" : "MR20B"
+                  }
+               },
+               {
+                  "$C$22" : {
+                     "Name" : "$C$22",
+                     "Text" : "Mountain Rockets (Box 20)",
+                     "Type" : "Cell",
+                     "Value" : "Mountain Rockets (Box 20)"
+                  }
+               },
+               {
+                  "$D$22" : {
+                     "Name" : "$D$22",
+                     "Text" : "$55.25 ",
+                     "Type" : "Cell",
+                     "Value" : "55.25"
+                  }
+               },
+               {
+                  "$E$22" : {
+                     "Name" : "$E$22",
+                     "Text" : "1",
+                     "Type" : "Cell",
+                     "Value" : "1"
+                  }
+               },
+               {
+                  "$F$22" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E22 > 0, D22*E22, \"\")",
+                     "Name" : "$F$22",
+                     "Precedents" : "$D$22:$E$22",
+                     "Text" : "$55.25 ",
+                     "Type" : "Cell",
+                     "Value" : "55.25"
+                  }
+               },
+               {
+                  "$F$23" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E23 > 0, D23*E23, \"\")",
+                     "Name" : "$F$23",
+                     "Precedents" : "$D$23:$E$23",
+                     "Text" : "",
+                     "Type" : "Cell",
+                     "Value" : ""
+                  }
+               },
+               {
+                  "$F$24" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E24 > 0, D24*E24, \"\")",
+                     "Name" : "$F$24",
+                     "Precedents" : "$D$24:$E$24",
+                     "Text" : "",
+                     "Type" : "Cell",
+                     "Value" : ""
+                  }
+               },
+               {
+                  "$F$25" : {
+                     "Dependents" : "$F$27:$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(E25 > 0, D25*E25, \"\")",
+                     "Name" : "$F$25",
+                     "Precedents" : "$D$25:$E$25",
+                     "Text" : "",
+                     "Type" : "Cell",
+                     "Value" : ""
+                  }
+               },
+               {
+                  "$E$27" : {
+                     "Name" : "$E$27",
+                     "Text" : "Subtotal",
+                     "Type" : "Cell",
+                     "Value" : "Subtotal"
+                  }
+               },
+               {
+                  "$F$27" : {
+                     "Dependents" : "$F$28:$F$29,$F$31,$F$34",
+                     "Formula" : "=SUM(F20:F25)",
+                     "Name" : "$F$27",
+                     "Precedents" : "$D$20:$F$25",
+                     "Text" : "$152.80 ",
+                     "Type" : "Cell",
+                     "Value" : "152.8"
+                  }
+               },
+               {
+                  "$E$28" : {
+                     "Name" : "$E$28",
+                     "Text" : "Discount",
+                     "Type" : "Cell",
+                     "Value" : "Discount"
+                  }
+               },
+               {
+                  "$F$28" : {
+                     "Dependents" : "$F$29,$F$31,$F$34",
+                     "Formula" : "=IF(F27>200,F12*F27,0)",
+                     "Name" : "$F$28",
+                     "Precedents" : "$F$12,$F$27,$D$20:$F$25",
+                     "Text" : "$0.00 ",
+                     "Type" : "Cell",
+                     "Value" : "0.0000"
+                  }
+               },
+               {
+                  "$E$29" : {
+                     "Name" : "$E$29",
+                     "Text" : "After Discount",
+                     "Type" : "Cell",
+                     "Value" : "After Discount"
+                  }
+               },
+               {
+                  "$F$29" : {
+                     "Dependents" : "$F$31,$F$34",
+                     "Formula" : "=F27-F28",
+                     "Name" : "$F$29",
+                     "Precedents" : "$F$12,$F$27:$F$28,$D$20:$F$25",
+                     "Text" : "$152.80 ",
+                     "Type" : "Cell",
+                     "Value" : "152.8"
+                  }
+               },
+               {
+                  "$E$31" : {
+                     "Name" : "$E$31",
+                     "Text" : "5% Sales Tax",
+                     "Type" : "Cell",
+                     "Value" : "5% Sales Tax"
+                  }
+               },
+               {
+                  "$F$31" : {
+                     "Dependents" : "$F$34",
+                     "Formula" : "=F29*0.05",
+                     "Name" : "$F$31",
+                     "Precedents" : "$F$12,$F$27:$F$29,$D$20:$F$25",
+                     "Text" : "$7.64 ",
+                     "Type" : "Cell",
+                     "Value" : "7.64"
+                  }
+               },
+               {
+                  "$E$32" : {
+                     "Name" : "$E$32",
+                     "Text" : "Shipping",
+                     "Type" : "Cell",
+                     "Value" : "Shipping"
+                  }
+               },
+               {
+                  "$F$32" : {
+                     "Dependents" : "$F$34",
+                     "Formula" : "=IF(C15=\"standard\",F9,F10)",
+                     "Name" : "$F$32",
+                     "Precedents" : "$C$15,$F$9:$F$10",
+                     "Text" : "$3.99 ",
+                     "Type" : "Cell",
+                     "Value" : "3.99"
+                  }
+               },
+               {
+                  "$G$32" : {
+                     "Dependents" : "None",
+                     "Formula" : "=C15",
+                     "Name" : "$G$32",
+                     "Precedents" : "$C$15",
+                     "Text" : "standard",
+                     "Type" : "Cell",
+                     "Value" : "standard"
+                  }
+               },
+               {
+                  "$E$34" : {
+                     "Name" : "$E$34",
+                     "Text" : "TOTAL",
+                     "Type" : "Cell",
+                     "Value" : "TOTAL"
+                  }
+               },
+               {
+                  "$F$34" : {
+                     "Dependents" : "None",
+                     "Formula" : "=F29+F31+F32",
+                     "Name" : "$F$34",
+                     "Precedents" : "$F$31:$F$32,$C$15,$F$9:$F$10,$F$12,$F$27:$F$29,$D$20:$F$25",
+                     "Text" : "$164.43 ",
+                     "Type" : "Cell",
+                     "Value" : "164.43"
+                  }
+               },
+               {
+                  "$G$34" : {
+                     "Name" : "$G$34",
+                     "Text" : "",
+                     "Type" : "Cell",
+                     "Value" : ""
+                  }
+               }
+            ],
+            "Name" : "Order Form",
+            "Ranges" : [
+               {
+                  "LineStyle" : "xlContinuous",
+                  "Range" : "$E$8:$F$10",
+                  "Type" : "Border",
+                  "Weight" : "xlThin"
+               },
+               {
+                  "LineStyle" : "xlContinuous",
+                  "Range" : "$B$19:$F$25",
+                  "Type" : "Border",
+                  "Weight" : "xlThin"
+               },
+               {
+                  "Fill" : {
+                     "Color" : {
+                        "MSO" : "0, 0, 139",
+                        "MSOTheme" : "xlThemeColorDark2",
+                        "MSOThemeRGB" : "3, 0, 0",
+                        "Pattern" : "xlPatternSolid",
+                        "RGB" : "148, 138, 84"
+                     }
+                  },
+                  "Range" : "$A$1:$F$2",
+                  "Type" : "Fill"
+               }
+            ],
+            "Type" : "Sheet"
+         }
+      }
+   ]
+}

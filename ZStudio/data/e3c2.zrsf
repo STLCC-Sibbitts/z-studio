@@ -1,0 +1,608 @@
+{
+  "Name": "e3c2",
+  "Text": "rubric spreadsheet template",
+  "Type": "SpreadSheet",
+  "Worksheets": [
+    "Documentation",
+    "Order Form"
+  ],
+  "Pts": 50,
+  "Categories":[
+	{ "Category":"Neatness", "Weight":0.05, "Points":2.5, "Units":8, "PPU":0.3125 },
+	{ "Category":"Accruacy", "Weight":0.15, "Points":7.5, "Units":15, "PPU":0.5 },
+	{ "Category":"Primary Learning Objective", "Weight":0.80, "Points":40, "Units":15, "PPU":2.6667 }
+  ],
+  "File": "C:\\Users\\Public\\Documents\\_z-notes\\_ZStudio\\ZStudio\\data\\WizardWorks Order Form-key.xlsx",
+  "Steps": [
+    {
+      "Name": "Step - 1",
+      "Text": "save the workbook as WizardWorks Order Form.",
+      "Required": true,
+      "Tasks": [
+        {
+		  "Zid":"9004AEFD-4D3A-449E-A077-81C9EDF6E688",
+          "Name": "1a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+		  "Category":"Accuracy",
+		  "Weight":1,
+          "Target": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Target": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 2",
+      "Text": "In the Documentation sheet, enter your name in cell B3 and enter the date in cell B4.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "2a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Target": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Target": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 3",
+      "Text": "In the Order Form worksheet, \n\t\tin cell C4, enter the customer name, Kevin Kemper. \n\t\tIn cell C6, enter the order number, 28314. \n\t\tIn the range C9:C13, enter the following address: \n\t\t\tAddress 1: 315 Avalon Street\n\t\t\tCity:  Greenfield\n\t\t\tState: IN\n\t\t\tZip: 46140",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "3a",
+          "Text": "in cell c4",
+          "Pts": "1",
+          "Target": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Target": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "99",
+          "Text": "",
+          "Pts": 0.0,
+          "Target": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": 86,
+            "length": 41
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Target": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 4",
+      "Text": "In cell C5, enter a function that displays the current date.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "4a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 5",
+      "Text": "In the range B20:E22, enter the following orders:\n\tItem\tName\tPrice\tQty\n\tBF001\tBucket of Fireworks\t$45.75\t1\n\tNAF\tNightair Fountain\t$12.95\t4\n\tMR20B\tMountain Rockets (Box 20)\t$55.25\t2",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "5a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 6",
+      "Text": "In cell C15, enter overnight to ship this order overnight.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "6a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 7",
+      "Text": " In cell F20, enter an IF function that tests whether the order quantity in cell E20 is greater than 0 (zero). \nIf it is, return the value of cell E20 multiplied by cell D20; otherwise, return no text by entering \"\". \nAutoFill this formula into the range F21:F25.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "7a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 8",
+      "Text": "In cell F27, calculate the sum of the values in the range F20:F25.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "8a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 9",
+      "Text": "In cell F28, enter an IF function that tests whether cell F27 is greater than 200. If it is, return the value of cell F27 multiplied by the discount percentage in cell F12; otherwise, return the value 0(zero)",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "9a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 10",
+      "Text": "In cell F29, subtract the discount value in cell F28 from the subtotal value in cell F27",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "10a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 11",
+      "Text": "In cell F31, calculate the sales tax by multiplying the after discount value in cell F29 by the sales tax percentage, 0.05.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "11a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 12",
+      "Text": "In cell F32, determine the shipping charge by entering an IF function that tests whether cell C15 equals �standard�. If it does, return the value in cell F9; otherwise, return the value in cell F10.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "12a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 13",
+      "Text": "In cell G32, display the value of cell C15",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "13a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 14",
+      "Text": "In cell F34, calculate the total of the after discount value, the sales tax, and the shipping fee",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "14a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 15",
+      "Text": "Reduce the quantity of Mountain Rockets boxes from 2 to 1, and then verify that the discount is changed to 0 for the order",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "15a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Step - 16",
+      "Text": "Change the shipping option from overnight to standard, and then verify that the shipping fee is changed to the fee for standard shipping.",
+      "Pts": 0.0,
+      "Required": true,
+      "Tasks": [
+        {
+          "Name": "16a",
+          "Text": "Complete step",
+          "Pts": 0.0,
+          "Type": "Content",
+          "Property": "Value",
+          "Required": true,
+          "Location": {
+            "Type": "Cell"
+          },
+          "StepLocation": {
+            "startPos": -1,
+            "length": -1
+          },
+          "Scenarios": [
+            {
+              "Deduct": 0.0,
+              "Name": "Correct",
+              "Credit": "Full",
+              "Type": "Content",
+              "Feedback": "Correct",
+              "Answers": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Description": "WizardWorks Andrew Howe owns and operates WizardWorks, an online seller of fireworks based in Franklin, Tennessee. \nAndrew wants you to help him develop an order form for his business. The form needs to contain formulas to calculate \nthe charge for each order. The total charge is based on the quantity and type of items ordered plus the shipping charge \nand the 5 percent sales tax. Orders can be shipped using standard 3-to 5-day shipping for $3.99 or overnight for $10.99.\nAndrew is also offering a 4 percent discount for orders that exceed $200. Both the shipping option and the discount need \nto be calculated using formulas based on values entered into the worksheet. Complete the following: "
+}

@@ -1,0 +1,38 @@
+{
+	"Name":"",
+	"Text":"",
+	"Settings":
+	{
+		"EvalType":["Literal","Logical"],
+		"FormulaOptions":
+		{
+			"Allow blanks":"Boolean",
+			"Allow equivalent operation order":"Boolean"
+		}
+	},
+	"Type":["SpreadSheet"],
+	"Worksheets":[ ],
+	"Pts":"#",
+	"Description":"",
+	"Steps":
+	{
+		"Name":"",
+		"Text":"",
+		"Property":["Value","Formula"],
+		"Pts":"#",
+		"Location":
+		{
+			"Worksheets":"",
+			"Type":["Range","Cell"],
+			"Cells":""
+		},
+		"Required":["True","False"],
+		"Type":["Content","Formula"],
+		"Tasks":
+		{
+		"Required":["True","False"],
+		"Property":["Value","Formula"],
+		"Type":["Content","Formatting"]
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "Name": "newTest",
+  "Text": "rubric spreadsheet template",
+  "Type": "SpreadSheet",
+  "Worksheets": [
+    "Documentation",
+    "Order Form"
+  ],
+  "Pts": 45,
+  "Description":"",
+  "File": "C:\\Users\\Public\\Documents\\_z-notes\\ZStudio\\ZStudio\\data\\WizardWorks Order Form-key.xlsx",
+  "Steps": []
+}

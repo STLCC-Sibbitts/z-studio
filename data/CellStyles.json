@@ -1,0 +1,41 @@
+{"CellStyles":
+[
+	{"Total": {
+		  "Font": {
+			"Name": "Calibri",
+			"Size": "11",
+			"Italic": "False",
+			"Bold": "True",
+			"FontStyle": "Bold",
+			"Strikethrough": "False",
+			"Subscript": "False",
+			"Superscript": "False",
+			"Underline": "None",
+			"Color": "0, 0, 0",
+			"Background": ""
+		  },
+		  "Borders": 
+		  [
+			{
+			  "Border": "xlEdgeTop",
+			  "LineStyle": "xlContinuous",
+			  "BorderWeight": "xlThin",
+			  "ColorIndex": "42",
+			  "Color": "91, 155, 213",
+			  "ThemeColor": "xlThemeColorAccent1"
+			},
+			{
+			  "Border": "xlEdgeBottom",
+			  "LineStyle": "xlDouble",
+			  "BorderWeight": "xlThick",
+			  "ColorIndex": "42",
+			  "Color": "91, 155, 213",
+			  "ThemeColor": "xlThemeColorAccent1"
+			}
+		  ],
+		  "Style": {
+			"Name": "Total"
+		  }
+		}
+	}
+]}
