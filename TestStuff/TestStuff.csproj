@@ -96,19 +96,11 @@
     <None Include="rubric.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\grader\zgrader\Excel2Json\Excel2Json.csproj">
-      <Project>{196f0ffd-ed06-4924-8597-2a3da95ab5a7}</Project>
-      <Name>Excel2Json</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\grader\zgrader\Grader\Grader.csproj">
-      <Project>{a5da2589-4342-4b35-833a-4829065bca44}</Project>
-      <Name>Grader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interop.Excel\Interop.Excel.csproj">
+    <ProjectReference Include="..\lib\Interop.Excel\Interop.Excel.csproj">
       <Project>{a754f43d-65ed-45b3-9147-850a14cf8eac}</Project>
       <Name>Interop.Excel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interop.WinApi\Interop.WinApi.csproj">
+    <ProjectReference Include="..\lib\Interop.WinApi\Interop.WinApi.csproj">
       <Project>{c0e5fdef-d735-4b2e-b28d-604156f1816e}</Project>
       <Name>Interop.WinApi</Name>
     </ProjectReference>

@@ -1,21 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Excel", "Interop.Excel\Interop.Excel.csproj", "{A754F43D-65ED-45B3-9147-850A14CF8EAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Excel", "lib\Interop.Excel\Interop.Excel.csproj", "{A754F43D-65ED-45B3-9147-850A14CF8EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.WinApi", "Interop.WinApi\Interop.WinApi.csproj", "{C0E5FDEF-D735-4B2E-B28D-604156F1816E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.WinApi", "lib\Interop.WinApi\Interop.WinApi.csproj", "{C0E5FDEF-D735-4B2E-B28D-604156F1816E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLib", "ZLib\ZLib.csproj", "{0D565BC0-CCE5-4AC3-913E-22A2FDF256AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZExplorer", "ZStudio\ZExplorer.csproj", "{11A91925-9995-4CE5-86D6-420D9F37AC93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZExplorer", "ZExplorer\ZExplorer.csproj", "{11A91925-9995-4CE5-86D6-420D9F37AC93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStuff", "TestStuff\TestStuff.csproj", "{A2152E05-6B11-4E1A-B2C1-2785D6CA81C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.Net35", "lib\Newtonsoft.Json\Newtonsoft.Json.Net35.csproj", "{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel2Json", "grader\zgrader\Excel2Json\Excel2Json.csproj", "{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grader", "grader\zgrader\Grader\Grader.csproj", "{A5DA2589-4342-4B35-833A-4829065BCA44}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5607E735-2934-4C69-8C2F-B1F797EF0BF6}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,10 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5607E735-2
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -97,28 +89,12 @@ Global
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|x86.ActiveCfg = Release|Any CPU
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Debug|x86.ActiveCfg = Debug|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Debug|x86.Build.0 = Debug|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Release|Any CPU.ActiveCfg = Release|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Release|Mixed Platforms.Build.0 = Release|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Release|x86.ActiveCfg = Release|x86
-		{196F0FFD-ED06-4924-8597-2A3DA95AB5A7}.Release|x86.Build.0 = Release|x86
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A5DA2589-4342-4B35-833A-4829065BCA44}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

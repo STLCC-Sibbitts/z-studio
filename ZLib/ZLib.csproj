@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -45,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZExcel\ZExcel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ZExpr\SoundsLikeExtensions.cs" />
     <Compile Include="ZExpr\ZExpr.cs" />
     <Compile Include="ZExpr\ZExprDelta.cs" />
@@ -82,6 +91,14 @@
     <Compile Include="ZRubric\ZWeightCategory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\lib\Interop.Excel\Interop.Excel.csproj">
+      <Project>{a754f43d-65ed-45b3-9147-850a14cf8eac}</Project>
+      <Name>Interop.Excel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\Interop.WinApi\Interop.WinApi.csproj">
+      <Project>{c0e5fdef-d735-4b2e-b28d-604156f1816e}</Project>
+      <Name>Interop.WinApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\lib\Newtonsoft.Json\Newtonsoft.Json.Net35.csproj">
       <Project>{a9ae40ff-1a21-414a-9fe7-3be13644cc6d}</Project>
       <Name>Newtonsoft.Json.Net35</Name>
