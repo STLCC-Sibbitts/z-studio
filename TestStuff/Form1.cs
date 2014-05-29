@@ -17,7 +17,7 @@ using Newtonsoft.Json.Utilities;
 using ZLib;
 using ZLib.ZRubric;
 using Excel2Json;
-using Grader;
+//using Grader;
 using System.Reflection;
 using System.Linq.Expressions;
 
@@ -243,6 +243,38 @@ namespace TestStuff
             }
             ZRubric.LoadFunctions();
             ZRubric.LoadPreferences();
+			ZRubric.LoadOntologies();
+			ZOntology excelOntology = ZRubric.activeOntologies["Excel2010"];
+			ZObjectives objectives = excelOntology.objectives;
+
+			ZObjective objective = objectives["EX281"];
+			ZResources resources = ZRubric.activePreferences.resources;
+			ZResourceProviders rps = excelOntology.resourceProviders;
+			// lets see what we have for this objective
+			ZResourceProvider rp = null;
+			ZObjectiveMappings oms = null;
+			foreach (ZResource res in resources)
+			{
+				string name = res.id;
+				rp = rps[0];	// this finds the resource provider stuff for the current resource
+				rp = rps[name];
+				if (rp != null)
+				{
+					oms = rp.objectiveMappings;
+					// TODO: handle multiple mappings for same id, like EX281
+					List<ZObjectiveMapping> omList = oms[objective.id];
+					foreach (ZObjectiveMapping om in omList)
+					{
+						ZObjectiveResources ors = rp.Resources(om.type);
+						string omName = om.name;
+						ZObjectiveResource or = ors[om.name];
+						int index = or.index;
+					}
+				}
+			}
+
+			
+
 		}
         private void PopulateNode(TreeNode  treeNode)
         {
@@ -865,16 +897,16 @@ namespace TestStuff
 		{
 			DialogResult markupSubmission = System.Windows.Forms.DialogResult.No;
 			ZExcelToJson zexcel = null;
-			if (currentFolder.Length == 0)
+//			if (currentFolder.Length == 0)
 			{
 				zexcel = new ZExcelToJson();
 				markupSubmission = MessageBox.Show("Markup current Excel file?", "Markup submission", MessageBoxButtons.YesNo);
 				// load the rubric for this submission folder
 				currentFolder = zexcel.currentFolder;
 			}
-
 			ZRubric rubric = new ZRubric(currentFolder);
 			rubric.LoadSubmission(currentFolder + @"\gradedSubmission.json");
+
 			// report basics in output window
 			// TODO: provide option to export
 			double deduct;
@@ -905,7 +937,7 @@ namespace TestStuff
 			if (zexcel != null && markupSubmission == System.Windows.Forms.DialogResult.Yes)
 			{
 				// TODO: start going through task deductions and marking up the excel submission
-				zexcel.MarkupSubmission(ZRubric.activeSubmission.taskDeductions);
+				zexcel.MarkupSubmission(rubric, ZRubric.activeSubmission.taskDeductions);
 			}
 
 		}
@@ -973,6 +1005,7 @@ namespace TestStuff
 			//ZPreference option = preferences.partialCredit;
 			//bool enabled = preferences.partialCredit.enabled;
 
+
 #if false
 			//foreach (ZStep step in rubric.steps)
 			//{
@@ -1020,15 +1053,53 @@ namespace TestStuff
 				,ZRubric.activeProject.allocations.LO.max);
 			txtOut.Text += t;
             double deduct;
+			// setup ontology related stuff
+			string ontologyName = ZRubric.activeProject.ontology;
+			ZOntology excelOntology = ZRubric.activeOntologies[ontologyName];
+			ZResources resources = ZRubric.activePreferences.resources;
+			ZResourceProviders rps = excelOntology.resourceProviders;
+			// lets see what we have for this objective
+			ZResourceProvider rp = null;
+			ZObjectiveMappings oms = null;
+			foreach (ZResource res in resources)
+			{
+				string name = res.id;
+				rp = rps[0];	// this finds the resource provider stuff for the current resource
+				rp = rps[name];
+				if (rp != null)
+				{
+					oms = rp.objectiveMappings;
+					// TODO: handle multiple mappings for same id, like EX281
+					List<ZObjectiveMapping> omList = oms[""]; //objective.id];
+					foreach (ZObjectiveMapping om in omList)
+					{
+						ZObjectiveResources ors = rp.Resources(om.type);
+						string omName = om.name;
+						ZObjectiveResource or = ors[om.name];
+					}
+				}
+			}
+
 			// let's see if we can figure out how much needs to be deducted
 			foreach (ZTaskDeduction taskDeduction in ZRubric.activeSubmission.taskDeductions)
 			{
                 deduct = taskDeduction.deduct;
                 t = string.Format("\ntask:'{0}', pts:{1:N2}, action:'{2}', targetType:'{3}', targetProperty:'{4}', \n    deduction:{5:N2}, ptsDeducted:{6:N2}, feedback:'{7}'\n",
-					taskDeduction.task.text, taskDeduction.task.pts, taskDeduction.task.mapping.action,
-					taskDeduction.task.target.type, taskDeduction.task.target.property, taskDeduction.deduct, 
+					taskDeduction.task.text, 
+					taskDeduction.task.pts, 
+					taskDeduction.task.mapping.action,
+					taskDeduction.task.target.type, 
+					taskDeduction.task.target.property, 
+					taskDeduction.deduct, 
                     taskDeduction.pointsDeducted,
                     taskDeduction.scenario.remediation.feedback);
+				string t1 = taskDeduction.task.target.location.taggedAddress;
+				ZStep dStep = rubric.steps[taskDeduction.stepID];
+				//TODO: get back to original task target with tagged information
+				string taskID = taskDeduction.origTaskID;
+				ZTask dTask = dStep.tasks[taskID];
+				//TODO - we're working, now I can drill back into the stuff I need to for the output
+				t1 = dTask.target.location.taggedAddress;
 				txtOut.Text += t;
 				t = string.Format("\n    scenario'{2}', deductionType:{0}, deductionCategory:'{1}', tag:'{3}'\n",
 					taskDeduction.scenario.deduction.type, taskDeduction.scenario.deduction.category, 

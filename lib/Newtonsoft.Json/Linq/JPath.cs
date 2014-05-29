@@ -613,6 +613,8 @@ namespace Newtonsoft.Json.Linq
 									current = tok;
 								break;
 							}
+							else
+								current = null;	// otherwise we're defaulting to the first one and that isn't good
 						}
 
 						//current = t.Children()[key] as JToken;

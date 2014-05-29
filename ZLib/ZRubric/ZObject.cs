@@ -315,6 +315,7 @@ namespace ZLib.ZRubric
 	}
 
 	#endregion
+
 	#region ZObjects
 	public class ZObjects<A, T> : ZObject<T>, IEnumerable where T : ZObject<T>, new() //, INotifyPropertyChanged 
 	{
@@ -380,9 +381,19 @@ namespace ZLib.ZRubric
 				if (jTok == null)
 					jTok = items.Parent.SelectToken(itemTag + "[" + tag + "]");
 				if (jTok == null)
-					jTok = items.Parent.Parent.SelectToken(itemTag + "[" + tag + "]");
-				if ( jTok == null )
-					jTok = items.SelectToken("[" + tag + "]" );
+				{
+					bool has = items.Contains(tag);
+					jTok = items.SelectToken("[" + tag + "]");
+				}
+				if (jTok == null)
+				{
+					bool has = items.Contains(itemTag);
+					JToken pTok = items.Parent.Parent.Values(itemTag).First<JToken>();
+					if (pTok.Type == JTokenType.Array)
+						jTok = pTok.SelectToken("[" + tag + "]");
+//					if ( jTok == null )
+//						jTok = items.Parent.Parent.SelectToken(itemTag + "[" + tag + "]");
+				}
 				if (jTok == null)
 					jTok = items[tag];
 				JToken val2 = jTok;
@@ -467,8 +478,8 @@ namespace ZLib.ZRubric
 	{
 		public class Tags
 		{
-			public const string Name = "Name";
-			public const string ZUid = "ZUid";
+			public const string Name		= "Name";
+			public const string ZUid		= "ZUid";
 		}
 		public const string NULL_VALUE = "<NULL>";
 		//public virtual string itemTag { get { return ""; } }
@@ -606,7 +617,26 @@ namespace ZLib.ZRubric
 
 			return tok;
 		}
-
+		public int index
+		{
+			get
+			{
+				int	value = -1;		// not an element of an array
+				if (m_jToken.Parent is JArray)
+				{
+					value = m_jToken.BeforeSelf().Count<JToken>();
+				}
+				else if (m_jToken.Parent.Parent is JArray)
+				{
+					value = m_jToken.Parent.BeforeSelf().Count<JToken>();
+				}
+				else if (m_jToken.Parent.Parent.Parent is JArray)
+				{
+					value = m_jToken.Parent.Parent.BeforeSelf().Count<JToken>();
+				}
+				return value;
+			}
+		}
 		public List<JToken> Properties
 		{
 			get
@@ -621,17 +651,21 @@ namespace ZLib.ZRubric
 			}
 		}
 		// TODO: may need to return variant at some time
-		public string GetStringValue(string propName)
+		public string GetStringValue(string propName, bool stripTags = true)
 		{
 			string val = "";
 			JValue jVal = this[propName] as JValue;
+			JToken jTok = this[propName] as JToken;
 			if (jVal != null)
 			{
 				val = jVal.Value<string>();
 				// this is put in here to strip out any task loc information
 				// I may change my mind on this in the event that it affects the grading feedback
-				val = ZTaskLocs.StrippedText(val);
-                val = ResolveStringValue(val);
+				if (stripTags)
+				{
+					val = ZTaskLocs.StrippedText(val);
+					val = ResolveStringValue(val);
+				}
 			}
 			return val;
 		}
@@ -1386,14 +1420,26 @@ namespace ZLib.ZRubric
 			string propName = ZToken.propName(myInfo);
 			return propName;
 		}
-		public object get(MethodBase myBase)
+		public object get(MethodBase myBase, bool checkChildren = false)
 		{
 			MethodInfo myInfo = myBase as MethodInfo;
 			string propName = ZToken.propName(myInfo);
 
 			if (myInfo.ReturnType == typeof(string))
 			{
-				return GetStringValue(propName);
+				string value = GetStringValue(propName);
+				if (checkChildren)
+				{
+					if (value == null || value == "")
+					{
+						JToken jTok =this.Properties.First<JToken>().Children().First<JToken>();
+						value = (string)((ZToken)(jTok)).get(myBase);
+						if (value == null)
+							value = NULL_VALUE;
+					}
+
+				}
+				return value;
 			}
 			else if (myInfo.ReturnType == typeof(int))
 			{

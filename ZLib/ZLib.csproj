@@ -68,6 +68,7 @@
     <Compile Include="ZRubric\ZAllocations.cs" />
     <Compile Include="ZRubric\ZAnswer.cs" />
     <Compile Include="ZRubric\ZArg.cs" />
+    <Compile Include="ZRubric\ZOntology.cs" />
     <Compile Include="ZRubric\ZTag.cs" />
     <Compile Include="ZRubric\ZTaskDeduction.cs" />
     <Compile Include="ZRubric\ZPreferences.cs" />

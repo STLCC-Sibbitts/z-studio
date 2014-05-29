@@ -251,6 +251,11 @@ namespace ZLib.ZRubric
 			get { return GetStringValue(propName(MethodInfo.GetCurrentMethod())); }
 			set { SetValue(propName(MethodInfo.GetCurrentMethod()), value); }
 		}
+		public string objective
+		{
+			get { return GetStringValue(propName(MethodInfo.GetCurrentMethod())); }
+			set { SetValue(propName(MethodInfo.GetCurrentMethod()), value); }
+		}
 		public bool review
 		{
 			get 

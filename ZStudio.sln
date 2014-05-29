@@ -15,8 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.Net35", "li
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5607E735-2934-4C69-8C2F-B1F797EF0BF6}"
 	ProjectSection(SolutionItems) = preProject
-		data\Functions.json = data\Functions.json
-		data\Preferences.json = data\Preferences.json
+		ZExplorer\data\Functions.json = ZExplorer\data\Functions.json
+		ZExplorer\data\Preferences.json = ZExplorer\data\Preferences.json
 	EndProjectSection
 EndProject
 Global

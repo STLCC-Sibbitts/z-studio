@@ -178,6 +178,82 @@ namespace ZLib.ZRubric
         }
 
     }
+	public class ZResource : ZObject<ZResource>
+	{
+		public new class Tags : ZToken.Tags
+		{
+			public const string Text            = "Type";
+			public const string NullValue		= "<NULL>";
+		}
+		public class Types
+		{
+			public const string Training         = "Training";
+			public const string Textbook		 = "Textbook";
+		}
+		public new string id
+		{
+			get
+			{
+				string value = base.id;
+				if (value == "" || value == null)
+				{
+					JToken jTok =this.Properties.First<JToken>().Children().First<JToken>();
+					value = ZToken.OID(jTok);
+					if (value == null)
+						return Tags.NullValue;
+					// this makes sure we have resolved the value
+				}
+
+				return value;
+			}
+		}
+		public string text
+		{
+			get
+			{
+				string value = (string)get(MethodInfo.GetCurrentMethod());
+				if (value == null)
+				{
+					JToken jTok =this.Properties.First<JToken>().Children().First<JToken>();
+					value = (string)((ZToken)(jTok)).get(MethodInfo.GetCurrentMethod());
+					if (value == null)
+						return Tags.NullValue;
+					// this makes sure we have resolved the value
+				}
+				return value;
+			}
+			set { set(MethodInfo.GetCurrentMethod(), value); }
+		}
+		public string type
+		{
+			get
+			{
+				string value = (string)get(MethodInfo.GetCurrentMethod());
+				if (value == null)
+				{
+					JToken jTok =this.Properties.First<JToken>().Children().First<JToken>();
+					value = (string)((ZToken)(jTok)).get(MethodInfo.GetCurrentMethod());
+					if (value == null)
+						return Tags.NullValue;
+					// this makes sure we have resolved the value
+				}
+				return value;
+			}
+			set { set(MethodInfo.GetCurrentMethod(), value); }
+		}
+
+		public ZResource(ZObject<ZResource> zToken) : base(zToken) { }
+		public ZResource(JToken jToken) : base(jToken) { }
+		public ZResource() { }
+	}
+	public class ZResources : ZObjects<ZResources, ZResource>
+	{
+		public ZResources(JArray jArray) : base(jArray) { }
+		public ZResources(JToken jTok) : base(jTok) { }
+		public ZResources(ZObject<ZResource> zObject) : base(zObject) { }
+		public ZResources() { }
+	}
+
 	public class ZPreference : ZObject<ZPreference>
 	{
 		public object this[string propertyName]
@@ -338,11 +414,25 @@ namespace ZLib.ZRubric
 				return zPreference;
 			}
 		}
-        public ZPreference rounding
+		public ZResources resources
+		{
+			get
+			{
+				JToken jTok = this["Resources"];
+				while (jTok != null && jTok.Type != JTokenType.Array)
+				{
+					jTok = jTok.First;	// grab the actual value
+				}
+				return new ZResources(jTok);
+			}
+			set { set(MethodInfo.GetCurrentMethod(), value); }
+		}
+		public ZPreference rounding
         {
             get { return this["Rounding"];} // (ZPreference)((JToken)get(MethodInfo.GetCurrentMethod())); }
             set { set(MethodInfo.GetCurrentMethod(), value); }
         }
+
         public ZMultiplierPreference skillLevels
 		{
             get

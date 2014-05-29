@@ -23,11 +23,22 @@ namespace ZLib.ZRubric
 			: base()
 		{
 			this.task = new ZTask(task);
-			this.task.activeStep = task.activeStep;
+			ZStep step = new ZStep((JObject)task.activeStep);
+			this.task.activeStep = step;
 			this.task.zScenarios.jArray.RemoveAll();	// we don't care about the other scenarios, only this one
 			this.task.zScenarios.Add(scenario);			// not sure if I need to do both of these
 			this.scenario = scenario;
+			this.task.activeStep = step;
 			stepID = task.parentStep.key;
+			string []rPathParts = task.rPath.Split('.');
+			
+			origTaskID = rPathParts[rPathParts.Length-2];
+
+		}
+		public string origTaskID
+		{
+			get { return (string)get(MethodInfo.GetCurrentMethod()); }
+			set { set(MethodInfo.GetCurrentMethod(), (JValue)value); }
 		}
 		public ZTask task
 		{

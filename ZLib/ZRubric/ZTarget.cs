@@ -349,7 +349,7 @@ namespace ZLib.ZRubric
 			address			= location.address;
 			taggedAddress	= location.taggedAddress;
 			context			= location.context;
-			taggedContext	= location.taggedContext;
+			//taggedContext	= location.taggedContext;
 		}
 		public ZLocation()
 			: base(new JObject())
@@ -402,19 +402,21 @@ namespace ZLib.ZRubric
 			{
 				string[] valueArray = (string[])GetStringArrayValue("Tags.Address");
 				string value = "";
-				if (valueArray == null || valueArray.Length == 0)
-				{
-					if (valueArray == null)
-					{
-						valueArray = new string[0];
-					}
-					// this makes sure we have resolved the value
-				}
-				// now foldup the array into a single string
-				foreach (string str in valueArray)
-					value += str;
-				string theAddress = ResolveStringValue("{^Address}");
-				value = value.Replace("{^Address}",ResolveStringValue("{^Address}"));
+				
+				value = GetStringValue(Tags.Address,false);
+				//if (valueArray == null || valueArray.Length == 0)
+				//{
+				//	if (valueArray == null)
+				//	{
+				//		valueArray = new string[0];
+				//	}
+				//	// this makes sure we have resolved the value
+				//}
+				//// now foldup the array into a single string
+				//foreach (string str in valueArray)
+				//	value += str;
+				//string theAddress = ResolveStringValue("{^Address}");
+				//value = value.Replace("{^Address}",ResolveStringValue("{^Address}"));
 				return value;
 			}
 			set 
@@ -437,32 +439,33 @@ namespace ZLib.ZRubric
 			get { return GetStringValue(Tags.Context); }
 			set { SetValue(Tags.Context, value); }
 		}
-		public string[] taggedContext
+		public string taggedContext
 		{
 			get
 			{
-				string[] value = (string[])get(MethodInfo.GetCurrentMethod());
-				if (value == null || value.Length == 0)
-				{
-					if (value == null)
-					{
-						value = new string[0];
-					}
-					// this makes sure we have resolved the value
-				}
+				string value = 	GetStringValue(Tags.Context, false);
+				//(string)get(MethodInfo.GetCurrentMethod());
+				//if (value == null || value.Length == 0)
+				//{
+				//	if (value == null)
+				//	{
+				//		value = new string[0];
+				//	}
+				//	// this makes sure we have resolved the value
+				//}
 				return value;
 			}
-			set 
-			{
-				JArray array = SelectToken("TaggedContext") as JArray;
-				if (array == null)
-				{
-					array = new JArray();
-					(this.m_jToken as JObject).Add("TaggedContext", array);
-				}
-				foreach ( String str in value )
-					array.Add(new JValue(str));
-			}
+			//set 
+			//{
+			//	JArray array = SelectToken("TaggedContext") as JArray;
+			//	if (array == null)
+			//	{
+			//		array = new JArray();
+			//		(this.m_jToken as JObject).Add("TaggedContext", array);
+			//	}
+			//	foreach ( String str in value )
+			//		array.Add(new JValue(str));
+			//}
 		}
 		#region old stuff to be deleted
 		public string worksheets

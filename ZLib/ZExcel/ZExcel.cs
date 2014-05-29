@@ -38,7 +38,7 @@ namespace Excel2Json
 				mWorkbook = mApp.ActiveWorkbook;
 				Worksheet wksht = mApp.ActiveSheet;
 				//tvJson.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvJson_AfterSelect);
-				mApp.SheetChange += mApp_SheetChange;
+//GS - add this back in for building intermediate submission results				mApp.SheetChange += mApp_SheetChange;
 				// mWorkbook.SheetSelectionChange - use this to force a recalculation of the spreadsheet
 				// containing all of the non-event inducing changes
 
@@ -126,9 +126,267 @@ namespace Excel2Json
 //			mApp.Quit();
 //			mApp = null;
 		}
-		public void MarkupSubmission(ZTaskDeductions taskDeductions)
+		public double stepDeduction(string stepID, ZTaskDeductions taskDeductions)
+		{
+			double deduction = 0;
+			foreach (ZTaskDeduction taskDeduction in taskDeductions)
+			{
+				if ( taskDeduction.stepID == stepID )
+					deduction += taskDeduction.pointsDeducted;
+			}
+			return deduction;
+		}
+		public void MarkupSubmission(ZRubric rubric, ZTaskDeductions taskDeductions)
 		{
 			// loop through each of the task deductions and add comments to the excel file
+			// report basics in output window
+			// TODO: provide option to export
+			string ontologyName = ZRubric.activeProject.ontology;
+			ZOntology ontology = ZRubric.activeOntologies[ontologyName];
+			ZResources resources = ZRubric.activePreferences.resources;
+			ZResourceProviders rps = ontology.resourceProviders;
+			// lets see what we have for this objective
+			ZResourceProvider rp = null;
+			ZObjectiveMappings oms = null;
+
+			double deduct;
+			string t;
+			// let's see if we can figure out how much needs to be deducted
+			double grade = ZRubric.activeProject.totalPts;
+			foreach (ZTaskDeduction taskDeduction in ZRubric.activeSubmission.taskDeductions)
+			{
+				grade -= taskDeduction.pointsDeducted;
+			}
+
+			// add a new sheet for the report
+			int reportSheetRow = 1;	// second row after header
+
+			Worksheet reportSheet = mApp.ActiveWorkbook.Worksheets.Add();	// mApp.ActiveWorkbook.Worksheets[0]);
+			reportSheet.Name = "ZReport";
+			// set initial column widths
+			Range rng = reportSheet.Columns[1][1];
+			rng.ColumnWidth = 10;
+			rng = reportSheet.Columns[1][2];
+			rng.ColumnWidth = 4;
+			rng = reportSheet.Columns[1][3];
+			rng.ColumnWidth = 4;
+			rng = reportSheet.Columns[1][4];
+			rng.ColumnWidth = 90;
+			rng = reportSheet.Columns[1][10];
+			rng.ColumnWidth = 30;
+
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng.Merge();
+			rng.Value = "Project: " + ZRubric.activeProject.name;
+			rng.WrapText = true;
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng.Merge();
+			rng.Value = "Score is: " + grade.ToString("N2") + " out of " + ZRubric.activeProject.totalPts.ToString("N2");
+			rng.WrapText = true;
+
+			t = string.Format("allocations - NCE:{0:N2}/{1:P2}, EE:{2:N2}/{3:P2}, LO:{4:N2}/{5:P2}"
+				, ZRubric.activeSubmission.allocations.NCE.max
+				, ZRubric.activeSubmission.allocations.NCE.pct
+				, ZRubric.activeSubmission.allocations.EE.max
+				, ZRubric.activeSubmission.allocations.EE.pct
+				, ZRubric.activeSubmission.allocations.LO.max
+				, ZRubric.activeSubmission.allocations.LO.pct);
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng.Merge();
+			rng.Value = t;
+			rng.WrapText = true;
+			t = string.Format("deductions - NCE:{0:N2}/{1:N2}, EE:{2:N2}/{3:N2}, LO:{4:N2}/{5:N2}"
+				, ZRubric.activeSubmission.allocations.NCE.actual
+				, ZRubric.activeSubmission.allocations.NCE.total
+				, ZRubric.activeSubmission.allocations.EE.actual
+				, ZRubric.activeSubmission.allocations.EE.total
+				, ZRubric.activeSubmission.allocations.LO.actual
+				, ZRubric.activeSubmission.allocations.LO.total);
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng.Merge();
+			rng.Value = t;
+			rng.WrapText = true;
+
+			ZStep currentStep = rubric.steps[0];	// first step
+			reportSheetRow += 2;	// second row after header
+			ZTask currentTask = null;
+			int objectiveCol = 5;
+			int	lastStepIndexDisplayed = -1;
+			foreach (ZTaskDeduction taskDeduction in ZRubric.activeSubmission.taskDeductions)
+			{
+				// grab the step for which this deduction applies
+				ZStep theStep = rubric.steps[taskDeduction.stepID];
+				// output the information for this step and all preceding steps
+				#region outputPrecedingSteps
+				while (lastStepIndexDisplayed < (theStep.index - 1))
+				{
+					rng = reportSheet.Cells[reportSheetRow, 1];
+					rng.Value = currentStep.id;
+					rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+					rng.Merge();
+					rng.Value =currentStep.text;
+					rng.WrapText = true;
+					rng = reportSheet.Cells[reportSheetRow, 5];
+					rng.Value = string.Format("{0:f2}/{0:f2}", currentStep.pts );
+					reportSheetRow++;
+					// now dump task stuff
+					foreach (ZTask task in currentStep.tasks)
+					{
+						rng = reportSheet.Cells[reportSheetRow, 2];
+						rng.Value = task.id;
+						rng = reportSheet.Cells[reportSheetRow, 3];
+						rng.Value = "OK";
+						rng = reportSheet.Cells[reportSheetRow, 4];
+						t = task.text;
+						rng.Value = task.text;
+						rng.WrapText = true;
+						// output mapping information, category, difficulty, action, objective, ...
+						objectiveCol = 6;
+						rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+						rng.Value = task.mapping.category;
+						rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+						rng.Value = task.mapping.difficulty;
+						rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+						rng.Value = task.mapping.action;
+						rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+						rng.Value = task.mapping.objective;
+						rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+						rng.Value = ontology.objectives[ task.mapping.objective].text;
+						reportSheetRow++;
+					}
+					lastStepIndexDisplayed = currentStep.index;
+					currentStep = rubric.steps[currentStep.index+1];
+				}
+				#endregion
+				// if we haven't output this step already
+				if (lastStepIndexDisplayed < theStep.index)
+				{
+					currentStep = theStep;
+					lastStepIndexDisplayed = currentStep.index;
+					rng = reportSheet.Cells[reportSheetRow, 1];
+					rng.Value = currentStep.name;
+					rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+					rng.Merge();
+					rng.Value =currentStep.text;
+					rng.WrapText = true;
+					rng = reportSheet.Cells[reportSheetRow, 5];
+					double deduction = stepDeduction(taskDeduction.stepID, taskDeductions);
+					rng.Value = string.Format("{0:f2}/{1:f2}", deduction, currentStep.pts);
+					reportSheetRow++;
+				}
+				// now display any preceding tasks
+				string taskID = taskDeduction.origTaskID;
+				ZTask dTask = theStep.tasks[taskID];
+				foreach (ZTask task in theStep.tasks)
+				{
+					if ( task.index >= dTask.index )
+						break;
+					rng = reportSheet.Cells[reportSheetRow, 2];
+					rng.Value = task.id;
+					rng = reportSheet.Cells[reportSheetRow, 3];
+					rng.Value = "OK";
+					rng = reportSheet.Cells[reportSheetRow, 4];
+					rng.Value = task.text;
+					rng.WrapText = true;
+					// output mapping information, category, difficulty, action, objective, ...
+					objectiveCol = 6;
+					rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+					rng.Value = task.mapping.category;
+					rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+					rng.Value = task.mapping.difficulty;
+					rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+					rng.Value = task.mapping.action;
+					rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+					rng.Value = task.mapping.objective;
+					rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+					rng.Value = ontology.objectives[task.mapping.objective].text;
+					reportSheetRow++;
+				}
+				// now we can display the deduction
+				//TODO: add comment
+				rng = reportSheet.Cells[reportSheetRow, 2];
+				rng.Value = dTask.id;
+				rng = reportSheet.Cells[reportSheetRow, 3];
+				rng.Value = "ERR";
+				rng = reportSheet.Cells[reportSheetRow, 4];
+				rng.Value = dTask.text;
+				rng.WrapText = true;
+				// add comment if the target is a cell
+				if (dTask.target.location.type == "Cell")
+				{
+					Worksheet errSheet = mApp.Worksheets[dTask.target.location.context];
+					Range errCell = errSheet.Range[dTask.target.location.address];
+					errCell.ClearComments();
+					Comment comment = errCell.AddComment();
+					t = theStep.name + ": " + theStep.text 
+						+ "\n" + dTask.id + ": " + dTask.text 
+						+ taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback
+						+ "\n deducted: " + taskDeduction.pointsDeducted.ToString("N2") + " pts";
+					comment.Text( t );
+				}
+
+				// output mapping information, category, difficulty, action, objective, ...
+				objectiveCol = 6;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = dTask.mapping.category;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = dTask.mapping.difficulty;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = dTask.mapping.action;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = dTask.mapping.objective;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = ontology.objectives[dTask.mapping.objective].text;
+				reportSheetRow++;
+
+				objectiveCol = 4;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				t = taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback;
+				rng.Value = t;
+				rng.WrapText = true;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = taskDeduction.scenario.remediation.category;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = taskDeduction.scenario.deduction.category;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = taskDeduction.scenario.deduction.type;
+				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+				rng.Value = taskDeduction.scenario.deduction.pointsDeducted;
+				reportSheetRow++;
+				// output resources for this objective/error, this will change once we
+				// have error specific feedback
+				foreach (ZResource res in resources)
+				{
+					string name = res.id;
+					rp = rps[name];
+					if (rp != null)
+					{
+						oms = rp.objectiveMappings;
+						// TODO: handle multiple mappings for same id, like EX281
+						List<ZObjectiveMapping> omList = oms[dTask.mapping.objective];
+						foreach (ZObjectiveMapping om in omList)
+						{
+							ZObjectiveResources ors = rp.Resources(om.type);
+							string omName = om.name;
+							ZObjectiveResource or = ors[om.name];
+							objectiveCol = 4;
+							rng = reportSheet.Cells[reportSheetRow, objectiveCol];
+							rng.Value = om.type + " - " + or.id + ":" + or.text;
+							rng.WrapText = true;
+							reportSheetRow++;
+						}
+					}
+				}
+				t = "Workbook: '" + taskDeduction.task.target.location.context + ", address: '" + taskDeduction.task.target.location.address + "\n";
+				string testString = theStep.text;
+				grade -= taskDeduction.pointsDeducted;
+			}
+			//txtOut.Text += string.Format("Grade is {0:N2} out of {1:N2}\n", grade, ZRubric.activeProject.totalPts);
+			//txtOut.Text += "==============================================================\n";
+
 
 		}
 		public void SaveMarkedupSubmission()
@@ -204,7 +462,10 @@ namespace Excel2Json
 			m_writer = new StringWriter(new StringBuilder());
 			return json;
 		}
-		public void MarkupSubmission(ZTaskDeductions taskDeductions) { zExcel.MarkupSubmission(taskDeductions); }
+		public void MarkupSubmission(ZRubric rubric, ZTaskDeductions taskDeductions) 
+		{
+			zExcel.MarkupSubmission(rubric, taskDeductions); 
+		}
 		public void SaveMarkedupSubmission() { zExcel.SaveMarkedupSubmission(); }
 		public string SaveSubmission()
 		{

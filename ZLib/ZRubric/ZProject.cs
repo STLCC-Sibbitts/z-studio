@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Utilities;
+using System.Reflection;
 
 namespace ZLib.ZRubric
 {
@@ -27,6 +28,12 @@ namespace ZLib.ZRubric
 		public ZProject(ZObject<ZProject> zToken) : base(zToken) { }
 		public ZProject(JToken jToken) : base(jToken) { }
 		public ZProject() { }
+		public string ontology
+		{
+			get { return (string)get(MethodInfo.GetCurrentMethod()); }
+			set { set(MethodInfo.GetCurrentMethod(), value); }
+		}
+
 		public string description
 		{
 			get { return GetStringValue(Tags.Description); }

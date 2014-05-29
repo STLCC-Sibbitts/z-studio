@@ -28,10 +28,12 @@ namespace ZLib.ZRubric
 		private ZRubricSchema	m_schema;
 		private string m_rubricFileName;
 		private string m_rubricDir;
-		public static ZProject activeProject;
-		public static ZSubmission activeSubmission;
-        public static ZFunctions activeFunctions;
-        public static ZPreferences  activePreferences;
+		public static ZProject		activeProject;
+		public static ZSubmission	activeSubmission;
+		public static ZFunctions	activeFunctions;
+		public static ZOntologies	activeOntologies;
+		public static ZPreferences	activePreferences;
+
 		public string rubric
 		{
 			get
@@ -136,7 +138,9 @@ namespace ZLib.ZRubric
 				LoadPreferences();
 			if ( activeFunctions == null )
 				LoadFunctions();
-//			if (steps == null)
+			if (activeOntologies== null)
+				LoadOntologies();
+			//			if (steps == null)
 //				throw (new ApplicationException("no steps in this rubric:" + name));
 		}
 		public ZRubric(string rubricFolder)
@@ -205,6 +209,32 @@ namespace ZLib.ZRubric
 			}
 			return loadKeys;
 		}
+		private const string ontologyJsonFile = @"\src\data\ontology.json";
+		public static bool LoadOntologies()
+		{
+			bool load = true;
+			try
+			{
+				using (StreamReader inStream = new StreamReader(ontologyJsonFile))
+				{
+					string ontology = inStream.ReadToEnd();
+					JObject ontologyObj = (JToken.Parse(ontology) as JObject);
+					JArray fArray = null;
+					JToken fTok	= ontologyObj.SelectToken(ZOntologies.itemTag);	// ontologyObj.First; // 
+					if (fTok.Type == JTokenType.Array ) // JTokenType.Property && (fTok as JProperty).Name == ZOntology.itemTag && fTok.First.Type == JTokenType.Array) // )
+					{
+						fArray = fTok as JArray;
+						activeOntologies = new ZOntologies(fArray);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				load = false;
+			}
+			return load;
+		}
+
         private const string functionsJsonFile = @"\src\data\Functions.json";
 		public static bool LoadFunctions( )
 		{
@@ -342,7 +372,10 @@ namespace ZLib.ZRubric
 					jTokSubmission = submissionObj;
 				}
 				activeSubmission = new ZSubmission(submissionObj);
-				activeSubmission.allocations = activeProject.allocations;
+				// if we already have allocations, don't set them now
+				JToken jtok = activeSubmission.SelectToken("Allocations");
+				if ( jtok == null )
+					activeSubmission.allocations = activeProject.allocations;
 			}
 
 		}
