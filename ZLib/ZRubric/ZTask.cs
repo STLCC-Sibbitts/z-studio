@@ -375,6 +375,15 @@ namespace ZLib.ZRubric
 		//	public const string Value			= "Value";
 		//	public const string DisplayValue	= "DisplayValue";
 		//}
+		public string taggedText
+		{
+			get
+			{
+				string value = GetStringValue(Tags.Text,false);
+				return value;
+			}
+			set { SetValue(Tags.Text, value); }
+		}
 		public string text
 		{
 			get 

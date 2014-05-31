@@ -70,6 +70,11 @@ namespace ZLib.ZRubric
 				return m_locs;
 			}
 		}
+		public ZTaskLocs(ZStepLocs stepLocs, ZTask task)
+		{
+			m_locs = new List<ZTaskLoc>();
+			this.text = ParsedText(stepLocs, task.taggedText);
+		}
 		public ZTaskLocs(ZStepLocs stepLocs, string taskText)
 		{
 			m_locs = new List<ZTaskLoc>();

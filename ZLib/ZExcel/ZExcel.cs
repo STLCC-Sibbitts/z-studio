@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.IO;
+//using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Office;
@@ -19,6 +20,42 @@ using ZLib.ZRubric;
 	//Application.Left = 88.75
 	//Application.Top = 16
 	//Range("A1").Comment.Text Text:="Gary E. Sibbitts:" & Chr(10) & "This is a bold comment."
+//	Range("E26").Comment.Shape.Select True
+    
+//	Range("E26").Comment.Text Text:= _
+//		"Step 14: Select E26 and type Highest Salary." & Chr(10) & "-: Select "
+//	Range("E26").Comment.Text Text:= _
+//		"E26 and type Highest SalaryCreate.Value.Text - Partial credit awarded, detected minor discrepancy between value entered, 'Highest Salry' and valu", Start:=79
+//	Range("E26").Comment.Text Text:= _
+//		"e expected 'Highest Salary'. " & Chr(10) & " deducted: 0.25 pts", Start:=200
+//	Dim theFont As Font
+//	With Range("E26").Comment.Shape.TextFrame.Characters(Start:=79, Length:=27).Font
+//		.Name = "Gill Sans MT"
+//		.FontStyle = "Regular"
+//		.Size = 12
+//		.Strikethrough = False
+//		.Superscript = False
+//		.Subscript = False
+//		.OutlineFont = False
+//		.Shadow = False
+//		.Underline = xlUnderlineStyleNone
+//		.Color = ColorConstants.vbGreen
+//		.Color = -16776961
+//	End With
+//theend:
+//	With Range("E26").Comment.Shape.TextFrame.Characters(Start:=79, Length:=27).Font
+//		.Name = "Gill Sans MT"
+//		.FontStyle = "Bold"
+//		.Size = 14
+//		.Strikethrough = False
+//		.Superscript = False
+//		.Subscript = False
+//		.OutlineFont = False
+//		.Shadow = False
+//		.Underline = xlUnderlineStyleSingle
+//		.Bold = True
+//	End With
+        
 
 namespace Excel2Json
 {
@@ -136,6 +173,29 @@ namespace Excel2Json
 			}
 			return deduction;
 		}
+		private string WrapIt(string text, int wrapLen = 70)
+		{
+			// if contains embedded newline characters, leave alone
+			if ( text.Contains('\n') || text.Length <= wrapLen )
+				return text;
+
+			int breakPos = text.IndexOf(" ", wrapLen);
+			// include a little margin
+			while (breakPos > 0 && ((breakPos + 10) < text.Length) )
+			{
+				text = text.Substring(0, breakPos) + '\n' + text.Substring(++breakPos);
+				breakPos += wrapLen;
+				if (breakPos >= text.Length)
+					break;
+				breakPos = text.IndexOf(" ", breakPos);
+			}
+
+			return text;
+		}
+		private static bool isNewLine(char ch)
+		{
+			return ch == '\n';
+		}
 		public void MarkupSubmission(ZRubric rubric, ZTaskDeductions taskDeductions)
 		{
 			// loop through each of the task deductions and add comments to the excel file
@@ -175,44 +235,77 @@ namespace Excel2Json
 			rng = reportSheet.Columns[1][10];
 			rng.ColumnWidth = 30;
 
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
 			rng.Merge();
-			rng.Value = "Project: " + ZRubric.activeProject.name;
-			rng.WrapText = true;
+			rng.Value = "Project:";
+			rng.Font.Bold = true;
+
+			rng = reportSheet.Cells[reportSheetRow, 4];
+			rng.Value = ZRubric.activeProject.name;
+
 			++reportSheetRow;
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
 			rng.Merge();
-			rng.Value = "Score is: " + grade.ToString("N2") + " out of " + ZRubric.activeProject.totalPts.ToString("N2");
+			rng.Value = "Grade:";
+			rng.Font.Bold = true;
+
+			rng = reportSheet.Cells[reportSheetRow, 4];
+			rng.Value = grade.ToString("N2") + " out of " + ZRubric.activeProject.totalPts.ToString("N2");
 			rng.WrapText = true;
 
-			t = string.Format("allocations - NCE:{0:N2}/{1:P2}, EE:{2:N2}/{3:P2}, LO:{4:N2}/{5:P2}"
+			reportSheetRow += 2;
+
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			rng.Merge();
+			rng.Value = "Allocations:";
+			rng.Font.Bold = true;
+
+			rng = reportSheet.Cells[reportSheetRow, 4];
+			t = string.Format("NCE: {0:N2}/{1:P2}, EE: {2:N2}/{3:P2}, LO: {4:N2}/{5:P2}"
 				, ZRubric.activeSubmission.allocations.NCE.max
 				, ZRubric.activeSubmission.allocations.NCE.pct
 				, ZRubric.activeSubmission.allocations.EE.max
 				, ZRubric.activeSubmission.allocations.EE.pct
 				, ZRubric.activeSubmission.allocations.LO.max
 				, ZRubric.activeSubmission.allocations.LO.pct);
-			++reportSheetRow;
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
-			rng.Merge();
 			rng.Value = t;
 			rng.WrapText = true;
-			t = string.Format("deductions - NCE:{0:N2}/{1:N2}, EE:{2:N2}/{3:N2}, LO:{4:N2}/{5:N2}"
+
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			rng.Merge();
+			rng.Font.Bold = true;
+			rng.Value = "Points/error:";
+
+			rng = reportSheet.Cells[reportSheetRow, 4];
+			t = string.Format("NCE: {0:N2}, EE: {1:N2}, LO: {2:N2}"
+				, ZRubric.activeSubmission.allocations.NCE.ppe
+				, ZRubric.activeSubmission.allocations.EE.ppe
+				, ZRubric.activeSubmission.allocations.LO.ppe);
+			rng.Value = t;
+			rng.WrapText = true;
+
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			rng.Merge();
+			rng.Value = "Deductions:";
+			rng.Font.Bold = true;
+			rng.WrapText = true;
+
+			rng = reportSheet.Cells[reportSheetRow, 4];
+			t = string.Format("NCE: {0:N2}/{1:N2}, EE: {2:N2}/{3:N2}, LO: {4:N2}/{5:N2}"
 				, ZRubric.activeSubmission.allocations.NCE.actual
 				, ZRubric.activeSubmission.allocations.NCE.total
 				, ZRubric.activeSubmission.allocations.EE.actual
 				, ZRubric.activeSubmission.allocations.EE.total
 				, ZRubric.activeSubmission.allocations.LO.actual
 				, ZRubric.activeSubmission.allocations.LO.total);
-			++reportSheetRow;
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
-			rng.Merge();
 			rng.Value = t;
 			rng.WrapText = true;
 
 			ZStep currentStep = rubric.steps[0];	// first step
 			reportSheetRow += 2;	// second row after header
-			ZTask currentTask = null;
+
 			int objectiveCol = 5;
 			int	lastStepIndexDisplayed = -1;
 			foreach (ZTaskDeduction taskDeduction in ZRubric.activeSubmission.taskDeductions)
@@ -228,6 +321,41 @@ namespace Excel2Json
 					rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
 					rng.Merge();
 					rng.Value =currentStep.text;
+
+					rng.Select();
+					// color code the step text, just like Excel, also grey or bold the text for this task
+					foreach (ZStepLoc stepLoc in theStep.stepLocs.Values)
+					{
+						Characters characters = mApp.ActiveCell.Characters[stepLoc.startPos, stepLoc.length+1];
+						if (theStep.tasks.Count > 1 && stepLoc.locType == ZStepLoc.LocType.task)
+						{
+							characters.Font.Bold = true;
+							characters.Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
+						}
+						else if (stepLoc.locType == ZStepLoc.LocType.tag)
+						{
+							characters.Font.Bold = true;
+							characters.Font.Color = stepLoc.color;
+						}
+					}
+					rng.WrapText = true;
+					double rh = rng.RowHeight;
+					string stxt = currentStep.text;
+					if (stxt.Contains('\n'))
+					{
+						// see how many
+						int lines = stxt.Count<char>(isNewLine) + 1;
+						// if we didn't expand the height of the row after wrapping, we need to do it now
+						if (rh == rng.RowHeight)
+						{
+							rh *= lines;
+							// make sure we don't get too big
+							if (rh < 1000)
+								rng.RowHeight = rh;
+						}
+					}
+
+
 					rng.WrapText = true;
 					rng = reportSheet.Cells[reportSheetRow, 5];
 					rng.Value = string.Format("{0:f2}/{0:f2}", currentStep.pts );
@@ -242,6 +370,17 @@ namespace Excel2Json
 						rng = reportSheet.Cells[reportSheetRow, 4];
 						t = task.text;
 						rng.Value = task.text;
+						ZTaskLocs taskLocs = new ZTaskLocs(task.parentStep.stepLocs, task.text);
+						if (taskLocs != null  && taskLocs.locs.Count > 0)
+						{
+							foreach (ZTaskLoc taskLoc in taskLocs.locs)
+							{
+								Characters characters = mApp.ActiveCell.Characters[taskLoc.startPos, taskLoc.length+1];
+								characters.Font.Bold = true;
+								characters.Font.Color = taskLoc.color;
+							}
+						}
+
 						rng.WrapText = true;
 						// output mapping information, category, difficulty, action, objective, ...
 						objectiveCol = 6;
@@ -268,10 +407,45 @@ namespace Excel2Json
 					lastStepIndexDisplayed = currentStep.index;
 					rng = reportSheet.Cells[reportSheetRow, 1];
 					rng.Value = currentStep.name;
+					rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 					rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
 					rng.Merge();
 					rng.Value =currentStep.text;
+					rng.Select();
+					// color code the step text, just like Excel, also grey or bold the text for this task
+					foreach (ZStepLoc stepLoc in theStep.stepLocs.Values)
+					{
+						// only color the tags, but underline the individual tasks if more than one present
+						Characters characters = mApp.ActiveCell.Characters[stepLoc.startPos, stepLoc.length+1];
+						if (theStep.tasks.Count > 1 && stepLoc.locType == ZStepLoc.LocType.task)
+						{
+							characters.Font.Bold = true;
+							characters.Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
+						}
+						else if (stepLoc.locType == ZStepLoc.LocType.tag)
+						{
+							characters.Font.Bold = true;
+							characters.Font.Color = stepLoc.color;
+						}
+					}
+
+					double rowHeight = rng.RowHeight;
 					rng.WrapText = true;
+					// need to see if the row should be made taller
+					string txt = currentStep.text;
+					if (txt.Contains('\n'))
+					{
+						// see how many
+						int lines = txt.Count<char>(isNewLine) + 1;
+						// if we didn't expand the height of the row after wrapping, we need to do it now
+						if (rowHeight == rng.RowHeight)
+						{
+							rowHeight *= lines;
+							// make sure we don't get too big
+							if (rowHeight < 1000 )
+								rng.RowHeight = rowHeight;
+						}
+					}
 					rng = reportSheet.Cells[reportSheetRow, 5];
 					double deduction = stepDeduction(taskDeduction.stepID, taskDeductions);
 					rng.Value = string.Format("{0:f2}/{1:f2}", deduction, currentStep.pts);
@@ -290,6 +464,17 @@ namespace Excel2Json
 					rng.Value = "OK";
 					rng = reportSheet.Cells[reportSheetRow, 4];
 					rng.Value = task.text;
+					ZTaskLocs taskLocs = new ZTaskLocs(task.parentStep.stepLocs, task);
+					if (taskLocs != null  && taskLocs.locs.Count > 0)
+					{
+						foreach (ZTaskLoc taskLoc in taskLocs.locs)
+						{
+							Characters characters = mApp.ActiveCell.Characters[taskLoc.startPos, taskLoc.length+1];
+							characters.Font.Bold = true;
+							characters.Font.Color = taskLoc.color;
+						}
+					}
+
 					rng.WrapText = true;
 					// output mapping information, category, difficulty, action, objective, ...
 					objectiveCol = 6;
@@ -309,10 +494,23 @@ namespace Excel2Json
 				//TODO: add comment
 				rng = reportSheet.Cells[reportSheetRow, 2];
 				rng.Value = dTask.id;
+				rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 				rng = reportSheet.Cells[reportSheetRow, 3];
 				rng.Value = "ERR";
+				rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 				rng = reportSheet.Cells[reportSheetRow, 4];
 				rng.Value = dTask.text;
+				ZTaskLocs dTaskLocs = new ZTaskLocs(dTask.parentStep.stepLocs, dTask);
+				if (dTaskLocs != null  && dTaskLocs.locs.Count > 0)
+				{
+					foreach (ZTaskLoc taskLoc in dTaskLocs.locs)
+					{
+						Characters characters = mApp.ActiveCell.Characters[taskLoc.startPos, taskLoc.length+1];
+						characters.Font.Bold = true;
+						characters.Font.Color = taskLoc.color;
+					}
+				}
+
 				rng.WrapText = true;
 				// add comment if the target is a cell
 				if (dTask.target.location.type == "Cell")
@@ -321,11 +519,48 @@ namespace Excel2Json
 					Range errCell = errSheet.Range[dTask.target.location.address];
 					errCell.ClearComments();
 					Comment comment = errCell.AddComment();
-					t = theStep.name + ": " + theStep.text 
-						+ "\n" + dTask.id + ": " + dTask.text 
-						+ taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback
-						+ "\n deducted: " + taskDeduction.pointsDeducted.ToString("N2") + " pts";
-					comment.Text( t );
+					string stepText = theStep.name + ": ";
+					int stepOffset = stepText.Length;
+					stepText = WrapIt(stepText + theStep.text);
+					string taskText = ""; 
+					string scenarioText = WrapIt( "Scenario: " + taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback);
+					int taskOffset = 0;
+					if ( theStep.tasks.Count > 1 ) // dTask.text.LevenshteinDistance(theStep.text) > 4)
+					{
+						taskText = "Task " + dTask.id + ": ";
+						taskOffset = taskText.Length + stepText.Length;
+						taskText += dTask.text;
+						taskText = WrapIt(taskText);
+						stepText  += "\n" + taskText;
+					}
+					else
+						taskText = "";
+					stepText += "\n\n" + scenarioText + "\n\nDeducted: " + taskDeduction.pointsDeducted.ToString("N2") + " pts";
+
+					comment.Text(stepText);
+					foreach (ZStepLoc stepLoc in theStep.stepLocs.Values)
+					{
+						// only color the tags
+//						if (stepLoc.locType == ZStepLoc.LocType.task)
+						{
+							Characters characters = comment.Shape.TextFrame.Characters(stepOffset + stepLoc.startPos, stepLoc.length+1);
+							characters.Font.Bold = true;
+							characters.Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
+							if (stepLoc.locType == ZStepLoc.LocType.tag)
+								characters.Font.Color = stepLoc.color;
+						}
+					}
+
+					if (taskText.Length > 0 && dTaskLocs != null  && dTaskLocs.locs.Count > 0)
+					{
+						foreach (ZTaskLoc taskLoc in dTaskLocs.locs)
+						{
+							Characters characters = comment.Shape.TextFrame.Characters(taskOffset + taskLoc.startPos, taskLoc.length+1);
+							characters.Font.Bold = true;
+							characters.Font.Color = taskLoc.color;
+						}
+					}
+					comment.Shape.TextFrame.AutoSize = true;
 				}
 
 				// output mapping information, category, difficulty, action, objective, ...
@@ -344,17 +579,20 @@ namespace Excel2Json
 
 				objectiveCol = 4;
 				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
-				t = taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback;
+				t = "Scenario: " + taskDeduction.scenario.name + " - " + taskDeduction.scenario.remediation.feedback;
 				rng.Value = t;
 				rng.WrapText = true;
 				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
-				rng.Value = taskDeduction.scenario.remediation.category;
+				rng.Value = taskDeduction.scenario.deduction.pointsDeducted;
+
+//				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
+//				rng.Value = taskDeduction.scenario.remediation.category;
 				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
-				rng.Value = taskDeduction.scenario.deduction.category;
+				// use task category if no deduction category present
+				rng.Value = taskDeduction.scenario.deduction.category.Length > 0 ? taskDeduction.scenario.deduction.category : dTask.mapping.category;
+				
 				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
 				rng.Value = taskDeduction.scenario.deduction.type;
-				rng = reportSheet.Cells[reportSheetRow, objectiveCol++];
-				rng.Value = taskDeduction.scenario.deduction.pointsDeducted;
 				reportSheetRow++;
 				// output resources for this objective/error, this will change once we
 				// have error specific feedback

@@ -895,12 +895,12 @@ namespace TestStuff
 		#region gradeit
 		private void DoReportIt(string currentFolder)
 		{
-			DialogResult markupSubmission = System.Windows.Forms.DialogResult.No;
+			DialogResult markupSubmission = System.Windows.Forms.DialogResult.Yes; // No;
 			ZExcelToJson zexcel = null;
 //			if (currentFolder.Length == 0)
 			{
 				zexcel = new ZExcelToJson();
-				markupSubmission = MessageBox.Show("Markup current Excel file?", "Markup submission", MessageBoxButtons.YesNo);
+//				markupSubmission = MessageBox.Show("Markup current Excel file?", "Markup submission", MessageBoxButtons.YesNo);
 				// load the rubric for this submission folder
 				currentFolder = zexcel.currentFolder;
 			}
