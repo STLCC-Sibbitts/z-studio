@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZLib")]
+[assembly: AssemblyTitle("ZGUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("z-know")]
-[assembly: AssemblyProduct("ZLib")]
+[assembly: AssemblyProduct("ZGUI")]
 [assembly: AssemblyCopyright("Copyright © z-know 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -17,10 +17,10 @@ using System.Runtime.InteropServices;
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("13d97aa3-565a-4f25-b83f-7f8735b79c33")]
+[assembly: Guid("59ab0b9e-557c-4ab2-9d6a-855a49ae680d")]
 
 // Version information for an assembly consists of the following four values:
 //

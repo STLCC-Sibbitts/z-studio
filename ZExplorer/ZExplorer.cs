@@ -17,11 +17,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
 using System.Configuration;
-using JWC;
+
 //using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using ZLib.ZRubric;
-using ZStudio.UserControls;
+using ZGUI;
 using Excel2Json;
 #endregion
 
@@ -34,7 +34,9 @@ namespace ZStudio
 		private int m_curFileNum = 0;
 		private ZRubricSchema m_rubricSchema = null;
 		private ZRubric m_rubric = null;
+#if USE_THIS
 		private ZExcel m_rubricExcel = null;
+#endif
 		private ZExcel m_submissionExcel = null;
 
 		public StatusStrip statusStrip

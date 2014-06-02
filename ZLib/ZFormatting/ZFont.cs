@@ -24,7 +24,7 @@ namespace ZLib
 		public ZFont(JObject obj) : base(obj) { }
 		public ZFont() { }
 
-		public string name
+		public new string name
 		{
 			get { return (string)get(MethodInfo.GetCurrentMethod()); }
 			set { set(MethodInfo.GetCurrentMethod(), value); }

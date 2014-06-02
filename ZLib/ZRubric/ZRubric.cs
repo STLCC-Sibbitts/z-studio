@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
@@ -230,6 +231,7 @@ namespace ZLib.ZRubric
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 				load = false;
 			}
 			return load;
@@ -256,6 +258,7 @@ namespace ZLib.ZRubric
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 				load = false;
 			}
 			return load;
@@ -312,7 +315,8 @@ namespace ZLib.ZRubric
             }
             catch (Exception ex)
             {
-                load = false;
+				Debug.Print(ex.Message);
+				load = false;
             }
             return load;
         }
@@ -329,7 +333,8 @@ namespace ZLib.ZRubric
             }
             catch (Exception ex)
             {
-                save = false;
+				Debug.Print(ex.Message);
+				save = false;
             }
             return save;
         }
@@ -391,6 +396,7 @@ namespace ZLib.ZRubric
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 				loadSubmission = false;
 			}
 			return loadSubmission;
@@ -408,6 +414,7 @@ namespace ZLib.ZRubric
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 				saveGradedSubmission = false;
 			}
 			return saveGradedSubmission;

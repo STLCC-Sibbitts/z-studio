@@ -58,20 +58,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPreferences.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPreferences.Designer.cs">
-      <DependentUpon>frmPreferences.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPreferences.resx">
-      <DependentUpon>frmPreferences.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -107,6 +98,10 @@
     <ProjectReference Include="..\lib\Newtonsoft.Json\Newtonsoft.Json.Net35.csproj">
       <Project>{a9ae40ff-1a21-414a-9fe7-3be13644cc6d}</Project>
       <Name>Newtonsoft.Json.Net35</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZGUI\ZGUI.csproj">
+      <Project>{b340b507-8b11-4781-9efe-aede44ab8d73}</Project>
+      <Name>ZGUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\ZLib\ZLib.csproj">
       <Project>{0d565bc0-cce5-4ac3-913e-22a2fdf256aa}</Project>

@@ -8,8 +8,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLib", "ZLib\ZLib.csproj", "{0D565BC0-CCE5-4AC3-913E-22A2FDF256AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZExplorer", "ZExplorer\ZExplorer.csproj", "{11A91925-9995-4CE5-86D6-420D9F37AC93}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73} = {B340B507-8B11-4781-9EFE-AEDE44AB8D73}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStuff", "TestStuff\TestStuff.csproj", "{A2152E05-6B11-4E1A-B2C1-2785D6CA81C2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73} = {B340B507-8B11-4781-9EFE-AEDE44AB8D73}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.Net35", "lib\Newtonsoft.Json\Newtonsoft.Json.Net35.csproj", "{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}"
 EndProject
@@ -17,6 +23,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5607E735-2
 	ProjectSection(SolutionItems) = preProject
 		ZExplorer\data\Functions.json = ZExplorer\data\Functions.json
 		ZExplorer\data\Preferences.json = ZExplorer\data\Preferences.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZGUI", "ZGUI\ZGUI.csproj", "{B340B507-8B11-4781-9EFE-AEDE44AB8D73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A754F43D-65ED-45B3-9147-850A14CF8EAC} = {A754F43D-65ED-45B3-9147-850A14CF8EAC}
+		{0D565BC0-CCE5-4AC3-913E-22A2FDF256AA} = {0D565BC0-CCE5-4AC3-913E-22A2FDF256AA}
+		{C0E5FDEF-D735-4B2E-B28D-604156F1816E} = {C0E5FDEF-D735-4B2E-B28D-604156F1816E}
+		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D} = {A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}
 	EndProjectSection
 EndProject
 Global
@@ -89,6 +103,16 @@ Global
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9AE40FF-1A21-414A-9FE7-3BE13644CC6D}.Release|x86.ActiveCfg = Release|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B340B507-8B11-4781-9EFE-AEDE44AB8D73}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

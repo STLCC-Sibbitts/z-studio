@@ -209,7 +209,6 @@ namespace Excel2Json
 			ZResourceProvider rp = null;
 			ZObjectiveMappings oms = null;
 
-			double deduct;
 			string t;
 			// let's see if we can figure out how much needs to be deducted
 			double grade = ZRubric.activeProject.totalPts;
@@ -1155,13 +1154,12 @@ namespace Excel2Json
 			// string str = "";
 			int lastCol = sht.UsedRange.Columns.Count + sht.UsedRange.Column - 1;
 			int lastRow = sht.UsedRange.Rows.Count + sht.UsedRange.Row - 1;
-			int noFillColor = (int)Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexNone;
-
+//			int noFillColor = (int)Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexNone;
 			foreach (Range chkCell in sht.UsedRange)
 			{
 				Debug.Print("cell:" + chkCell.Address);
-				if (chkCell.Address == "$A$3")
-					ul = ul;
+				//if (chkCell.Address == "$A$3")
+				//	ul = ul;
 				// if we haven't found the ul corner yet
 				if (ul == null)
 				{
@@ -1668,6 +1666,7 @@ namespace Excel2Json
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 			}
 			WriteEndObject();
 		}
@@ -1872,8 +1871,8 @@ namespace Excel2Json
 				value2 = val;
 			}
 			string v = theCell.Address.ToString();
-			if ( v == "$D$1" || v == "$A$25" || v == "$B$25" || v == "$E$25" )
-				v = v;
+			//if ( v == "$D$1" || v == "$A$25" || v == "$B$25" || v == "$E$25" )
+			//	v = v;
 			//v = cell.AddressLocal.ToString();
 			WriteStartObject();
 			WritePropertyName(v);

@@ -1,4 +1,4 @@
-﻿namespace TestStuff
+﻿namespace ZGUI
 {
     partial class frmPreferences
     {
@@ -82,16 +82,10 @@
 			this.label20 = new System.Windows.Forms.Label();
 			this.txtScenarioPath = new System.Windows.Forms.TextBox();
 			this.grpDefaultScenario = new System.Windows.Forms.GroupBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.label28 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label22 = new System.Windows.Forms.Label();
 			this.cboDeductionType = new System.Windows.Forms.ComboBox();
 			this.grpRemediation = new System.Windows.Forms.GroupBox();
-			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-			this.label27 = new System.Windows.Forms.Label();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.label26 = new System.Windows.Forms.Label();
 			this.txtFeedback = new System.Windows.Forms.RichTextBox();
 			this.label25 = new System.Windows.Forms.Label();
 			this.txtNotes = new System.Windows.Forms.RichTextBox();
@@ -123,6 +117,12 @@
 			this.txtDefaultProjectPoints = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.label26 = new System.Windows.Forms.Label();
+			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+			this.label27 = new System.Windows.Forms.Label();
+			this.label28 = new System.Windows.Forms.Label();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.tabsPreferences.SuspendLayout();
 			this.tabBasicPreferences.SuspendLayout();
 			this.grpMultipliers.SuspendLayout();
@@ -195,7 +195,7 @@
 			this.tabBasicPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabBasicPreferences.Name = "tabBasicPreferences";
 			this.tabBasicPreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabBasicPreferences.Size = new System.Drawing.Size(923, 637);
+			this.tabBasicPreferences.Size = new System.Drawing.Size(923, 547);
 			this.tabBasicPreferences.TabIndex = 0;
 			this.tabBasicPreferences.Text = "Basic";
 			this.tabBasicPreferences.UseVisualStyleBackColor = true;
@@ -629,10 +629,10 @@
 			this.radRounding50.AutoSize = true;
 			this.radRounding50.Location = new System.Drawing.Point(7, 90);
 			this.radRounding50.Name = "radRounding50";
-			this.radRounding50.Size = new System.Drawing.Size(70, 21);
+			this.radRounding50.Size = new System.Drawing.Size(62, 21);
 			this.radRounding50.TabIndex = 3;
 			this.radRounding50.Tag = "50";
-			this.radRounding50.Text = "0.50 pt";
+			this.radRounding50.Text = "1/2 pt";
 			this.radRounding50.UseVisualStyleBackColor = true;
 			this.radRounding50.CheckedChanged += new System.EventHandler(this.radRounding_CheckedChanged);
 			// 
@@ -642,11 +642,11 @@
 			this.radRounding25.Checked = true;
 			this.radRounding25.Location = new System.Drawing.Point(7, 66);
 			this.radRounding25.Name = "radRounding25";
-			this.radRounding25.Size = new System.Drawing.Size(70, 21);
+			this.radRounding25.Size = new System.Drawing.Size(62, 21);
 			this.radRounding25.TabIndex = 2;
 			this.radRounding25.TabStop = true;
 			this.radRounding25.Tag = "25";
-			this.radRounding25.Text = "0.25 pt";
+			this.radRounding25.Text = "1/4 pt";
 			this.radRounding25.UseVisualStyleBackColor = true;
 			this.radRounding25.CheckedChanged += new System.EventHandler(this.radRounding_CheckedChanged);
 			// 
@@ -658,7 +658,7 @@
 			this.radRounding10.Size = new System.Drawing.Size(70, 21);
 			this.radRounding10.TabIndex = 1;
 			this.radRounding10.Tag = "10";
-			this.radRounding10.Text = "0.10 pt";
+			this.radRounding10.Text = "1/10 pt";
 			this.radRounding10.UseVisualStyleBackColor = true;
 			this.radRounding10.CheckedChanged += new System.EventHandler(this.radRounding_CheckedChanged);
 			// 
@@ -799,26 +799,6 @@
 			this.grpDefaultScenario.TabStop = false;
 			this.grpDefaultScenario.Tag = "OName";
 			// 
-			// textBox1
-			// 
-			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBox1.Location = new System.Drawing.Point(503, 31);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ReadOnly = true;
-			this.textBox1.Size = new System.Drawing.Size(54, 23);
-			this.textBox1.TabIndex = 13;
-			this.textBox1.Text = "10%";
-			// 
-			// label28
-			// 
-			this.label28.AutoSize = true;
-			this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label28.Location = new System.Drawing.Point(333, 31);
-			this.label28.Name = "label28";
-			this.label28.Size = new System.Drawing.Size(149, 17);
-			this.label28.TabIndex = 12;
-			this.label28.Text = "Threshold Percentage";
-			// 
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.label22);
@@ -873,42 +853,6 @@
 			this.grpRemediation.TabStop = false;
 			this.grpRemediation.Tag = "Remediation";
 			this.grpRemediation.Text = "Remediation";
-			// 
-			// richTextBox2
-			// 
-			this.richTextBox2.Location = new System.Drawing.Point(176, 208);
-			this.richTextBox2.Name = "richTextBox2";
-			this.richTextBox2.Size = new System.Drawing.Size(491, 77);
-			this.richTextBox2.TabIndex = 5;
-			this.richTextBox2.Tag = "MissingFeedback";
-			this.richTextBox2.Text = "";
-			// 
-			// label27
-			// 
-			this.label27.AutoSize = true;
-			this.label27.Location = new System.Drawing.Point(8, 208);
-			this.label27.Name = "label27";
-			this.label27.Size = new System.Drawing.Size(55, 17);
-			this.label27.TabIndex = 4;
-			this.label27.Text = "Missing";
-			// 
-			// richTextBox1
-			// 
-			this.richTextBox1.Location = new System.Drawing.Point(176, 119);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(491, 77);
-			this.richTextBox1.TabIndex = 3;
-			this.richTextBox1.Tag = "PartialCreditFeedback";
-			this.richTextBox1.Text = "";
-			// 
-			// label26
-			// 
-			this.label26.AutoSize = true;
-			this.label26.Location = new System.Drawing.Point(8, 119);
-			this.label26.Name = "label26";
-			this.label26.Size = new System.Drawing.Size(89, 17);
-			this.label26.TabIndex = 2;
-			this.label26.Text = "Partial Credit";
 			// 
 			// txtFeedback
 			// 
@@ -1010,7 +954,7 @@
 			// 
 			this.tabFormattingPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabFormattingPreferences.Name = "tabFormattingPreferences";
-			this.tabFormattingPreferences.Size = new System.Drawing.Size(923, 637);
+			this.tabFormattingPreferences.Size = new System.Drawing.Size(923, 547);
 			this.tabFormattingPreferences.TabIndex = 3;
 			this.tabFormattingPreferences.Text = "Formatting";
 			this.tabFormattingPreferences.UseVisualStyleBackColor = true;
@@ -1023,7 +967,7 @@
 			this.tabProjectPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabProjectPreferences.Name = "tabProjectPreferences";
 			this.tabProjectPreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabProjectPreferences.Size = new System.Drawing.Size(923, 637);
+			this.tabProjectPreferences.Size = new System.Drawing.Size(923, 547);
 			this.tabProjectPreferences.TabIndex = 2;
 			this.tabProjectPreferences.Text = "Project Defaults";
 			this.tabProjectPreferences.UseVisualStyleBackColor = true;
@@ -1254,6 +1198,62 @@
 			this.splitContainer3.Size = new System.Drawing.Size(931, 707);
 			this.splitContainer3.SplitterDistance = 663;
 			this.splitContainer3.TabIndex = 4;
+			// 
+			// richTextBox1
+			// 
+			this.richTextBox1.Location = new System.Drawing.Point(176, 119);
+			this.richTextBox1.Name = "richTextBox1";
+			this.richTextBox1.Size = new System.Drawing.Size(491, 77);
+			this.richTextBox1.TabIndex = 3;
+			this.richTextBox1.Tag = "PartialCreditFeedback";
+			this.richTextBox1.Text = "";
+			// 
+			// label26
+			// 
+			this.label26.AutoSize = true;
+			this.label26.Location = new System.Drawing.Point(8, 119);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(89, 17);
+			this.label26.TabIndex = 2;
+			this.label26.Text = "Partial Credit";
+			// 
+			// richTextBox2
+			// 
+			this.richTextBox2.Location = new System.Drawing.Point(176, 208);
+			this.richTextBox2.Name = "richTextBox2";
+			this.richTextBox2.Size = new System.Drawing.Size(491, 77);
+			this.richTextBox2.TabIndex = 5;
+			this.richTextBox2.Tag = "MissingFeedback";
+			this.richTextBox2.Text = "";
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(8, 208);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(55, 17);
+			this.label27.TabIndex = 4;
+			this.label27.Text = "Missing";
+			// 
+			// label28
+			// 
+			this.label28.AutoSize = true;
+			this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label28.Location = new System.Drawing.Point(333, 31);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(149, 17);
+			this.label28.TabIndex = 12;
+			this.label28.Text = "Threshold Percentage";
+			// 
+			// textBox1
+			// 
+			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBox1.Location = new System.Drawing.Point(503, 31);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.ReadOnly = true;
+			this.textBox1.Size = new System.Drawing.Size(54, 23);
+			this.textBox1.TabIndex = 13;
+			this.textBox1.Text = "10%";
 			// 
 			// frmPreferences
 			// 

@@ -231,7 +231,7 @@ namespace ZLib.ZRubric
 					value = jVal.Value<bool>();
 				}
 			}
-			catch (Exception ex)
+			catch (Exception )
 			{
 				value = false;
 			}

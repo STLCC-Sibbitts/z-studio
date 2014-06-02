@@ -59,7 +59,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,52 +73,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmExcel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmExcel.Designer.cs">
-      <DependentUpon>frmExcel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="UserControls\ZStepControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ZStepControl.Designer.cs">
-      <DependentUpon>ZStepControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ZExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ZExplorer.Designer.cs">
       <DependentUpon>ZExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MruStripMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\TVRubric.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UserControls\TVRubric.Designer.cs">
-      <DependentUpon>TVRubric.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ZExcelViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ZExcelViewer.Designer.cs">
-      <DependentUpon>ZExcelViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ZPropertiesControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ZPropertiesControl.Designer.cs">
-      <DependentUpon>ZPropertiesControl.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="frmExcel.resx">
-      <DependentUpon>frmExcel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ZStepControl.resx">
-      <DependentUpon>ZStepControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ZExplorer.resx">
       <DependentUpon>ZExplorer.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,15 +95,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UserControls\TVRubric.resx">
-      <DependentUpon>TVRubric.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ZExcelViewer.resx">
-      <DependentUpon>ZExcelViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ZPropertiesControl.resx">
-      <DependentUpon>ZPropertiesControl.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="data\e3c2.zrsf" />
     <None Include="data\e3c2wZuids.zrsf" />
@@ -179,6 +133,10 @@
       <Project>{a9ae40ff-1a21-414a-9fe7-3be13644cc6d}</Project>
       <Name>Newtonsoft.Json.Net35</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZGUI\ZGUI.csproj">
+      <Project>{b340b507-8b11-4781-9efe-aede44ab8d73}</Project>
+      <Name>ZGUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZLib\ZLib.csproj">
       <Project>{0D565BC0-CCE5-4AC3-913E-22A2FDF256AA}</Project>
       <Name>ZLib</Name>
@@ -201,7 +159,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="MSComDlg">
       <Guid>{F9043C88-F6F2-101A-A3C9-08002B2F49FB}</Guid>

@@ -196,7 +196,7 @@ namespace ZLib.ZRubric
 		public ZSteps(ZObjects<ZSteps, ZStep> zObject) : base(zObject) { }
 		public ZSteps(JArray jArray) : base(jArray) { }
 		public ZSteps() { }
-		public ZStep this[string key]
+		public new ZStep this[string key]
 		{
 			get
 			{

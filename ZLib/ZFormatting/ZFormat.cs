@@ -55,14 +55,6 @@ namespace ZLib
 			get
 			{
 				bool value = (bool)get(MethodInfo.GetCurrentMethod());
-				if (value == null)
-				{
-					JToken jTok =this.Properties.First<JToken>().Children().First<JToken>();
-					value = (bool)((ZToken)(jTok)).get(MethodInfo.GetCurrentMethod());
-					if (value == null)
-						return false;
-					// this makes sure we have resolved the value
-				}
 				return value;
 			}
 			set { set(MethodInfo.GetCurrentMethod(), value); }

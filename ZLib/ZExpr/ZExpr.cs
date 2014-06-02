@@ -80,7 +80,7 @@ namespace ZLib
 		//static string elementName1Pattern	= @"(\.(?<"  + ZToken.RXFields.ElementName1	+ @">[\w\d_]+))";
 		//static string elementName2Pattern	= @"(\.(?<"  + ZToken.RXFields.ElementName2	+ @">[\w\d_]+))";
 		//static string parentVarNamePattern  = @"(^\^(?<" + ZToken.RXFields.ParentVarName	+ @">[^\^\*\(\[\.]+))";
-		static string tagVarPattern		= @"(((?'Open'///\<)[^{}]*)+((?'Close-Open'})[^{}]*)+)*(?(Open)(?!))$";
+		//static string tagVarPattern		= @"(((?'Open'///\<)[^{}]*)+((?'Close-Open'})[^{}]*)+)*(?(Open)(?!))$";
 
 		static public ZExprNode Parse(string[] taggedExpression, string[] zTags)
 		{

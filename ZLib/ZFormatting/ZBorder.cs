@@ -40,7 +40,7 @@ namespace ZLib
 				return value;
 			}
 		}
-		public string name
+		public new string name
 		{
 			get { return (string)get(MethodInfo.GetCurrentMethod()); }
 			set { set(MethodInfo.GetCurrentMethod(), value); }

@@ -34,7 +34,7 @@ namespace ZLib
 		public ZStyle(JObject obj) : base(obj) { }
 		public ZStyle() { }
 
-		public string name
+		public new string name
 		{
 			get
 			{

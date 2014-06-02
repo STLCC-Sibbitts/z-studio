@@ -24,12 +24,12 @@ namespace ZLib
 		public ZNumberFormat(JObject obj) : base(obj) { }
 		public ZNumberFormat() { }
 
-		public string name
+		public new string name
 		{
 			get { return (string)get(MethodInfo.GetCurrentMethod()); }
 			set { set(MethodInfo.GetCurrentMethod(), value); }
 		}
-		public string value
+		public new string value
 		{
 			get { return (string)get(MethodInfo.GetCurrentMethod()); }
 			set { set(MethodInfo.GetCurrentMethod(), value); }

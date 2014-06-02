@@ -24,7 +24,7 @@ namespace ZLib.ZRubric
 				{
 					retValue = (int)get(MethodInfo.GetCurrentMethod());
 				}
-				catch (System.Exception ex)
+				catch (System.Exception )
 				{
 
 				}
@@ -50,7 +50,7 @@ namespace ZLib.ZRubric
                 {
                     retValue = (string)get(MethodInfo.GetCurrentMethod());
                 }
-                catch (System.Exception ex)
+                catch (System.Exception )
                 {
 
                 }
@@ -107,11 +107,11 @@ namespace ZLib.ZRubric
                         jTok = SelectToken("[" + preferenceName + "]");
                     zPreference = new ZThresholdPreference(jTok as JObject);
                 }
-                catch (System.Exception ex)
-                {
-
-                }
-                return zPreference;
+				catch (System.Exception ex)
+				{
+					Debug.Print(ex.Message);
+				}
+				return zPreference;
             }
         }
         public ZThresholdPreferences(ZThresholdPreferences zToken) : base(zToken) { }
@@ -132,7 +132,7 @@ namespace ZLib.ZRubric
                 {
                     retValue = (int)get(MethodInfo.GetCurrentMethod());
                 }
-                catch (System.Exception ex)
+                catch (System.Exception )
                 {
 
                 }
@@ -151,7 +151,7 @@ namespace ZLib.ZRubric
                 }
                 catch (System.Exception ex)
                 {
-
+					Debug.Print(ex.Message);
                 }
                 return retValue;
             }
@@ -256,7 +256,7 @@ namespace ZLib.ZRubric
 
 	public class ZPreference : ZObject<ZPreference>
 	{
-		public object this[string propertyName]
+		public new object this[string propertyName]
 		{
 			get
 			{
@@ -297,7 +297,7 @@ namespace ZLib.ZRubric
 				{
 					retValue = (string)get(MethodInfo.GetCurrentMethod()); 
 				}
-				catch (System.Exception ex)
+				catch (System.Exception )
 				{
 
 				}
@@ -316,7 +316,7 @@ namespace ZLib.ZRubric
 				}
 				catch (System.Exception ex)
 				{
-
+					Debug.Print(ex.Message);
 				}
 				return retValue;
 			}
@@ -339,7 +339,7 @@ namespace ZLib.ZRubric
                 }
                 catch (System.Exception ex)
                 {
-
+					Debug.Print(ex.Message);
                 }
                 return retValue;
             }
@@ -511,7 +511,7 @@ namespace ZLib.ZRubric
 				}
 				catch (System.Exception ex)
 				{
-
+					Debug.Print(ex.Message);
 				}
 				return retValue;
 			}
@@ -601,6 +601,7 @@ namespace ZLib.ZRubric
 				}
 				catch (System.Exception ex)
 				{
+					Debug.Print(ex.Message);
 					zPreferences = new ZPreferences();
 				}
 				return zPreferences;
@@ -625,6 +626,7 @@ namespace ZLib.ZRubric
 				}
 				catch (System.Exception ex)
 				{
+					Debug.Print(ex.Message);
 
 				}
 				return zPreference;

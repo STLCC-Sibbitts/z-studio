@@ -300,6 +300,7 @@ namespace ZLib.ZRubric
 			text = str;
 			ZTarget tgt = target;	// make sure we know what happens here
 			target = new ZTarget(task.target);
+#if USE_THIS
 			if (false)
 			{
 				target.text = task.target.text;
@@ -309,7 +310,9 @@ namespace ZLib.ZRubric
 				target.property = task.target.property;
 				target.type = task.target.type;
 			}
+#endif
 			answer = new ZAnswer(task.answer);
+#if USE_THIS
 			if (false)
 			{
 				answer.type = task.answer.type;
@@ -317,6 +320,7 @@ namespace ZLib.ZRubric
 				answer.begExpression = task.answer.begExpression;
 				answer.value = task.answer.value;
 			}
+#endif
 			mapping = task.mapping;
 //			args.jArray.RemoveAll();
 			//args.jArray = new JArray();
@@ -1068,7 +1072,7 @@ namespace ZLib.ZRubric
         }
         public void GradeApplyFormat()
         {
-            ZFormat submissionFormat = null;
+//            ZFormat submissionFormat = null;
             // preferences? allow equivalent
             ZPreferences prefs = ZRubric.activeProject.preferences;
             // since the target could be a range, need to iterate over each of the cells in the range

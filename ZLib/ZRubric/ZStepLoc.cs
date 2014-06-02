@@ -139,6 +139,7 @@ namespace ZLib.ZRubric
 			public const string taggedText				= "taggedText";
 			public const string tagKey					= "tagKey";
 		}
+#if USE_THESE
 		static string tagVarPattern		= @"(((?'Open'///\<{(?<" + ExprTags.tagKey + @">[\.A-Za-z0-9_ ]*)\})+((?'Close-Open'})[^{}]*)+)*(?(Open)(?!))$";
 
 		static string tagBegPattern			= @"(///<\{(?<" + ExprTags.tagKey + @">[\.A-Za-z0-9_ ]*)\})(?<" + ExprTags.taggedText + @">[\.A-Za-z_0-9 ]*)";
@@ -148,7 +149,7 @@ namespace ZLib.ZRubric
 		// [^<>]*(((?'Open'<)[^<>]*)+((?'Close-Open'>)[^<>]*)+)*(?(Open)(?!))
 		static string tagPattern =
 			@"((?'Open'///<)\{(?<" + ExprTags.tagKey + @">[\.A-Za-z0-9_ ]*)\})(?<" + ExprTags.taggedText + @">[\.A-Za-z_0-9 ]*)+((?'Close-Open'>///)(!(///<|>///))*)+)*(?(Open)(?!))$";
-
+#endif
 		//private void ResolveTags(string[] taggedStepTextLines)
 		//{
 		//	Color[] tagColors = { Color.Red, Color.Green, Color.DarkBlue, Color.Orange, Color.DarkViolet, Color.DarkOliveGreen, Color.DarkGoldenrod };

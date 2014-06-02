@@ -1,4 +1,5 @@
-﻿using ZStudio.UserControls;
+﻿using ZGUI;
+
 
 namespace ZStudio
 {
@@ -77,19 +78,19 @@ namespace ZStudio
 			this.scPanel = new System.Windows.Forms.Panel();
 			this.scMainExplorer = new System.Windows.Forms.SplitContainer();
 			this.scLeft = new System.Windows.Forms.SplitContainer();
-			this.tvRubric = new ZStudio.UserControls.TVRubric();
-			this.ctlZproperties = new ZStudio.UserControls.ZPropertiesControl();
+			this.tvRubric = new ZGUI.TVRubric();
+			this.ctlZproperties = new ZGUI.ZPropertiesControl();
 			this.sc1 = new System.Windows.Forms.SplitContainer();
 			this.tcDetails = new System.Windows.Forms.TabControl();
 			this.tabStep = new System.Windows.Forms.TabPage();
-			this.zStepControl = new ZStudio.UserControls.ZStepControl();
+			this.zStepControl = new ZGUI.ZStepControl();
 			this.tabTask = new System.Windows.Forms.TabPage();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabScenario = new System.Windows.Forms.TabPage();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tabRubric = new System.Windows.Forms.TabPage();
 			this.txtDescription = new System.Windows.Forms.RichTextBox();
-			this.zExcelViewer = new ZStudio.UserControls.ZExcelViewer();
+			this.zExcelViewer = new ZGUI.ZExcelViewer();
 			this.refreshSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zStatus.SuspendLayout();
 			this.mnuMain.SuspendLayout();
@@ -778,15 +779,15 @@ namespace ZStudio
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.SplitContainer sc1;
 		private System.Windows.Forms.SplitContainer scLeft;
-		private UserControls.ZPropertiesControl ctlZproperties;
+		private ZGUI.ZPropertiesControl ctlZproperties;
 		private TVRubric tvRubric;
-		private UserControls.ZExcelViewer zExcelViewer;
+		private ZGUI.ZExcelViewer zExcelViewer;
 		private System.Windows.Forms.ToolStripMenuItem mnuProjectImportSteps;
 		private System.Windows.Forms.TabControl tcDetails;
 		private System.Windows.Forms.TabPage tabStep;
 		private System.Windows.Forms.TabPage tabTask;
 		private System.Windows.Forms.TabPage tabScenario;
-		private UserControls.ZStepControl zStepControl;
+		private ZGUI.ZStepControl zStepControl;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TabPage tabRubric;

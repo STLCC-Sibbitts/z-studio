@@ -97,11 +97,11 @@ namespace ZLib.ZRubric
 		//	get { return (string)get(MethodInfo.GetCurrentMethod()); }
 		//	set { set(MethodInfo.GetCurrentMethod(), value); }
 		//}
-		public string value
-		{
-			get { return (string)get(MethodInfo.GetCurrentMethod()); }
-			set { set(MethodInfo.GetCurrentMethod(), value); }
-		}
+		//public string value
+		//{
+		//	get { return (string)get(MethodInfo.GetCurrentMethod()); }
+		//	set { set(MethodInfo.GetCurrentMethod(), value); }
+		//}
 		public string taggedValue
 		{
 			get { return (string)GetStringValue(propName(MethodInfo.GetCurrentMethod()),false ); }
