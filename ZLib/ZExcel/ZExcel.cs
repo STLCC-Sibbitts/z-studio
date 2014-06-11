@@ -138,11 +138,19 @@ namespace Excel2Json
 		{
 			if (mApp != null)
 			{
-				if (mApp.ActiveWorkbook != null)
+				try
 				{
-					mApp.ActiveWorkbook.Close(XlSaveAction.xlDoNotSaveChanges);
+					if (mApp.ActiveWorkbook != null)
+					{
+						mApp.ActiveWorkbook.Close(XlSaveAction.xlDoNotSaveChanges);
+					}
+					mApp.Quit();
+
 				}
-				mApp.Quit();
+				catch (Exception ex)
+				{
+					Debug.Print("Encountered error trying to close Excel: " + ex.Message);
+				}
 			}
 			mApp = null;
 
@@ -254,69 +262,115 @@ namespace Excel2Json
 
 			reportSheetRow += 2;
 
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			int firstResourceRow = reportSheetRow;
+			foreach (ZResourceProvider zrp in rps)
+			{
+				string name = zrp.id;
+				// for now, just grab the first one
+				ZObjectiveResource zres = zrp.Resources(0)[0];
+				{
+					name += ": Type - " + zres.id;
+					rng = reportSheet.Cells[reportSheetRow++, 4];
+					rng.Value = name;
+					rng.WrapText = true;
+				}
+			}
+			rng = reportSheet.Range[reportSheet.Cells[firstResourceRow, 1], reportSheet.Cells[reportSheetRow-1, 3]];
 			rng.Merge();
-			rng.Value = "Allocations:";
+			rng.Value = "Resources:";
+			rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 			rng.Font.Bold = true;
 
-			rng = reportSheet.Cells[reportSheetRow, 4];
-			t = string.Format("NCE: {0:N2}/{1:P2}, EE: {2:N2}/{3:P2}, LO: {4:N2}/{5:P2}"
+			++reportSheetRow;
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow + 2, 3]];
+			rng.Merge();
+			rng.Value = "Allocations:";
+			rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
+			rng.Font.Bold = true;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Non-Critical-Errors:       {0:N2} pts => {1:P2}"
 				, ZRubric.activeSubmission.allocations.NCE.max
-				, ZRubric.activeSubmission.allocations.NCE.pct
+				, ZRubric.activeSubmission.allocations.NCE.pct);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Execution-Errors:          {0:N2} pts => {1:P2}"
 				, ZRubric.activeSubmission.allocations.EE.max
-				, ZRubric.activeSubmission.allocations.EE.pct
+				, ZRubric.activeSubmission.allocations.EE.pct);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Learning-Objective-Errors: {0:N2} pts => {1:P2}"
 				, ZRubric.activeSubmission.allocations.LO.max
 				, ZRubric.activeSubmission.allocations.LO.pct);
 			rng.Value = t;
-			rng.WrapText = true;
 
-			++reportSheetRow;
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow+2, 3]];
 			rng.Merge();
 			rng.Font.Bold = true;
 			rng.Value = "Points/error:";
+			rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 
-			rng = reportSheet.Cells[reportSheetRow, 4];
-			t = string.Format("NCE: {0:N2}, EE: {1:N2}, LO: {2:N2}"
-				, ZRubric.activeSubmission.allocations.NCE.ppe
-				, ZRubric.activeSubmission.allocations.EE.ppe
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Non-Critical-Errors:       {0:N2} pts"
+				, ZRubric.activeSubmission.allocations.NCE.ppe);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Execution-Errors:          {0:N2} pts"
+				, ZRubric.activeSubmission.allocations.EE.ppe);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Learning-Objective-Errors: {0:N2} pts"
 				, ZRubric.activeSubmission.allocations.LO.ppe);
 			rng.Value = t;
-			rng.WrapText = true;
 
-			++reportSheetRow;
-			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow, 3]];
+			rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 1], reportSheet.Cells[reportSheetRow+2, 3]];
 			rng.Merge();
-			rng.Value = "Deductions:";
+			rng.Value = "Points Deducted:";
+			rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 			rng.Font.Bold = true;
 			rng.WrapText = true;
 
-			rng = reportSheet.Cells[reportSheetRow, 4];
-			t = string.Format("NCE: {0:N2}/{1:N2}, EE: {2:N2}/{3:N2}, LO: {4:N2}/{5:N2}"
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Non-Critical-Errors:       actual: {0:N2}, total {1:N2}"
 				, ZRubric.activeSubmission.allocations.NCE.actual
-				, ZRubric.activeSubmission.allocations.NCE.total
+				, ZRubric.activeSubmission.allocations.NCE.total);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Execution-Errors:          actual: {0:N2}, total {1:N2}"
 				, ZRubric.activeSubmission.allocations.EE.actual
-				, ZRubric.activeSubmission.allocations.EE.total
+				, ZRubric.activeSubmission.allocations.EE.total);
+			rng.Value = t;
+
+			rng = reportSheet.Cells[reportSheetRow++, 4];
+			t = string.Format("Learning-Objective-Errors: actual: {0:N2}, total {1:N2}"
 				, ZRubric.activeSubmission.allocations.LO.actual
 				, ZRubric.activeSubmission.allocations.LO.total);
 			rng.Value = t;
-			rng.WrapText = true;
 
 			ZStep currentStep = rubric.steps[0];	// first step
-			reportSheetRow += 2;	// second row after header
+			++reportSheetRow;	// second row after header
 
 			int objectiveCol = 5;
-			int	lastStepIndexDisplayed = -1;
+			int	nextStepIndexToDisplay = 0;
 			foreach (ZTaskDeduction taskDeduction in ZRubric.activeSubmission.taskDeductions)
 			{
+				currentStep = rubric.steps[0];
 				// grab the step for which this deduction applies
 				ZStep theStep = rubric.steps[taskDeduction.stepID];
 				// output the information for this step and all preceding steps
 				#region outputPrecedingSteps
-				while (lastStepIndexDisplayed < (theStep.index - 1))
+				while (nextStepIndexToDisplay < (theStep.index - 1))
 				{
+					currentStep = rubric.steps[nextStepIndexToDisplay++];
 					rng = reportSheet.Cells[reportSheetRow, 1];
-					rng.Value = currentStep.id;
+					rng.Value = currentStep.name;
+					rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
+
 					rng = reportSheet.Range[reportSheet.Cells[reportSheetRow, 2], reportSheet.Cells[reportSheetRow, 4]];
 					rng.Merge();
 					rng.Value =currentStep.text;
@@ -357,18 +411,22 @@ namespace Excel2Json
 
 					rng.WrapText = true;
 					rng = reportSheet.Cells[reportSheetRow, 5];
-					rng.Value = string.Format("{0:f2}/{0:f2}", currentStep.pts );
+					// nothing was deducted
+					rng.Value = string.Format("0/{0:f2}", currentStep.pts );
 					reportSheetRow++;
 					// now dump task stuff
 					foreach (ZTask task in currentStep.tasks)
 					{
 						rng = reportSheet.Cells[reportSheetRow, 2];
 						rng.Value = task.id;
+						rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 						rng = reportSheet.Cells[reportSheetRow, 3];
 						rng.Value = "OK";
+						rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 						rng = reportSheet.Cells[reportSheetRow, 4];
 						t = task.text;
 						rng.Value = task.text;
+						rng.Select();
 						ZTaskLocs taskLocs = new ZTaskLocs(task.parentStep.stepLocs, task.text);
 						if (taskLocs != null  && taskLocs.locs.Count > 0)
 						{
@@ -395,15 +453,13 @@ namespace Excel2Json
 						rng.Value = ontology.objectives[ task.mapping.objective].text;
 						reportSheetRow++;
 					}
-					lastStepIndexDisplayed = currentStep.index;
-					currentStep = rubric.steps[currentStep.index+1];
 				}
 				#endregion
 				// if we haven't output this step already
-				if (lastStepIndexDisplayed < theStep.index)
+				if (nextStepIndexToDisplay <= theStep.index)
 				{
 					currentStep = theStep;
-					lastStepIndexDisplayed = currentStep.index;
+					nextStepIndexToDisplay = currentStep.index + 1;
 					rng = reportSheet.Cells[reportSheetRow, 1];
 					rng.Value = currentStep.name;
 					rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
@@ -459,10 +515,13 @@ namespace Excel2Json
 						break;
 					rng = reportSheet.Cells[reportSheetRow, 2];
 					rng.Value = task.id;
+					rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 					rng = reportSheet.Cells[reportSheetRow, 3];
 					rng.Value = "OK";
+					rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 					rng = reportSheet.Cells[reportSheetRow, 4];
 					rng.Value = task.text;
+					rng.Select();
 					ZTaskLocs taskLocs = new ZTaskLocs(task.parentStep.stepLocs, task);
 					if (taskLocs != null  && taskLocs.locs.Count > 0)
 					{
@@ -499,6 +558,7 @@ namespace Excel2Json
 				rng.VerticalAlignment = XlVAlign.xlVAlignCenter;
 				rng = reportSheet.Cells[reportSheetRow, 4];
 				rng.Value = dTask.text;
+				rng.Select();
 				ZTaskLocs dTaskLocs = new ZTaskLocs(dTask.parentStep.stepLocs, dTask);
 				if (dTaskLocs != null  && dTaskLocs.locs.Count > 0)
 				{
@@ -611,7 +671,7 @@ namespace Excel2Json
 							ZObjectiveResource or = ors[om.name];
 							objectiveCol = 4;
 							rng = reportSheet.Cells[reportSheetRow, objectiveCol];
-							rng.Value = om.type + " - " + or.id + ":" + or.text;
+							rng.Value = name + " - Type[" + om.type + "], ID[" + or.id + "], Desc:" + or.text;
 							rng.WrapText = true;
 							reportSheetRow++;
 						}
@@ -620,6 +680,7 @@ namespace Excel2Json
 				t = "Workbook: '" + taskDeduction.task.target.location.context + ", address: '" + taskDeduction.task.target.location.address + "\n";
 				string testString = theStep.text;
 				grade -= taskDeduction.pointsDeducted;
+
 			}
 			//txtOut.Text += string.Format("Grade is {0:N2} out of {1:N2}\n", grade, ZRubric.activeProject.totalPts);
 			//txtOut.Text += "==============================================================\n";
@@ -704,7 +765,7 @@ namespace Excel2Json
 			zExcel.MarkupSubmission(rubric, taskDeductions); 
 		}
 		public void SaveMarkedupSubmission() { zExcel.SaveMarkedupSubmission(); }
-		public string SaveSubmission()
+		public string SaveSubmission(bool refreshRubricSubmission = false)
 		{
 			ToJson();
 			string jsonfn = currentFolder + @"\submission.json";
@@ -716,6 +777,7 @@ namespace Excel2Json
 			CloseOutput = true;
 			Close();
 			m_writer = new StringWriter(new StringBuilder());
+
 			return submission;
 		}
 		public void ToJson(string filename)
@@ -790,6 +852,10 @@ namespace Excel2Json
 #endregion
 		}
 
+		public bool SelectRange(string rangeText)
+		{
+			return zExcel.SelectRange(rangeText);
+		}
 		void mApp_SheetChange(object sht, Range target)
 		{
 			// prompt to see if this change should be recorded

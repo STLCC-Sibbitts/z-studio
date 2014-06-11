@@ -103,7 +103,7 @@ namespace ZLib.ZRubric
         {
             base.Add(taskDeduction);
             // now update the allocations
-            ZAllocation allocation = ZRubric.activeSubmission.allocations[taskDeduction.scenario.parentMapping.category];
+            ZAllocation allocation = ZRubric.activeSubmission.allocations[taskDeduction.scenario.deduction.category];	// use deduction category .parentMapping.category];
             double deduction = taskDeduction.deduct;
             // update the deduction information with actual amount deducted, which is based on the
             // amount that has been deducted vs. the max allowed

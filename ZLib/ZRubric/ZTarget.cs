@@ -32,6 +32,22 @@ using ZLib.ZRubric;
 
 namespace ZLib.ZRubric
 {
+	public class ZTargetRange : ZTarget
+	{
+		public ZTargetRange(ZTargetRange obj)
+			: base()
+		{
+			text		= obj.text;
+			type		= obj.type;
+			property	= obj.property;
+			location	= new ZLocation(obj.location);
+		}
+		public ZTargetRange(JObject jObj) : base(jObj) { }
+		public ZTargetRange()
+			: base(new JObject())
+		{
+		}
+	}
 	public class ZTarget : ZTargetSource
 	{
 		public ZTarget(ZTarget obj) : base()
@@ -46,16 +62,6 @@ namespace ZLib.ZRubric
 			: base(new JObject())
 		{
 		}
-		public new class Tags : ZTargetSource.Tags
-		{
-			public const string Item		= "Target";
-		}
-		public double GradeIT(ZTask task)
-		{
-			double deduction = 0;
-
-			return deduction;
-		}
         public ZFormat format
         {
             get
@@ -65,202 +71,16 @@ namespace ZLib.ZRubric
                 return value;
             }
         }
-		public ZContent content
+		public new List<ZContent> content
 		{
 			get
 			{
-				ZContent value = null;
-				value = ZRubric.activeSubmission.GetContent(this);
-				return value;
+				object value = ZRubric.activeSubmission.GetContent(this);
+				if (value is List<ZContent>)
+					return value as List<ZContent>;
+				return new List<ZContent>();	// return an empty list
 			}
 		}
-		//public double GradeCreateFormula(ZTask task)
-		//{
-		//	double deduction = 0;
-		//	ZContent	submissionContent = content;
-		//	ZAnswer		answer = task.answer;
-		//	// preferences? allow equivalent
-		//	ZPreferences prefs = ZRubric.activeProject.preferences;
-		//// TODO: create a ZDeduction class...
-
-		//	// start with the easiest thing first, if the formula matches the expression, we're good
-		//	if ( submissionContent.formula == answer.expression )
-		//		return deduction;
-		//	// check other standard options based on preferences
-		//	// remove leading =
-		//	ZExpr submissionExpr = new ZExpr(submissionContent.formula.Substring(1));
-		//	ZExpr answerExpr = new ZExpr(answer.expression.Substring(1));
-		//	// make this part of the ZDeduction collection for evaluating this task
-		//	if (!prefs.partialCredit.enabled)
-		//	{
-
-		//	}
-		//	else
-		//	{
-		//		string	defaultParms = "";
-		//		string	functionName = "";
-		//		string	defaultSep = "";
-		//		// if we have a function, check for default arg inclusion
-		//		if (answerExpr.rootNode.nodeType == ZExprNode.ZNodeType.zFunction)
-		//		{
-		//			// loop through the args and construct the revised answerExpression by including the default value
-		//			if ( prefs.content.expressions.allowDefaultValueEntry.enabled )
-		//			{
-		//				string answerExprWithDefaults = "";
-		//				string	sep = "";
-		//				foreach ( ZArg arg in task.args )
-		//				{
-		//					if ( arg.id == "Function" )
-		//					{
-		//						answerExprWithDefaults = arg.expression + "(";
-		//						functionName = arg.expression;
-		//						continue;
-		//					}
-		//					// this means that no value was provided in the solution
-		//					// TODO: update the json to see if I can just standardize the expression without
-		//					//	putting null in explicitly
-		//					if (arg.expression == NULL_VALUE || arg.expression.Length == 0)
-		//					{
-		//						answerExprWithDefaults += sep + arg.defaultValue;
-		//						defaultParms += defaultSep + arg.id;
-		//						defaultSep = ",";
-		//					}
-		//					else 
-		//					{
-		//						answerExprWithDefaults += sep + arg.expression;
-		//					}
-		//					sep = ",";
-		//				}
-		//				answerExprWithDefaults += ")";
-		//				ZExpr answerExprWithDflt = new ZExpr(answerExprWithDefaults);
-		//				// test for equivalency
-		//				if (submissionExpr == answerExprWithDflt)
-		//				{
-		//					ZScenario scenario = new ZScenario();
-		//					scenario.name = "DefaultValueEntry";
-		//					ZAnswer dfltAnswer = new ZAnswer();
-		//					dfltAnswer.expression = "=" + answerExprWithDefaults;
-		//					dfltAnswer.type = answer.type;
-		//					scenario.answers.Add(dfltAnswer);
-		//					ZExpressionPreference allowDefaultValueEntry =ZRubric.activeProject.preferences.content.expressions.allowDefaultValueEntry;
-		//					scenario.deduction = allowDefaultValueEntry.deduction;
-		//					scenario.remediation = allowDefaultValueEntry.remediation;
-		//					string feedback = allowDefaultValueEntry.remediation.feedback;
-		//					scenario.remediation.feedback = string.Format( feedback, defaultParms, functionName);
-
-		//					ZTaskDeduction taskDeduction = new ZTaskDeduction(task, scenario);
-		//					ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
-		//					Debug.Print(string.Format("ScenarioMatched:[{0}], Remediation: Category-[{1}]; Feedback[{2}]",
-		//						scenario.name, scenario.remediation.category, scenario.remediation.feedback));
-		//					deduction = taskDeduction.deduct;
-		//					return deduction;
-		//				}
-		//			}
-
-		//		}
-		//		else
-		//		{
-		//			// test for equivalency
-		//			if (submissionExpr == answerExpr)
-		//				return deduction;
-		//			// something else is going on
-		//		}
-		//		// the begExpression is a standard alternative and usually is present when the formula
-		//		// is modified in a subsequent step, full credit is given if the formula matches the original value
-		//		if (submissionContent.formula == answer.begExpression)
-		//			return deduction;
-		//		// check to see if no formula and literal value was entered
-		//		if (submissionContent.formula.Length == 0 && submissionContent.value == answer.literalValue.ToString())
-		//		{
-		//			deduction = task.pts;
-		//			// TODO: do something with remediation
-		//		}
-		//		// now check each of the scenarios
-		//		bool scenarioMatched = true;
-		//		foreach (ZScenario scenario in task.zScenarios)
-		//		{
-		//			scenarioMatched = true;
-		//			// need to check each of the answers, there may be more than one required
-		//			Debug.Print(string.Format("Checking Scenario:[{0}], Notes:[{1}]",
-		//				scenario.name, scenario.notes));
-		//			// TODO: when checking each answer that involves a function:
-		//			//			1) check preferences
-		//			//				a) equivalent expression
-		//			//				b) allow entry of default value for function arguments
-		//			//					check args 1 at a time
-		//			foreach (ZAnswer scenarioAnswer in scenario.answers)
-		//			{
-		//				Debug.Print(string.Format("    Checking Type:[{0}], Expression:[{1}]",
-		//					scenarioAnswer.type, scenarioAnswer.expression));
-		//				if (scenarioAnswer.expression != submissionContent.formula)
-		//				{
-		//					scenarioMatched = false;
-		//				}
-		//			}
-		//			if (scenarioMatched)
-		//			{
-		//				ZTaskDeduction taskDeduction = new ZTaskDeduction(task, scenario);
-		//				ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
-		//				Debug.Print(string.Format("ScenarioMatched:[{0}], Remediation: Category-[{1}]; Feedback[{2}]",
-		//					scenario.name, scenario.remediation.category, scenario.remediation.feedback));
-		//				deduction = scenario.deduct;
-		//				break;
-		//			}
-		//		}
-		//		if (!scenarioMatched)
-		//		{
-		//			Debug.Print(string.Format("NoScenarioMatch Found, Task:[{0}] - [{1}]", task.name, task.text));
-		//			deduction = task.pts;
-		//		}
-		//	}
-		//	return deduction;
-		//}
-		//public double GradeFormula(ZTask task)
-		//{
-		//	double deduction = 0;
-		//	switch (task.mapping.action)
-		//	{
-		//		case ZMapping.Actions.Create:
-		//			deduction = GradeCreateFormula(task);
-		//			break;
-		//		case ZMapping.Actions.Modify:
-		//			break;
-		//	}
-
-		//	return deduction;
-		//}
-		//	public double GradeTask(ZTask task)
-		//	{
-		//		double deduction = 0;
-
-		//		if (type == ZTargetSource.Types.Content)
-		//		{
-		//			switch(property)
-		//			{
-		//				case ZTargetSource.Properties.Formula:
-		//					deduction = GradeFormula(task);
-		//					break;
-		//				case ZTargetSource.Properties.FormulaR1C1:
-		//					break;
-		//				case ZTargetSource.Properties.Text:
-		//					break;
-		//			}
-		//		}
-		//		else if (type == ZTarget.Types.Format)
-		//		{
-		//			switch (property)
-		//			{
-		//				case ZTargetSource.Properties.Font:
-		//					break;
-		//			}
-		//		}
-		//		else
-		//		{
-		//		}
-
-		//		return deduction;
-		//	}
-		//}
 	}
 	public class ZSource : ZTargetSource
 	{
@@ -318,6 +138,15 @@ namespace ZLib.ZRubric
 		{
 			get { return GetStringValue(Tags.Property); }
 			set { SetValue(Tags.Property, value); }
+		}
+		public ZContent content
+		{
+			get
+			{
+				ZContent value = null;
+				value = ZRubric.activeSubmission.GetContent(this);
+				return value;
+			}
 		}
 		public ZLocation location
 		{
@@ -404,6 +233,7 @@ namespace ZLib.ZRubric
 				string value = "";
 				
 				value = GetStringValue(Tags.Address,false);
+#if false
 				//if (valueArray == null || valueArray.Length == 0)
 				//{
 				//	if (valueArray == null)
@@ -417,6 +247,7 @@ namespace ZLib.ZRubric
 				//	value += str;
 				//string theAddress = ResolveStringValue("{^Address}");
 				//value = value.Replace("{^Address}",ResolveStringValue("{^Address}"));
+#endif
 				return value;
 			}
 			set 
@@ -478,12 +309,18 @@ namespace ZLib.ZRubric
 			get { return GetStringValue(Tags.Cells); }
 			set { SetValue(Tags.Cells, value); }
 		}
+		public static string cellPath(string context, string address, string targetType = "")
+		{
+			string thePath = string.Format("Worksheets[{0}].Cells[{1}]", context, address);
+			if ( targetType.Length > 0 )
+				thePath += "." + targetType;
+			return thePath;
+		}
 		public string path
 		{
 			get 
 			{ 
-				string thePath = string.Format("Worksheets[{0}].Cells[{1}]", context, address);
-				return thePath; 
+				return cellPath(context, address);
 			}
 			// set { SetValue(Tags.Path, value); }
 		}

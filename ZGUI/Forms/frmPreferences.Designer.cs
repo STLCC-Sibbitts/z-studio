@@ -82,16 +82,21 @@
 			this.label20 = new System.Windows.Forms.Label();
 			this.txtScenarioPath = new System.Windows.Forms.TextBox();
 			this.grpDefaultScenario = new System.Windows.Forms.GroupBox();
+			this.label28 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.cboAllocationCategory = new System.Windows.Forms.ComboBox();
+			this.label23 = new System.Windows.Forms.Label();
 			this.label22 = new System.Windows.Forms.Label();
 			this.cboDeductionType = new System.Windows.Forms.ComboBox();
 			this.grpRemediation = new System.Windows.Forms.GroupBox();
+			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+			this.label27 = new System.Windows.Forms.Label();
+			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.label26 = new System.Windows.Forms.Label();
 			this.txtFeedback = new System.Windows.Forms.RichTextBox();
 			this.label25 = new System.Windows.Forms.Label();
 			this.txtNotes = new System.Windows.Forms.RichTextBox();
 			this.label24 = new System.Windows.Forms.Label();
-			this.cboAllocationCategory = new System.Windows.Forms.ComboBox();
-			this.label23 = new System.Windows.Forms.Label();
 			this.nudThreshold = new System.Windows.Forms.NumericUpDown();
 			this.label21 = new System.Windows.Forms.Label();
 			this.chkScenarioEnabled = new System.Windows.Forms.CheckBox();
@@ -117,12 +122,7 @@
 			this.txtDefaultProjectPoints = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.label26 = new System.Windows.Forms.Label();
-			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-			this.label27 = new System.Windows.Forms.Label();
-			this.label28 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.nudThresholdPct = new System.Windows.Forms.NumericUpDown();
 			this.tabsPreferences.SuspendLayout();
 			this.tabBasicPreferences.SuspendLayout();
 			this.grpMultipliers.SuspendLayout();
@@ -152,6 +152,7 @@
 			this.splitContainer3.Panel1.SuspendLayout();
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.nudThresholdPct)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnCancel
@@ -166,6 +167,7 @@
 			// 
 			// btnOK
 			// 
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.Location = new System.Drawing.Point(639, 12);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -195,7 +197,7 @@
 			this.tabBasicPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabBasicPreferences.Name = "tabBasicPreferences";
 			this.tabBasicPreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabBasicPreferences.Size = new System.Drawing.Size(923, 547);
+			this.tabBasicPreferences.Size = new System.Drawing.Size(923, 637);
 			this.tabBasicPreferences.TabIndex = 0;
 			this.tabBasicPreferences.Text = "Basic";
 			this.tabBasicPreferences.UseVisualStyleBackColor = true;
@@ -781,14 +783,12 @@
 			// 
 			// grpDefaultScenario
 			// 
-			this.grpDefaultScenario.Controls.Add(this.textBox1);
+			this.grpDefaultScenario.Controls.Add(this.nudThresholdPct);
 			this.grpDefaultScenario.Controls.Add(this.label28);
 			this.grpDefaultScenario.Controls.Add(this.panel1);
 			this.grpDefaultScenario.Controls.Add(this.grpRemediation);
 			this.grpDefaultScenario.Controls.Add(this.txtNotes);
 			this.grpDefaultScenario.Controls.Add(this.label24);
-			this.grpDefaultScenario.Controls.Add(this.cboAllocationCategory);
-			this.grpDefaultScenario.Controls.Add(this.label23);
 			this.grpDefaultScenario.Controls.Add(this.nudThreshold);
 			this.grpDefaultScenario.Controls.Add(this.label21);
 			this.grpDefaultScenario.Controls.Add(this.chkScenarioEnabled);
@@ -799,21 +799,59 @@
 			this.grpDefaultScenario.TabStop = false;
 			this.grpDefaultScenario.Tag = "OName";
 			// 
+			// label28
+			// 
+			this.label28.AutoSize = true;
+			this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label28.Location = new System.Drawing.Point(333, 31);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(149, 17);
+			this.label28.TabIndex = 12;
+			this.label28.Text = "Threshold Percentage";
+			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.cboAllocationCategory);
+			this.panel1.Controls.Add(this.label23);
 			this.panel1.Controls.Add(this.label22);
 			this.panel1.Controls.Add(this.cboDeductionType);
-			this.panel1.Location = new System.Drawing.Point(0, 91);
+			this.panel1.Location = new System.Drawing.Point(0, 58);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(316, 35);
+			this.panel1.Size = new System.Drawing.Size(316, 68);
 			this.panel1.TabIndex = 11;
 			this.panel1.Tag = "Deduction";
+			// 
+			// cboAllocationCategory
+			// 
+			this.cboAllocationCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cboAllocationCategory.FormattingEnabled = true;
+			this.cboAllocationCategory.Items.AddRange(new object[] {
+            "",
+            "NCE",
+            "EE",
+            "LO"});
+			this.cboAllocationCategory.Location = new System.Drawing.Point(178, 7);
+			this.cboAllocationCategory.Name = "cboAllocationCategory";
+			this.cboAllocationCategory.Size = new System.Drawing.Size(121, 24);
+			this.cboAllocationCategory.TabIndex = 9;
+			this.cboAllocationCategory.Tag = "Category";
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label23.Location = new System.Drawing.Point(12, 10);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(130, 17);
+			this.label23.TabIndex = 8;
+			this.label23.Tag = "";
+			this.label23.Text = "Allocation Category";
 			// 
 			// label22
 			// 
 			this.label22.AutoSize = true;
 			this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label22.Location = new System.Drawing.Point(10, 9);
+			this.label22.Location = new System.Drawing.Point(12, 39);
 			this.label22.Name = "label22";
 			this.label22.Size = new System.Drawing.Size(108, 17);
 			this.label22.TabIndex = 7;
@@ -831,7 +869,7 @@
             "Moderate",
             "Major",
             "Full"});
-			this.cboDeductionType.Location = new System.Drawing.Point(178, 6);
+			this.cboDeductionType.Location = new System.Drawing.Point(178, 36);
 			this.cboDeductionType.Name = "cboDeductionType";
 			this.cboDeductionType.Size = new System.Drawing.Size(121, 24);
 			this.cboDeductionType.TabIndex = 6;
@@ -853,6 +891,42 @@
 			this.grpRemediation.TabStop = false;
 			this.grpRemediation.Tag = "Remediation";
 			this.grpRemediation.Text = "Remediation";
+			// 
+			// richTextBox2
+			// 
+			this.richTextBox2.Location = new System.Drawing.Point(176, 208);
+			this.richTextBox2.Name = "richTextBox2";
+			this.richTextBox2.Size = new System.Drawing.Size(491, 77);
+			this.richTextBox2.TabIndex = 5;
+			this.richTextBox2.Tag = "MissingFeedback";
+			this.richTextBox2.Text = "";
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(8, 208);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(55, 17);
+			this.label27.TabIndex = 4;
+			this.label27.Text = "Missing";
+			// 
+			// richTextBox1
+			// 
+			this.richTextBox1.Location = new System.Drawing.Point(176, 119);
+			this.richTextBox1.Name = "richTextBox1";
+			this.richTextBox1.Size = new System.Drawing.Size(491, 77);
+			this.richTextBox1.TabIndex = 3;
+			this.richTextBox1.Tag = "PartialCreditFeedback";
+			this.richTextBox1.Text = "";
+			// 
+			// label26
+			// 
+			this.label26.AutoSize = true;
+			this.label26.Location = new System.Drawing.Point(8, 119);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(89, 17);
+			this.label26.TabIndex = 2;
+			this.label26.Text = "Partial Credit";
 			// 
 			// txtFeedback
 			// 
@@ -892,32 +966,6 @@
 			this.label24.TabIndex = 7;
 			this.label24.Text = "Notes";
 			// 
-			// cboAllocationCategory
-			// 
-			this.cboAllocationCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cboAllocationCategory.FormattingEnabled = true;
-			this.cboAllocationCategory.Items.AddRange(new object[] {
-            "",
-            "NCE",
-            "EE",
-            "LO"});
-			this.cboAllocationCategory.Location = new System.Drawing.Point(178, 61);
-			this.cboAllocationCategory.Name = "cboAllocationCategory";
-			this.cboAllocationCategory.Size = new System.Drawing.Size(121, 24);
-			this.cboAllocationCategory.TabIndex = 5;
-			this.cboAllocationCategory.Tag = "Category";
-			// 
-			// label23
-			// 
-			this.label23.AutoSize = true;
-			this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label23.Location = new System.Drawing.Point(10, 64);
-			this.label23.Name = "label23";
-			this.label23.Size = new System.Drawing.Size(130, 17);
-			this.label23.TabIndex = 4;
-			this.label23.Tag = "";
-			this.label23.Text = "Allocation Category";
-			// 
 			// nudThreshold
 			// 
 			this.nudThreshold.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -933,9 +981,9 @@
 			this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label21.Location = new System.Drawing.Point(10, 31);
 			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(149, 17);
+			this.label21.Size = new System.Drawing.Size(72, 17);
 			this.label21.TabIndex = 1;
-			this.label21.Text = "Threshold Percentage";
+			this.label21.Text = "Threshold";
 			// 
 			// chkScenarioEnabled
 			// 
@@ -954,7 +1002,7 @@
 			// 
 			this.tabFormattingPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabFormattingPreferences.Name = "tabFormattingPreferences";
-			this.tabFormattingPreferences.Size = new System.Drawing.Size(923, 547);
+			this.tabFormattingPreferences.Size = new System.Drawing.Size(923, 637);
 			this.tabFormattingPreferences.TabIndex = 3;
 			this.tabFormattingPreferences.Text = "Formatting";
 			this.tabFormattingPreferences.UseVisualStyleBackColor = true;
@@ -967,7 +1015,7 @@
 			this.tabProjectPreferences.Location = new System.Drawing.Point(4, 22);
 			this.tabProjectPreferences.Name = "tabProjectPreferences";
 			this.tabProjectPreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabProjectPreferences.Size = new System.Drawing.Size(923, 547);
+			this.tabProjectPreferences.Size = new System.Drawing.Size(923, 637);
 			this.tabProjectPreferences.TabIndex = 2;
 			this.tabProjectPreferences.Text = "Project Defaults";
 			this.tabProjectPreferences.UseVisualStyleBackColor = true;
@@ -1199,61 +1247,14 @@
 			this.splitContainer3.SplitterDistance = 663;
 			this.splitContainer3.TabIndex = 4;
 			// 
-			// richTextBox1
+			// nudThresholdPct
 			// 
-			this.richTextBox1.Location = new System.Drawing.Point(176, 119);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(491, 77);
-			this.richTextBox1.TabIndex = 3;
-			this.richTextBox1.Tag = "PartialCreditFeedback";
-			this.richTextBox1.Text = "";
-			// 
-			// label26
-			// 
-			this.label26.AutoSize = true;
-			this.label26.Location = new System.Drawing.Point(8, 119);
-			this.label26.Name = "label26";
-			this.label26.Size = new System.Drawing.Size(89, 17);
-			this.label26.TabIndex = 2;
-			this.label26.Text = "Partial Credit";
-			// 
-			// richTextBox2
-			// 
-			this.richTextBox2.Location = new System.Drawing.Point(176, 208);
-			this.richTextBox2.Name = "richTextBox2";
-			this.richTextBox2.Size = new System.Drawing.Size(491, 77);
-			this.richTextBox2.TabIndex = 5;
-			this.richTextBox2.Tag = "MissingFeedback";
-			this.richTextBox2.Text = "";
-			// 
-			// label27
-			// 
-			this.label27.AutoSize = true;
-			this.label27.Location = new System.Drawing.Point(8, 208);
-			this.label27.Name = "label27";
-			this.label27.Size = new System.Drawing.Size(55, 17);
-			this.label27.TabIndex = 4;
-			this.label27.Text = "Missing";
-			// 
-			// label28
-			// 
-			this.label28.AutoSize = true;
-			this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label28.Location = new System.Drawing.Point(333, 31);
-			this.label28.Name = "label28";
-			this.label28.Size = new System.Drawing.Size(149, 17);
-			this.label28.TabIndex = 12;
-			this.label28.Text = "Threshold Percentage";
-			// 
-			// textBox1
-			// 
-			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBox1.Location = new System.Drawing.Point(503, 31);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ReadOnly = true;
-			this.textBox1.Size = new System.Drawing.Size(54, 23);
-			this.textBox1.TabIndex = 13;
-			this.textBox1.Text = "10%";
+			this.nudThresholdPct.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.nudThresholdPct.Location = new System.Drawing.Point(503, 31);
+			this.nudThresholdPct.Name = "nudThresholdPct";
+			this.nudThresholdPct.Size = new System.Drawing.Size(38, 23);
+			this.nudThresholdPct.TabIndex = 14;
+			this.nudThresholdPct.Tag = "ThresholdPct";
 			// 
 			// frmPreferences
 			// 
@@ -1306,6 +1307,7 @@
 			this.splitContainer3.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
 			this.splitContainer3.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.nudThresholdPct)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -1390,8 +1392,6 @@
 		private System.Windows.Forms.RichTextBox txtNotes;
 		private System.Windows.Forms.Label label24;
 		private System.Windows.Forms.ComboBox cboDeductionType;
-		private System.Windows.Forms.ComboBox cboAllocationCategory;
-		private System.Windows.Forms.Label label23;
 		private System.Windows.Forms.NumericUpDown nudThreshold;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.CheckBox chkScenarioEnabled;
@@ -1404,7 +1404,9 @@
 		private System.Windows.Forms.Label label27;
 		private System.Windows.Forms.RichTextBox richTextBox1;
 		private System.Windows.Forms.Label label26;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label28;
+		private System.Windows.Forms.ComboBox cboAllocationCategory;
+		private System.Windows.Forms.Label label23;
+		private System.Windows.Forms.NumericUpDown nudThresholdPct;
     }
 }

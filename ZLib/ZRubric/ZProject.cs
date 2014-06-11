@@ -120,6 +120,8 @@ namespace ZLib.ZRubric
         }
 		public double pts(ZMapping mapping, ZDeduction deduction)
 		{
+			if ( deduction.type == "None" )
+				return 0;
             double deductionPct = ZRubric.activePreferences.deductions.multipliers[deduction.type].factor; 
 //			double categoryPPE = allocations[deduction.category].ppe;
             double deductionPts = pts(mapping);

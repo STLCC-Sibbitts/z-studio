@@ -171,6 +171,28 @@ namespace ZLib
 				return beingGraded;
 			}
 		}
+		public string functionArgName
+		{
+			get
+			{
+				string value = "";
+				if (isFunctionArg)
+				{
+					try
+					{
+						string functionName = parent.text;
+						ZFunction zFunction = ZRubric.ZRubric.activeFunctions[functionName];
+						int argIndex = 0;
+						argIndex = parent.children.IndexOf(this);
+						value = zFunction.functionArgs[argIndex].name;
+					}
+					catch (Exception)
+					{
+					}
+				}
+				return value;
+			}
+		}
 		public bool isFunctionArg
 		{
 			get

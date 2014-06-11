@@ -14,6 +14,7 @@ namespace ZLib
 		// Added an event which is raised whenever there is a difference
 
 		public string expression;		// string version of expression
+		public string mappingContext;
 		public ZExprNode rootNode;
 		static private string sheetPattern = @"(([A-Za-z]+!)?)";
 		static private string cellBasePattern = 
@@ -37,6 +38,7 @@ namespace ZLib
 		public ZExpr(string expression, ZTask task)
 		{
 			this.expression = expression;
+			mappingContext = task.mapping.defaultScenarioPath;
 			// if the expression doesn't start with a tick or an =, we need to force it to something that will be
 			// evaluate by the parser
 			if ( !expression.StartsWith("'") && !expression.StartsWith("="))
@@ -57,11 +59,13 @@ namespace ZLib
 		public ZExpr(string expression, string [] tags)
 		{
 			this.expression = expression;
+			mappingContext = "";
 			rootNode = Parse(expression, tags);
 		}
 		public ZExpr(string expression)
 		{
 			this.expression = expression;
+			mappingContext = "";
 			rootNode = Parse(expression);
 		}
 		static public string CellRangeText(string expression)
@@ -521,6 +525,7 @@ namespace ZLib
 		public delegate bool ZExprDeltaHandler(ZExprDeltaEventArgs zExprDeltaEventArgs);
 		public static ZExprDeltaHandler ExprDeltaHandler = null;
 		private static ZExprDeltaEventArgs zExprDeltaEventArgs = new ZExprDeltaEventArgs();
+
         public static bool Compare(ZExpr lExpr, ZExpr rExpr, ZScenario scenario)
         {
             zExprDeltaEventArgs.scenario = null;
@@ -530,7 +535,7 @@ namespace ZLib
             }
             return lExpr == rExpr;
         }
-		public static bool Compare(ZExprNode lNode, ZExprNode rNode)
+		public static bool Compare(ZExprNode lNode, ZExprNode rNode, string compareContext = "")
 		{
 			bool equivalent = true;		// assume they are equal
 			bool allowed = false;		// assume if we find a difference, that it is not allowed
@@ -619,7 +624,10 @@ namespace ZLib
 						// invoke special delta handling for use or omission of default value
                         if (ExprDeltaHandler != null && (lFunArgNode.isDefaultFunctionArgValue || rFunArgNode.isDefaultFunctionArgValue))
                         {
-                            deltaName = "FunctionArgs.";
+							//TODO-Delta
+							deltaName = "FunctionArgs.";
+							if (compareContext.Length > 0)
+								deltaName = compareContext + "." + deltaName;
                             // if we defaulted the left arg
                             if (lFunArgNode.isDefaultFunctionArgValue)
 								deltaName += "DefaultValue.Found";		// submission included default value when not requested
@@ -633,7 +641,9 @@ namespace ZLib
                         else
                         {
                             // compare them, set to false if was false or is false, regardless
+							
                             equivalent &= Compare(lFunArgNode, rFunArgNode);
+
                         }
 					}
 					break;
@@ -647,6 +657,7 @@ namespace ZLib
 						if (ExprDeltaHandler != null)
 						{
 							zExprDeltaEventArgs.SetContext(ZExprDelta.Contexts.Content, ZExprDelta.Qualifiers.Expression, "CellRef_Mismatch");
+							zExprDeltaEventArgs.feedbackArgs = new string[] { rNode.expression, rNode.functionArgName };
 							allowed = ExprDeltaHandler(zExprDeltaEventArgs);
 							equivalent = allowed;
 						}
@@ -660,7 +671,10 @@ namespace ZLib
 						// eventually these errors will be consolidated
 						if (ExprDeltaHandler != null)
 						{
-							zExprDeltaEventArgs.SetContext(ZExprDelta.Contexts.Content, ZExprDelta.Qualifiers.Expression, "Function.FunctionArgs.Range.Bounds");
+							string prefPath = compareContext;
+							prefPath += (prefPath.Length>0?".":"") + "Function.FunctionArgs.Range.Bounds";
+							zExprDeltaEventArgs.SetContext(ZExprDelta.Contexts.Content, ZExprDelta.Qualifiers.Expression, prefPath);
+							zExprDeltaEventArgs.feedbackArgs = new string[] { rNode.expression, rNode.functionArgName };
 							allowed = ExprDeltaHandler(zExprDeltaEventArgs);
 							equivalent = allowed;
 						}
@@ -703,16 +717,16 @@ namespace ZLib
 					// if only one child, they better be the same
 					if (lNode.children.Count() == 1)
 					{
-						if ( Compare(lNode.children[0], rNode.children[0]) == false )
+						if ( Compare(lNode.children[0], rNode.children[0], compareContext) == false )
 							equivalent = false;
 					}
 					// if two children and the current node is either + or *, verify in either direction
 					else if (lNode.children.Count() == 2 && (lNode.text == "+" || lNode.text == "*"))
 					{
-						if (Compare(lNode.children[0], rNode.children[0]) && Compare(lNode.children[1], rNode.children[1]) == false)
+						if (Compare(lNode.children[0], rNode.children[0], compareContext) && Compare(lNode.children[1], rNode.children[1], compareContext) == false)
 						{
 							// try the other way
-							if (Compare(lNode.children[0], rNode.children[1]) && Compare(lNode.children[0], rNode.children[1]) == false)
+							if (Compare(lNode.children[0], rNode.children[1], compareContext) && Compare(lNode.children[0], rNode.children[1], compareContext) == false)
 								equivalent = false;
 						}
 					}
@@ -721,7 +735,7 @@ namespace ZLib
 						// iterate through each of the children and make sure they are equivalent
 						// if there is a mismatch, we're done
 						for (int child = 0; child < lNode.children.Count() && equivalent; ++child)
-							if (Compare(lNode.children[child], rNode.children[child]) == false)
+							if (Compare(lNode.children[child], rNode.children[child], compareContext) == false)
 								equivalent = false;
 					}
 					break;

@@ -1050,8 +1050,13 @@ namespace ZLib
 		{
 			decimal levDistPct = 0M;
 			decimal	levDist = (decimal)s.LevenshteinDistance(t);
-			if ( levDist > 0 )
-				levDistPct = levDist / s.Length;
+			if (levDist > 0)
+			{
+				if (s.Length > 0)
+					levDistPct = levDist / s.Length;
+				else
+					levDistPct = 1;
+			}
 			return levDistPct;
 		}
         public static float SimilarText(this string s, string t)

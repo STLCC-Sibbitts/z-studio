@@ -66,8 +66,12 @@ namespace ZStudio
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mniToolsOptionsPreferences = new System.Windows.Forms.ToolStripMenuItem();
 			this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gradeTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.refreshSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gradeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gradeSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +95,6 @@ namespace ZStudio
 			this.tabRubric = new System.Windows.Forms.TabPage();
 			this.txtDescription = new System.Windows.Forms.RichTextBox();
 			this.zExcelViewer = new ZGUI.ZExcelViewer();
-			this.refreshSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zStatus.SuspendLayout();
 			this.mnuMain.SuspendLayout();
 			this.scPanel.SuspendLayout();
@@ -389,15 +392,26 @@ namespace ZStudio
 			// 
 			// optionsToolStripMenuItem
 			// 
+			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniToolsOptionsPreferences});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.optionsToolStripMenuItem.Text = "&Options";
+			// 
+			// mniToolsOptionsPreferences
+			// 
+			this.mniToolsOptionsPreferences.Name = "mniToolsOptionsPreferences";
+			this.mniToolsOptionsPreferences.Size = new System.Drawing.Size(135, 22);
+			this.mniToolsOptionsPreferences.Text = "Preferences";
+			this.mniToolsOptionsPreferences.Click += new System.EventHandler(this.mniToolsOptionsPreferences_Click);
 			// 
 			// testToolStripMenuItem
 			// 
 			this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gradeTaskToolStripMenuItem,
-            this.refreshSubmissionToolStripMenuItem});
+            this.refreshSubmissionToolStripMenuItem,
+            this.gradeSubmissionToolStripMenuItem,
+            this.gradeReportToolStripMenuItem});
 			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
 			this.testToolStripMenuItem.ShortcutKeyDisplayString = "";
 			this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -411,6 +425,27 @@ namespace ZStudio
 			this.gradeTaskToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
 			this.gradeTaskToolStripMenuItem.Text = "Grade Task";
 			this.gradeTaskToolStripMenuItem.Click += new System.EventHandler(this.gradeTaskToolStripMenuItem_Click);
+			// 
+			// refreshSubmissionToolStripMenuItem
+			// 
+			this.refreshSubmissionToolStripMenuItem.Name = "refreshSubmissionToolStripMenuItem";
+			this.refreshSubmissionToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.refreshSubmissionToolStripMenuItem.Text = "Refresh Submission";
+			this.refreshSubmissionToolStripMenuItem.Click += new System.EventHandler(this.refreshSubmissionToolStripMenuItem_Click);
+			// 
+			// gradeReportToolStripMenuItem
+			// 
+			this.gradeReportToolStripMenuItem.Name = "gradeReportToolStripMenuItem";
+			this.gradeReportToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.gradeReportToolStripMenuItem.Text = "Grade Report";
+			this.gradeReportToolStripMenuItem.Click += new System.EventHandler(this.gradeReportToolStripMenuItem_Click);
+			// 
+			// gradeSubmissionToolStripMenuItem
+			// 
+			this.gradeSubmissionToolStripMenuItem.Name = "gradeSubmissionToolStripMenuItem";
+			this.gradeSubmissionToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.gradeSubmissionToolStripMenuItem.Text = "Grade Submission";
+			this.gradeSubmissionToolStripMenuItem.Click += new System.EventHandler(this.gradeSubmissionToolStripMenuItem_Click);
 			// 
 			// mnuWindow
 			// 
@@ -688,13 +723,6 @@ namespace ZStudio
 			this.zExcelViewer.TabIndex = 0;
 			this.zExcelViewer.WorkbookLoaded += new System.EventHandler<System.Windows.Forms.WebBrowserDocumentCompletedEventArgs>(this.zExcelViewer_WorkbookLoaded);
 			// 
-			// refreshSubmissionToolStripMenuItem
-			// 
-			this.refreshSubmissionToolStripMenuItem.Name = "refreshSubmissionToolStripMenuItem";
-			this.refreshSubmissionToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-			this.refreshSubmissionToolStripMenuItem.Text = "Refresh Submission";
-			this.refreshSubmissionToolStripMenuItem.Click += new System.EventHandler(this.refreshSubmissionToolStripMenuItem_Click);
-			// 
 			// ZExplorer
 			// 
 			this.AllowDrop = true;
@@ -799,6 +827,9 @@ namespace ZStudio
 		private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gradeTaskToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem refreshSubmissionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem mniToolsOptionsPreferences;
+		private System.Windows.Forms.ToolStripMenuItem gradeReportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem gradeSubmissionToolStripMenuItem;
 	}
 }
 

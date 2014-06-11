@@ -20,6 +20,7 @@ using System.Configuration;
 
 //using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
+using ZLib;
 using ZLib.ZRubric;
 using ZGUI;
 using Excel2Json;
@@ -37,7 +38,7 @@ namespace ZStudio
 #if USE_THIS
 		private ZExcel m_rubricExcel = null;
 #endif
-		private ZExcel m_submissionExcel = null;
+		private ZExcelToJson m_submissionExcel = null;
 
 		public StatusStrip statusStrip
 		{
@@ -302,6 +303,78 @@ namespace ZStudio
 		{
 			// save whatever is in the associated submission and refresh submission file
 			// borrow code from test project
+			string submission = m_submissionExcel.SaveSubmission();
+			if ( m_rubric != null )
+				m_rubric.submission = submission;
+			
+		}
+
+		private void mniToolsOptionsPreferences_Click(object sender, EventArgs e)
+		{
+			frmPreferences userPreferences = new frmPreferences();
+			DialogResult result = userPreferences.ShowDialog(this);
+			// perform some action based on result
+			if (result == DialogResult.Cancel)
+				return;
+			// apply updates
+			ZRubric.SavePreferences();
+		}
+
+		private void gradeReportToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string currentFolder = "";
+			// see if we already have something loaded, if not, we're going to attach to whatever is running
+			if ( m_submissionExcel == null )
+			{
+				m_submissionExcel = new ZExcelToJson();
+				currentFolder = m_submissionExcel.currentFolder;
+			}
+			// if we don't already have a rubric loaded
+			if (m_rubric == null && currentFolder.Length > 0)
+			{
+				m_rubric = new ZRubric(currentFolder);
+			}
+			m_rubric.LoadSubmission(currentFolder + @"\gradedSubmission.json");
+			m_submissionExcel.MarkupSubmission(m_rubric, ZRubric.activeSubmission.taskDeductions);
+
+		}
+
+		private void gradeSubmissionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string currentFolder = "";
+			// see if we already have something loaded, if not, we're going to attach to whatever is running
+			// and assume that it has the rubric we're looking for
+			if (m_submissionExcel == null)
+			{
+				m_submissionExcel = new ZExcelToJson();
+				currentFolder = m_submissionExcel.currentFolder;
+			}
+			// if we don't already have a rubric loaded, load it now
+			if (m_rubric == null)
+			{
+				m_rubric = new ZRubric(currentFolder);
+			}
+			// load whatever keys we have
+            DialogResult refreshSubmission = System.Windows.Forms.DialogResult.No;
+            refreshSubmission = MessageBox.Show("Refresh submission from current Excel file?", "Refresh submission", MessageBoxButtons.YesNo);
+			if (refreshSubmission == System.Windows.Forms.DialogResult.OK)
+			{
+				if (m_rubric.LoadKeys())
+				{
+					if (m_submissionExcel != null)
+					{
+						string doc = m_submissionExcel.SaveSubmission();
+						m_rubric.submission = doc;
+					}
+					else
+						m_rubric.LoadSubmission(currentFolder + @"\submission.json");
+				}
+			}
+			else if (m_rubric.LoadKeys())	// make sure keys get loaded
+				m_rubric.LoadSubmission(currentFolder + @"\submission.json");
+
+			m_rubric.GradeSubmission();
+			m_rubric.SaveGradedSubmission(currentFolder + @"\gradedSubmission.json");
 		}
 		#region dragDrop
 		//private void tvJson_DoubleClick(object sender, EventArgs e)

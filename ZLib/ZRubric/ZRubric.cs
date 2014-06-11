@@ -419,6 +419,61 @@ namespace ZLib.ZRubric
 			}
 			return saveGradedSubmission;
 		}
+		public bool ZLiteralDeltaHandler(ZExprDeltaEventArgs zExprDeltaEventArgs)
+		{
+			//			ZPreference zPref =  rubric.project.preferences.content["Literal"]["Typos"];
+			bool allowed = false;
+			//allowed = true;
+			string tagValue = "";
+			ZExprNode foundNode = zExprDeltaEventArgs.zExprDelta.rExprNode;
+			ZExprNode expectedNode = zExprDeltaEventArgs.zExprDelta.lExprNode;
+			if (expectedNode.isTagged)
+			{
+				tagValue = expectedNode.tag;
+				if (expectedNode.isLiteral)
+				{
+					// now we need to check to see the distance should be checked
+					int levDist = expectedNode.text.LevenshteinDistance(foundNode.text);
+					string soundsLikeDiffs =  SoundsLike.diffs;
+					decimal levDistPct = expectedNode.text.LevDistPct(foundNode.text);
+					if (levDist <= 2 || levDistPct <= .10M)
+						allowed = true;
+					//txtOut.Text += string.Format("expectedText: [{3}], foundText: [{4}], levDist {0}, " 
+					//	+ "levDistPct: [{1:n2}], allowed: [{2}]" + Environment.NewLine,
+					//		levDist, levDistPct, allowed, expectedNode.text, foundNode.text);
+				}
+				else if (foundNode.isFunctionArg)
+				{
+					ZExprNode zFunNode = foundNode.parent;
+				}
+			}
+			zExprDeltaEventArgs.zExprDelta.Allowed = allowed;
+
+			return allowed;
+		}
+
+		public bool ZExprDeltaHandler(ZExprDeltaEventArgs zExprDeltaEventArgs)
+		{
+			bool allowed = false;
+			//allowed = true;
+			string tagValue = "";
+			ZExprNode badNode = zExprDeltaEventArgs.zExprDelta.lExprNode;
+			if (badNode.isTagged)
+			{
+				tagValue = badNode.tag;
+				if (badNode.isFunction)
+				{
+				}
+				else if (badNode.isFunctionArg)
+				{
+					ZExprNode zFunNode = badNode.parent;
+				}
+			}
+			zExprDeltaEventArgs.zExprDelta.Allowed = allowed;
+
+			return allowed;
+		}
+
 		public void GradeSubmission()
 		{
 			double grade = project.totalPts;

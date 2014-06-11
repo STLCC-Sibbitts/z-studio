@@ -397,7 +397,32 @@ namespace ZLib.ZRubric
 			}
 			set { SetValue(Tags.Text, value); }
 		}
-        public ZTarget target
+		public ZSource source
+		{
+			get
+			{
+				JToken jToken = SelectToken(Tags.Source);
+				ZSource val = null;
+				if (jToken == null)
+				{
+					val = new ZSource();
+					(base.m_jToken as JObject).Add(Tags.Source, (JObject)val);
+				}
+				else
+					val = new ZSource(jToken as JObject);
+				return val;
+			}
+			set
+			{
+				JObject jVal = base.m_jToken[Tags.Source] as JObject;
+				// if we don't have it, add it
+				if (jVal == null)
+					(m_jToken as JObject).Add(Tags.Source, (JToken)value);
+				else
+					base.m_jToken[Tags.Source] = (JToken)value;
+			}
+		}
+		public ZTarget target
         {
             get
             {
@@ -646,6 +671,7 @@ namespace ZLib.ZRubric
 						GradeFormula();
 						break;
 					case ZTargetSource.Properties.FormulaR1C1:
+						GradeFormula();
 						break;
 					case ZTargetSource.Properties.Text:
 						GradeValue();
@@ -678,9 +704,13 @@ namespace ZLib.ZRubric
 			switch (mapping.action)
 			{
 				case ZMapping.Actions.Create:
-					GradeCreateFormula();
+					GradeCreateModifyFormula();
 					break;
 				case ZMapping.Actions.Modify:
+					GradeCreateModifyFormula();
+					break;
+				case ZMapping.Actions.Copy:
+					GradeCopyFormula();
 					break;
 			}
 		}
@@ -744,7 +774,7 @@ namespace ZLib.ZRubric
 
 		public void GradeCreateValue()
 		{
-			ZContent	submissionContent = target.content;
+			ZContent	submissionContent = target.content[0];
 			// start with the easiest thing first, if the values match, we're good
 			if ( submissionContent.value == answer.value )
 				return;
@@ -759,6 +789,7 @@ namespace ZLib.ZRubric
 
 			// preferences? allow equivalent
 			ZPreferences prefs = ZRubric.activePreferences;
+			// grab preference by mapping
 			ZThresholdPreference valuePreference = ZRubric.activePreferences.content.thresholdPreference(mapping.defaultScenarioPath) as ZThresholdPreference;
 			// make this part of the ZDeduction collection for evaluating this task
             string feedback = "";
@@ -838,29 +869,44 @@ namespace ZLib.ZRubric
             //TODO: update Typos for expression literal values
 
             ZScenario scenario = null;
+			ZPreference expressionPreference = null;
+			string prefDeltaName = zExprDeltaEventArgs.deltaName;
+			if ( prefDeltaName.Length > 0 )
+				expressionPreference = ZRubric.activePreferences.content.preference(prefDeltaName) as ZPreference;
+
             if (zExprDeltaEventArgs.scenario != null)
             {
                 scenario = zExprDeltaEventArgs.scenario;
-                scenario.remediation.feedback = string.Format(scenario.remediation.feedback, zExprDeltaEventArgs.zExprDelta.rExprNode.text,
+				// override deduction info?
+				if (expressionPreference != null)
+				{
+					if (allowed = expressionPreference.enabled)
+					{
+						scenario.deduction = expressionPreference.deduction;
+						scenario.remediation = expressionPreference.remediation;
+					}
+				}
+				scenario.remediation.feedback = string.Format(scenario.remediation.feedback, zExprDeltaEventArgs.zExprDelta.rExprNode.text,
                     zExprDeltaEventArgs.deltaName);
 
             }
             else
             {
-                ZExpressionPreference expressionPreference = null;  // ZRubric.activePreferences.content.expression[zExprDeltaEventArgs.deltaName];
                 scenario = new ZScenario();
                 scenario.name = zExprDeltaEventArgs.deltaName;
                 ZAnswer dfltAnswer = new ZAnswer();
                 scenario.answers.Add(dfltAnswer);
-                if (expressionPreference != null)
+                if (expressionPreference != null )
                 {
-                    allowed = expressionPreference.enabled;
-                    scenario.deduction = expressionPreference.deduction;
-                    scenario.remediation = expressionPreference.remediation;
+					if (allowed = expressionPreference.enabled)
+					{
+						scenario.deduction = expressionPreference.deduction;
+						scenario.remediation = expressionPreference.remediation;
+					}
                     // TODO - perform final feedback expansion such that it can reference properties
                     //			within the taskDeduction, may need to use special tokens
                     // include answer found in "Answers[]"
-                    feedback = expressionPreference.remediation.feedback;
+					feedback = expressionPreference.remediation.feedback.Replace("{_argName_}", "{0}").Replace("{_functionName_}", "{1}");
                 }
                 else
                 {
@@ -875,7 +921,7 @@ namespace ZLib.ZRubric
                 }
                 ZExprNode expectedNode = zExprDeltaEventArgs.zExprDelta.lExprNode;
                 ZExprNode foundNode = zExprDeltaEventArgs.zExprDelta.rExprNode;
-                string[] feedbackArgs = { foundNode.text, expectedNode.text };
+                string[] feedbackArgs = zExprDeltaEventArgs.feedbackArgs;	// { foundNode.text, expectedNode.text };
                 if (expectedNode.isTagged)
                 {
                     tagValue = expectedNode.tag;
@@ -884,7 +930,13 @@ namespace ZLib.ZRubric
                 scenario.remediation.feedback = string.Format(feedback, feedbackArgs);
                 scenario.remediation.tag = tagValue;
             }
-            // add the delta
+            // add the delta if some deduction
+			if (scenario.deduction.type == ZDeduction.Types.None)
+			{
+				zExprDeltaEventArgs.zExprDelta.Allowed = true;
+				return zExprDeltaEventArgs.zExprDelta.Allowed;	// if we match this scenario, it's allowed
+			}
+
             ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
             ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
 
@@ -903,10 +955,104 @@ namespace ZLib.ZRubric
 
 			return allowed;
 		}
-
-		public void GradeCreateFormula()
+		public void GradeCopyFormula()
 		{
-			ZContent	submissionContent = target.content;
+			// if we're copying a formula, or anything for that matter, we're going to have a series of targets
+			// as for the answer, that will be equal to the source content
+
+			List<ZContent> submissionContentList = target.content;
+			ZContent sourceContent = source.content;
+			string	sourceFormula = sourceContent.formulaR1C1;
+			ZExpr sourceExpr = new ZExpr(sourceFormula);
+
+			// preferences? allow equivalent
+			ZPreferences prefs = ZRubric.activePreferences;
+			// TODO: double-check to see if answers match and figure out if something different should be done??
+			foreach (ZContent submissionContent in submissionContentList)
+			{
+				// start with the easiest thing first, if the formula matches the expression, we're good
+				if (submissionContent.formula == answer.expression)
+					continue;
+				if ( submissionContent.formulaR1C1 == sourceFormula )
+					continue;
+				// depending on whether or not there are defined scenarios
+				// check other standard options based on preferences
+				// remove leading =
+
+				ZExpr submissionExpr = new ZExpr(submissionContent.formula);
+				string taggedExpr = answer.taggedExpression;
+				string altExpr = answer.altTaggedExpression;
+				string beginExpr = answer.begExpression;
+
+				ZExpr answerExpr = new ZExpr(answer.taggedExpression, this);
+				ZExpr altAnswerExpr = new ZExpr(answer.altTaggedExpression, this);
+				// need to do this more explicitly, than implicitly
+				// if we have scenarios, we will do straight-up comparisons through
+				// the first pass
+				if (zScenarios.Count == 0)
+				{
+					ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+					bool areEqual = ZExpr.Compare(answerExpr.rootNode, submissionExpr.rootNode, mapping.defaultScenarioPath);
+					return;
+				}
+				// disable it for now, we may change our minds
+				ZExpr.ExprDeltaHandler = null;
+
+				// now check through the scenarios if they exist, look for exact match
+				foreach (ZScenario scenario in zScenarios)
+				{
+					// need to account for scenario details
+					foreach (ZAnswer zAnswer in scenario.answers)
+					{
+						string exp = zAnswer.expression;
+						ZExpr scenarioExpr = new ZExpr(exp, this);
+						if (ZExpr.Compare(scenarioExpr, submissionExpr, scenario))
+						{
+							ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
+							ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
+							return;
+						}
+					}
+				}
+				// if we made it here, rerun the comparison and trigger delta
+				ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+				bool isEqual = ZExpr.Compare(answerExpr.rootNode, submissionExpr.rootNode, mapping.defaultScenarioPath);
+				if (!isEqual)
+				{
+					// check against the beginning value for this expression, if it's fine, fine
+					ZExpr begExpr = new ZExpr(answer.begExpression);
+					ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+					bool equalBegin = ZExpr.Compare(answerExpr.rootNode, begExpr.rootNode);
+					if (equalBegin)
+					{
+						return;
+					}
+
+					// make another sweep with the delta handler in place
+					// now check through the scenarios if they exist, look for exact match
+					foreach (ZScenario scenario in zScenarios)
+					{
+						// need to account for scenario details
+						foreach (ZAnswer zAnswer in scenario.answers)
+						{
+							string exp = zAnswer.expression;
+							ZExpr scenarioExpr = new ZExpr(exp, this);
+							if (ZExpr.Compare(scenarioExpr, submissionExpr, scenario))
+							{
+								ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
+								ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
+								return;
+							}
+						}
+					}
+				}
+			}
+			return;
+		}
+
+		public void GradeCreateModifyFormula()
+		{
+			ZContent	submissionContent = target.content[0];	// just grab the first one for now
 			// preferences? allow equivalent
 			ZPreferences prefs = ZRubric.activePreferences;
 			// TODO: double-check to see if answers match and figure out if something different should be done??
@@ -919,17 +1065,25 @@ namespace ZLib.ZRubric
 			// remove leading =
 
 			ZExpr submissionExpr = new ZExpr(submissionContent.formula);
+			string taggedExpr = answer.taggedExpression;
+			string altExpr = answer.altTaggedExpression;
+			string beginExpr = answer.begExpression;
+
 			ZExpr answerExpr = new ZExpr(answer.taggedExpression, this);
+			ZExpr altAnswerExpr = new ZExpr(answer.altTaggedExpression, this);
             // need to do this more explicitly, than implicitly
             // if we have scenarios, we will do straight-up comparisons through
             // the first pass
-            ZExpr.ExprDeltaHandler = null;
-            if (zScenarios.Count == 0)
-                ZExpr.ExprDeltaHandler =  ZExprDeltaHandler;
+			if (zScenarios.Count == 0)
+			{
+				ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+				bool areEqual = ZExpr.Compare(answerExpr.rootNode, submissionExpr.rootNode, mapping.defaultScenarioPath);
+				return;
+			}
+			// disable it for now, we may change our minds
+			ZExpr.ExprDeltaHandler = null;
 
-            if (answerExpr == submissionExpr || zScenarios.Count == 0)
-                return;
-            // now check through the scenarios if they exist
+            // now check through the scenarios if they exist, look for exact match
             foreach (ZScenario scenario in zScenarios)
             {
                 // need to account for scenario details
@@ -939,16 +1093,54 @@ namespace ZLib.ZRubric
                     ZExpr scenarioExpr = new ZExpr(exp, this);
                     if (ZExpr.Compare(scenarioExpr, submissionExpr, scenario) )
                     {
-                        ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
-                        ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
+						// no harm, no foul
+						if (scenario.deduction.type != ZDeduction.Types.None)
+						{
+							ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
+							ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
+						}
                         return;
                     }
                 }
             }
             // if we made it here, rerun the comparison and trigger delta
-            ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
-            bool areEqual = (answerExpr == submissionExpr);
-            return;
+            //ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+			bool isEqual = false;	// check it after ZExpr.Compare(answerExpr.rootNode, submissionExpr.rootNode, mapping.defaultScenarioPath);
+			if (!isEqual)
+			{
+				// check against the beginning value for this expression, if it's fine, fine
+				ZExpr begExpr = new ZExpr(answer.begExpression);
+				//Don't do this ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+				bool equalBegin = ZExpr.Compare(answerExpr.rootNode, begExpr.rootNode);
+				if ( equalBegin )
+				{
+					return;
+				}
+
+				// make another sweep with the delta handler in place
+				// now check through the scenarios if they exist, look for exact match
+				foreach (ZScenario scenario in zScenarios)
+				{
+					// need to account for scenario details
+					foreach (ZAnswer zAnswer in scenario.answers)
+					{
+						string exp = zAnswer.expression;
+						ZExpr scenarioExpr = new ZExpr(exp, this);
+						if (ZExpr.Compare(scenarioExpr, submissionExpr, scenario))
+						{
+							ZTaskDeduction taskDeduction = new ZTaskDeduction(this, scenario);
+							ZRubric.activeSubmission.taskDeductions.Add(taskDeduction);
+							return;
+						}
+					}
+				}
+			}
+			// if we get here, we'll engage the default scenario
+			ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
+			isEqual = ZExpr.Compare(answerExpr.rootNode, submissionExpr.rootNode, mapping.defaultScenarioPath);
+
+			return;
+#if false
 				//	// need to check each of the answers, there may be more than one required
 				//	Debug.Print(string.Format("Checking Scenario:[{0}], Notes:[{1}]",
 				//		scenario.name, scenario.notes));
@@ -977,6 +1169,7 @@ namespace ZLib.ZRubric
 				//	}
 				//}
 			//}
+#endif
 		}
         public bool isCorrectApplyFormatStyle(ZFormat submissionFormat, JProperty setting)
         {

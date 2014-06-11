@@ -266,6 +266,19 @@ namespace ZLib.ZRubric
 			}
 			set { objectiveMappings = value; }
 		}
+		public ZObjectiveResources Resources(int idx)
+		{
+			ZObjectiveResources val = null;
+			JToken jTok = SelectToken("ObjectiveResources");
+
+			//HACK: fix this later
+			JToken jResources = jTok.First.First;
+			if (jTok != null && jTok is JArray)
+			{
+				val = new ZObjectiveResources(jTok as JArray);
+			}
+			return val;
+		}
 		public ZObjectiveResources Resources(string resourceType)
 		{
 			ZObjectiveResources val = null;

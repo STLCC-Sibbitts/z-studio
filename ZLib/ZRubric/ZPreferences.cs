@@ -34,7 +34,21 @@ namespace ZLib.ZRubric
 		}
 		public int thresholdPct		// as a whole number
 		{
-			get { return 10; }
+			get
+			{
+				int retValue = 0;	// default value to return if none found
+				try
+				{
+					retValue = (int)get(MethodInfo.GetCurrentMethod());
+				}
+				catch (System.Exception)
+				{
+					retValue = 0;
+					set(MethodInfo.GetCurrentMethod(), retValue);
+				}
+				return retValue;
+			}
+			set { set(MethodInfo.GetCurrentMethod(), value); }
 		}
         public bool enabled
         {
@@ -554,6 +568,27 @@ namespace ZLib.ZRubric
 					zOpt = new ZContentPreferences(jTok as JObject);
 				else
 					zOpt = new ZThresholdPreference(jTok as JObject);
+			}
+			return zOpt;
+
+		}
+		public object preference(string preferencePath)
+		{
+			object zOpt = null;
+			JToken jTok =  SelectToken(preferencePath);
+			if (jTok != null)
+			{
+				//jTok = jTok.First.First;
+			}
+			if (jTok != null)
+			{
+				JToken jEnabled = jTok.SelectToken("Enabled");
+				jEnabled = jTok.Value<JToken>("Enabled");
+				// see if we have enabled as a property
+				if (jEnabled == null || jEnabled.Parent.Parent != jTok)
+					zOpt = new ZContentPreferences(jTok as JObject);
+				else
+					zOpt = new ZPreference(jTok as JObject);
 			}
 			return zOpt;
 

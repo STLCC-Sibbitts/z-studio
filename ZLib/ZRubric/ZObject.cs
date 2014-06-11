@@ -663,8 +663,8 @@ namespace ZLib.ZRubric
 				// I may change my mind on this in the event that it affects the grading feedback
 				if (stripTags)
 				{
-					val = ZTaskLocs.StrippedText(val);
-					val = ResolveStringValue(val);
+//					val = ZTaskLocs.StrippedText(val);
+					val = ResolveStringValue(val, true);
 				}
 			}
 			return val;
@@ -745,11 +745,13 @@ namespace ZLib.ZRubric
 		static string pathRefPattern		= @"(^\/(?<" + RXFields.PathRef			+ @">[^{\]]+))";
 		static string formatArgPattern		= @"(\{(?<"  + RXFields.FormatArg		+ @">[\d]+)\}$)";
 
-		public string ResolveStringValue(string stringValue)
+		public string ResolveStringValue(string stringValue, bool stripTags = false)
 		{
 			string value		= "";
 			if (stringValue == null)
 				return NULL_VALUE;
+			if (stripTags)
+				stringValue = ZTaskLocs.StrippedText(stringValue);
 			if (stringValue.Contains("{^Args"))
 				value = "";
 			JValue jValue		= null;
@@ -830,6 +832,12 @@ namespace ZLib.ZRubric
 							}
 							else
 								value = (jToken as JValue).ToString();
+							if (value.Contains("Context") || value.Contains("Employees"))
+							{
+								if ( stripTags )
+									value = ZTaskLocs.StrippedText(value);
+							}
+								
 							return value;
 #if false
 							int indexOfRest = prevStringValuePos + vm.Groups[RXFields.PathRef].Index + vm.Groups[RXFields.PathRef].Length + 1;
@@ -845,7 +853,7 @@ namespace ZLib.ZRubric
 									restOfIt = restOfIt.Substring( 1);
 								}
 								restOfIt = restOfIt.Substring(0,restOfIt.Length-1);	// TODO: fix issue if path is not the only thing here, assuming there is a trailing }
-								pathSuffix = ResolveStringValue(restOfIt);
+								pathSuffix = ResolveStringValue(restOfIt,stripTags);
 								// append the pathRef root
 								pathRef = value.Substring(2);
 								jToken = this.m_jToken.Root.SelectToken(pathRef);
@@ -1061,7 +1069,7 @@ namespace ZLib.ZRubric
 									varValue = ((ZToken)jToken).GetParentStringValue("ParentName");
 								}
 								else
-									varValue = ((ZToken)jToken).ResolveStringValue(varValue);
+									varValue = ((ZToken)jToken).ResolveStringValue(varValue, stripTags);
 							}
 							else
 							{
@@ -1088,7 +1096,7 @@ namespace ZLib.ZRubric
 										jToken = jToken.Parent;
 									while (jToken.Type != JTokenType.Object && jToken.Type != JTokenType.Array)
 										jToken = jToken.Parent;
-									varValue = ((ZToken)jToken).ResolveStringValue(varValue);
+									varValue = ((ZToken)jToken).ResolveStringValue(varValue, stripTags);
 								}
 								else if (varValue == "{^Text}" )
 								{
@@ -1099,7 +1107,7 @@ namespace ZLib.ZRubric
 									varValue = ((ZToken)jToken).GetParentStringValue("Text");
 								}
 								else
-									varValue = ResolveStringValue(varValue);
+									varValue = ResolveStringValue(varValue, stripTags);
 							}
 						}
 						// now we'll check to see if we are looking at an expression and extract parm values
@@ -1127,6 +1135,12 @@ namespace ZLib.ZRubric
 			{
 				value = stringValue;
 			}
+			if (value.Contains("Context") || value.Contains("Employees"))
+			{
+				if (stripTags)
+					value = ZTaskLocs.StrippedText(value);
+			}
+
 			return value;
 		}
 		public JValue GetSiblingValue(string propName)
@@ -1621,6 +1635,10 @@ namespace ZLib.ZRubric
 						JValue jVal = prop.Value as JValue;
 						val = jVal.Value.ToString();
 					}
+				}
+				else if (m_jToken is JObject)
+				{
+					val = GetStringValue("Value");
 				}
 				return val;
 			}

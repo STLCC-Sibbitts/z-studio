@@ -26,20 +26,76 @@ namespace ZLib.ZRubric
 		public ZSubmission(ZObject<ZSubmission> zToken) : base(zToken) { }
 		public ZSubmission(JToken jToken) : base(jToken) { }
 		public ZSubmission() { }
-		public ZContent GetContent(ZTarget target)
+		// List<ZContent>
+		public object GetContent(ZTarget target)
 		{
-			ZContent	content = null;
-			JToken	jTok = null;
+			List<ZContent> contentList = new List<ZContent>();
+			ZContent content = null;
+			JToken jTok = null;
+			JObject oRoot = m_jToken as JObject;
+			string path = "";
+			// need to iterate through the range of locations in the target, which is a range
+			ZCellRef cellRef = null;
+			ZRangeRef rangeRef = null;
+			string cellRange = target.location.address;
+			string txtOut = "";
+			if (ZRangeRef.TryParse(cellRange, out rangeRef))
+			{
+				txtOut += String.Format("Match success. Found range: '") + rangeRef.ToString() + "'" 
+					+ ", with " + rangeRef.Count + " cells in it."
+					+ Environment.NewLine;
+				foreach (ZCellRef cr in rangeRef)
+				{
+					path = ZLocation.cellPath( target.location.context, cr.ToAbsolute().ToString() ,target.type);
+					jTok = oRoot.SelectToken(path);	// .First.Value<JObject>();
+					if (jTok != null)
+					{
+						content = new ZContent((JObject)jTok);
+						contentList.Add(content);
+					}
+					txtOut += String.Format("  cell: '") + cr.ToAbsolute().ToString() + "'" + Environment.NewLine;
+				}
+			}
+			else if (ZCellRef.TryParse(cellRange, out cellRef))
+			{
+				txtOut += String.Format("Match success. Found cell: '") + cellRef.ToString() + "'" + Environment.NewLine;
+				path = ZLocation.cellPath(target.location.context, cellRef.ToAbsolute().ToString(), target.type);
+				jTok = oRoot.SelectToken(path);	// .First.Value<JObject>();
+				if (jTok != null)
+				{
+					content = new ZContent((JObject)jTok);
+					contentList.Add(content);
+				}
+			}
+			return contentList;
+		}
+		//public ZContent GetContent(ZTarget target)
+		//{
+		//	ZContent	content = null;
+		//	JToken	jTok = null;
+		//	JObject oRoot = m_jToken as JObject;
+		//	//JToken jTokKeys = oRoot.SelectToken("Keys");
+
+		//	string	path = string.Format("{0}.{1}", target.location.path, target.type);
+		//	jTok = oRoot.SelectToken(path);	// .First.Value<JObject>();
+		//	if ( jTok != null )
+		//		content = new ZContent((JObject)jTok);
+		//	return content;
+		//}
+		public ZContent GetContent(ZTargetSource target)
+		{
+			ZContent content = null;
+			JToken jTok = null;
 			JObject oRoot = m_jToken as JObject;
 			//JToken jTokKeys = oRoot.SelectToken("Keys");
 
-			string	path = string.Format("{0}.{1}", target.location.path, target.type);
+			string path = string.Format("{0}.{1}", target.location.path, target.type);
 			jTok = oRoot.SelectToken(path);	// .First.Value<JObject>();
-			if ( jTok != null )
+			if (jTok != null)
 				content = new ZContent((JObject)jTok);
 			return content;
 		}
-        public ZFormat GetFormat(ZTarget target)
+		public ZFormat GetFormat(ZTarget target)
         {
             ZFormat format = null;
             JToken jTok = null;

@@ -28,7 +28,11 @@ namespace ZGUI
         {
             InitializeComponent();
             m_initializing = true;
+			if ( ZRubric.activePreferences == null )
+				ZRubric.LoadPreferences();
             chkPartialCredit.Checked = ZRubric.activePreferences.partialCredit.enabled;
+			JObject jobj = ZRubric.activePreferences.content.SelectToken("Create.Value.Text") as JObject;
+			ZThresholdPreference createValue = new ZThresholdPreference( ZRubric.activePreferences.content.SelectToken("Create.Value.Text") as JObject);
             // initialize Rounding
             if (!ZRubric.activePreferences.rounding.enabled)
             {
@@ -186,16 +190,20 @@ namespace ZGUI
 		}
 		private void LoadGroupSettings(Control.ControlCollection controlCollection, object zPreference)
 		{
-		
+
+			Debug.Print("Loading Group control:" + controlCollection[0].Parent.Name);
 			object preferenceValue;
-			//Debug.Print("Group control:" + groupControl.Name);
 			foreach (Control control in controlCollection)
 			{
+				Debug.Print("LoadGroupSettings[" + control.Name + "]");
 				if (control.Tag == null)
 					continue;
 				ComboBox cboControl = null;
 				if ( control.Name.StartsWith("cbo") )
 					cboControl = control as ComboBox;
+				CheckBox cb = null;
+				if ( control.Name == "chkScenarioEnabled" )
+					cb = control as CheckBox;
 				// the tag will either be the name of the preference, or it will be the preference object itself
 				string tag = "";
 				preferenceValue = null;
@@ -209,8 +217,12 @@ namespace ZGUI
 					else if (zPreference is ZThresholdPreference)
 					{
 //						tag = groupControl.Tag + "." + tag;
-						if (tag == "Category" || tag == "Deduction")
+						if (tag == "Enabled" || tag == "Threshold")
+						{
 							tag = tag.ToString();
+							// preferenceValue = (zPreference as JToken).Value<JValue>(tag);
+						}
+						
 						//preferenceValue = (zPreference as JToken).Value<JValue>(tag);
 						preferenceValue = (zPreference as ZThresholdPreference).SelectToken(tag);
 						// if the preference value is null, we have a content preference?
@@ -220,7 +232,15 @@ namespace ZGUI
 					{
 						if (tag == "Category" || tag == "Deduction")
 							tag = tag.ToString();
-						preferenceValue = (controlCollection.Owner.Tag as JToken).Value<JValue>(tag);
+						JObject jobj = (controlCollection.Owner.Tag as JObject);
+						preferenceValue = jobj.Value<JValue>(tag);
+						if (preferenceValue == null)
+						{
+							JValue jval = new JValue("");
+							jobj.Add(tag,jval);
+							preferenceValue = jobj.Value<JValue>(tag);
+						}
+
 					}
 					control.Tag = preferenceValue;
 				}
@@ -252,6 +272,8 @@ namespace ZGUI
 				}
 				else if (control is RichTextBox)
 				{
+					if ( preferenceValue == null )
+						preferenceValue = "NFND";
 					(control as RichTextBox).Text = preferenceValue.ToString();
 				}
 				else if (control is ComboBox)
@@ -264,8 +286,9 @@ namespace ZGUI
 				else if (control is NumericUpDown)
 				{
 					NumericUpDown nud = (control as NumericUpDown);
-					(control as NumericUpDown).Value = int.Parse(preferenceValue.ToString());
-					control.Text = preferenceValue.ToString();
+					string nudValue = preferenceValue.ToString();
+					nud.Value = int.Parse(nudValue);
+					control.Text = nudValue;
 					nud.Refresh();
 				}
 				else if (control is GroupBox)
@@ -282,7 +305,9 @@ namespace ZGUI
 		private void LoadGroupSettings(GroupBox groupControl)
 		{
 			// go through each of the controls in this group
+			string groupTag = groupControl.Tag.ToString();
 			ZPreference zPreference = ZRubric.activePreferences[groupControl.Tag.ToString()];
+			Debug.Print("LoadGroupSettings - " + groupControl.Name + ", tag/pref[" + groupTag + "]");
 			LoadGroupSettings(groupControl.Controls, zPreference);
 		}
 		private void ResetGroupSettings(Control.ControlCollection controls)
