@@ -376,6 +376,22 @@ namespace ZStudio
 			m_rubric.GradeSubmission();
 			m_rubric.SaveGradedSubmission(currentFolder + @"\gradedSubmission.json");
 		}
+
+		private void mniProjectStepsInsertBefore_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void mniProjectStepsInsertAfter_Click(object sender, EventArgs e)
+		{
+			// figure out the currently active step, then add a new one and go from there
+
+		}
+
+		private void mniProjectStepsRemove_Click(object sender, EventArgs e)
+		{
+
+		}
 		#region dragDrop
 		//private void tvJson_DoubleClick(object sender, EventArgs e)
 		//{

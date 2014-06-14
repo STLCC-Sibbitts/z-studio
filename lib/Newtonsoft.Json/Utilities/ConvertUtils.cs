@@ -238,7 +238,7 @@ namespace Newtonsoft.Json.Utilities
 #if !(NET35 || NET20 || SILVERLIGHT)
           return TimeSpan.Parse((string) initialValue, CultureInfo.InvariantCulture);
 #else
-          return TimeSpan.Parse((string)initialValue);
+			return TimeSpan.Parse((string)initialValue, CultureInfo.CurrentCulture);
 #endif
       }
 

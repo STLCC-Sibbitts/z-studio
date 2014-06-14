@@ -70,8 +70,8 @@ namespace ZStudio
 			this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gradeTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.refreshSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.gradeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gradeSubmissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gradeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,19 +82,23 @@ namespace ZStudio
 			this.scPanel = new System.Windows.Forms.Panel();
 			this.scMainExplorer = new System.Windows.Forms.SplitContainer();
 			this.scLeft = new System.Windows.Forms.SplitContainer();
-			this.tvRubric = new ZGUI.TVRubric();
-			this.ctlZproperties = new ZGUI.ZPropertiesControl();
 			this.sc1 = new System.Windows.Forms.SplitContainer();
 			this.tcDetails = new System.Windows.Forms.TabControl();
 			this.tabStep = new System.Windows.Forms.TabPage();
-			this.zStepControl = new ZGUI.ZStepControl();
 			this.tabTask = new System.Windows.Forms.TabPage();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabScenario = new System.Windows.Forms.TabPage();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tabRubric = new System.Windows.Forms.TabPage();
 			this.txtDescription = new System.Windows.Forms.RichTextBox();
+			this.tvRubric = new ZGUI.TVRubric();
+			this.ctlZproperties = new ZGUI.ZPropertiesControl();
+			this.zStepControl = new ZGUI.ZStepControl();
 			this.zExcelViewer = new ZGUI.ZExcelViewer();
+			this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mniProjectStepsInsertBefore = new System.Windows.Forms.ToolStripMenuItem();
+			this.mniProjectStepsInsertAfter = new System.Windows.Forms.ToolStripMenuItem();
+			this.mniProjectStepsRemove = new System.Windows.Forms.ToolStripMenuItem();
 			this.zStatus.SuspendLayout();
 			this.mnuMain.SuspendLayout();
 			this.scPanel.SuspendLayout();
@@ -350,28 +354,30 @@ namespace ZStudio
 			// mnuProjectImportSteps
 			// 
 			this.mnuProjectImportSteps.Name = "mnuProjectImportSteps";
-			this.mnuProjectImportSteps.Size = new System.Drawing.Size(141, 22);
+			this.mnuProjectImportSteps.Size = new System.Drawing.Size(152, 22);
 			this.mnuProjectImportSteps.Text = "Import Steps";
 			this.mnuProjectImportSteps.Click += new System.EventHandler(this.mnuProjectImportSteps_Click);
 			// 
 			// stepsToolStripMenuItem
 			// 
 			this.stepsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importToolStripMenuItem});
+            this.importToolStripMenuItem,
+            this.insertToolStripMenuItem,
+            this.mniProjectStepsRemove});
 			this.stepsToolStripMenuItem.Name = "stepsToolStripMenuItem";
-			this.stepsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+			this.stepsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.stepsToolStripMenuItem.Text = "Steps";
 			// 
 			// importToolStripMenuItem
 			// 
 			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-			this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+			this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.importToolStripMenuItem.Text = "Import";
 			// 
 			// taskToolStripMenuItem
 			// 
 			this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
-			this.taskToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+			this.taskToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.taskToolStripMenuItem.Text = "Task";
 			// 
 			// toolsToolStripMenuItem
@@ -433,19 +439,19 @@ namespace ZStudio
 			this.refreshSubmissionToolStripMenuItem.Text = "Refresh Submission";
 			this.refreshSubmissionToolStripMenuItem.Click += new System.EventHandler(this.refreshSubmissionToolStripMenuItem_Click);
 			// 
-			// gradeReportToolStripMenuItem
-			// 
-			this.gradeReportToolStripMenuItem.Name = "gradeReportToolStripMenuItem";
-			this.gradeReportToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-			this.gradeReportToolStripMenuItem.Text = "Grade Report";
-			this.gradeReportToolStripMenuItem.Click += new System.EventHandler(this.gradeReportToolStripMenuItem_Click);
-			// 
 			// gradeSubmissionToolStripMenuItem
 			// 
 			this.gradeSubmissionToolStripMenuItem.Name = "gradeSubmissionToolStripMenuItem";
 			this.gradeSubmissionToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
 			this.gradeSubmissionToolStripMenuItem.Text = "Grade Submission";
 			this.gradeSubmissionToolStripMenuItem.Click += new System.EventHandler(this.gradeSubmissionToolStripMenuItem_Click);
+			// 
+			// gradeReportToolStripMenuItem
+			// 
+			this.gradeReportToolStripMenuItem.Name = "gradeReportToolStripMenuItem";
+			this.gradeReportToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.gradeReportToolStripMenuItem.Text = "Grade Report";
+			this.gradeReportToolStripMenuItem.Click += new System.EventHandler(this.gradeReportToolStripMenuItem_Click);
 			// 
 			// mnuWindow
 			// 
@@ -551,31 +557,6 @@ namespace ZStudio
 			this.scLeft.SplitterWidth = 3;
 			this.scLeft.TabIndex = 0;
 			// 
-			// tvRubric
-			// 
-			this.tvRubric.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tvRubric.Location = new System.Drawing.Point(0, 0);
-			this.tvRubric.Margin = new System.Windows.Forms.Padding(2);
-			this.tvRubric.Name = "tvRubric";
-			this.tvRubric.Size = new System.Drawing.Size(333, 353);
-			this.tvRubric.TabIndex = 0;
-			this.tvRubric.tcDetails = null;
-			this.tvRubric.zProps = null;
-			this.tvRubric.zRubric = null;
-			this.tvRubric.zStep = null;
-			// 
-			// ctlZproperties
-			// 
-			this.ctlZproperties.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ctlZproperties.Location = new System.Drawing.Point(0, 0);
-			this.ctlZproperties.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.ctlZproperties.Name = "ctlZproperties";
-			this.ctlZproperties.Size = new System.Drawing.Size(333, 333);
-			this.ctlZproperties.TabIndex = 0;
-			this.ctlZproperties.tvRubric = null;
-			this.ctlZproperties.zExcelViewer = null;
-			this.ctlZproperties.zToken = null;
-			// 
 			// sc1
 			// 
 			this.sc1.AllowDrop = true;
@@ -594,8 +575,10 @@ namespace ZStudio
 			// 
 			this.sc1.Panel2.AllowDrop = true;
 			this.sc1.Panel2.Controls.Add(this.zExcelViewer);
+			this.sc1.Panel2Collapsed = true;
+			this.sc1.Panel2MinSize = 0;
 			this.sc1.Size = new System.Drawing.Size(1253, 689);
-			this.sc1.SplitterDistance = 645;
+			this.sc1.SplitterDistance = 682;
 			this.sc1.SplitterWidth = 3;
 			this.sc1.TabIndex = 0;
 			// 
@@ -615,7 +598,7 @@ namespace ZStudio
 			this.tcDetails.Name = "tcDetails";
 			this.tcDetails.Padding = new System.Drawing.Point(0, 0);
 			this.tcDetails.SelectedIndex = 0;
-			this.tcDetails.Size = new System.Drawing.Size(1253, 645);
+			this.tcDetails.Size = new System.Drawing.Size(1253, 689);
 			this.tcDetails.TabIndex = 0;
 			// 
 			// tabStep
@@ -625,28 +608,9 @@ namespace ZStudio
 			this.tabStep.Location = new System.Drawing.Point(4, 4);
 			this.tabStep.Margin = new System.Windows.Forms.Padding(0);
 			this.tabStep.Name = "tabStep";
-			this.tabStep.Size = new System.Drawing.Size(1245, 636);
+			this.tabStep.Size = new System.Drawing.Size(1245, 680);
 			this.tabStep.TabIndex = 0;
 			this.tabStep.UseVisualStyleBackColor = true;
-			// 
-			// zStepControl
-			// 
-			this.zStepControl.AllowDrop = true;
-			this.zStepControl.AutoSize = true;
-			this.zStepControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.zStepControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.zStepControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.zStepControl.Location = new System.Drawing.Point(0, 0);
-			this.zStepControl.Margin = new System.Windows.Forms.Padding(0);
-			this.zStepControl.MinimumSize = new System.Drawing.Size(525, 138);
-			this.zStepControl.name = "";
-			this.zStepControl.Name = "zStepControl";
-			this.zStepControl.pts = "";
-			this.zStepControl.Size = new System.Drawing.Size(1245, 636);
-			this.zStepControl.step = "";
-			this.zStepControl.TabIndex = 0;
-			this.zStepControl.zExcelViewer = null;
-			this.zStepControl.zStep = null;
 			// 
 			// tabTask
 			// 
@@ -711,17 +675,92 @@ namespace ZStudio
 			this.txtDescription.TabIndex = 0;
 			this.txtDescription.Text = "";
 			// 
+			// tvRubric
+			// 
+			this.tvRubric.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tvRubric.Location = new System.Drawing.Point(0, 0);
+			this.tvRubric.Margin = new System.Windows.Forms.Padding(2);
+			this.tvRubric.Name = "tvRubric";
+			this.tvRubric.Size = new System.Drawing.Size(333, 353);
+			this.tvRubric.TabIndex = 0;
+			this.tvRubric.tcDetails = null;
+			this.tvRubric.zProps = null;
+			this.tvRubric.zRubric = null;
+			this.tvRubric.zStep = null;
+			// 
+			// ctlZproperties
+			// 
+			this.ctlZproperties.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ctlZproperties.Location = new System.Drawing.Point(0, 0);
+			this.ctlZproperties.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ctlZproperties.Name = "ctlZproperties";
+			this.ctlZproperties.Size = new System.Drawing.Size(333, 333);
+			this.ctlZproperties.TabIndex = 0;
+			this.ctlZproperties.tvRubric = null;
+			this.ctlZproperties.zExcelViewer = null;
+			this.ctlZproperties.zToken = null;
+			// 
+			// zStepControl
+			// 
+			this.zStepControl.AllowDrop = true;
+			this.zStepControl.AutoSize = true;
+			this.zStepControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.zStepControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.zStepControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.zStepControl.Location = new System.Drawing.Point(0, 0);
+			this.zStepControl.Margin = new System.Windows.Forms.Padding(0);
+			this.zStepControl.MinimumSize = new System.Drawing.Size(525, 138);
+			this.zStepControl.name = "";
+			this.zStepControl.Name = "zStepControl";
+			this.zStepControl.pts = "";
+			this.zStepControl.Size = new System.Drawing.Size(1245, 680);
+			this.zStepControl.step = "";
+			this.zStepControl.TabIndex = 0;
+			this.zStepControl.zExcelViewer = null;
+			this.zStepControl.zStep = null;
+			// 
 			// zExcelViewer
 			// 
 			this.zExcelViewer.AllowDrop = true;
+			this.zExcelViewer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.zExcelViewer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.zExcelViewer.fileName = "";
 			this.zExcelViewer.Location = new System.Drawing.Point(0, 0);
-			this.zExcelViewer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.zExcelViewer.Margin = new System.Windows.Forms.Padding(2);
 			this.zExcelViewer.Name = "zExcelViewer";
-			this.zExcelViewer.Size = new System.Drawing.Size(1253, 41);
+			this.zExcelViewer.Size = new System.Drawing.Size(1253, 4);
 			this.zExcelViewer.TabIndex = 0;
 			this.zExcelViewer.WorkbookLoaded += new System.EventHandler<System.Windows.Forms.WebBrowserDocumentCompletedEventArgs>(this.zExcelViewer_WorkbookLoaded);
+			// 
+			// insertToolStripMenuItem
+			// 
+			this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniProjectStepsInsertBefore,
+            this.mniProjectStepsInsertAfter});
+			this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
+			this.insertToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.insertToolStripMenuItem.Text = "Insert";
+			// 
+			// mniProjectStepsInsertBefore
+			// 
+			this.mniProjectStepsInsertBefore.Name = "mniProjectStepsInsertBefore";
+			this.mniProjectStepsInsertBefore.Size = new System.Drawing.Size(152, 22);
+			this.mniProjectStepsInsertBefore.Text = "Before";
+			this.mniProjectStepsInsertBefore.Click += new System.EventHandler(this.mniProjectStepsInsertBefore_Click);
+			// 
+			// mniProjectStepsInsertAfter
+			// 
+			this.mniProjectStepsInsertAfter.Name = "mniProjectStepsInsertAfter";
+			this.mniProjectStepsInsertAfter.Size = new System.Drawing.Size(152, 22);
+			this.mniProjectStepsInsertAfter.Text = "After";
+			this.mniProjectStepsInsertAfter.Click += new System.EventHandler(this.mniProjectStepsInsertAfter_Click);
+			// 
+			// mniProjectStepsRemove
+			// 
+			this.mniProjectStepsRemove.Name = "mniProjectStepsRemove";
+			this.mniProjectStepsRemove.Size = new System.Drawing.Size(152, 22);
+			this.mniProjectStepsRemove.Text = "Remove";
+			this.mniProjectStepsRemove.Click += new System.EventHandler(this.mniProjectStepsRemove_Click);
 			// 
 			// ZExplorer
 			// 
@@ -830,6 +869,10 @@ namespace ZStudio
 		private System.Windows.Forms.ToolStripMenuItem mniToolsOptionsPreferences;
 		private System.Windows.Forms.ToolStripMenuItem gradeReportToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gradeSubmissionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem insertToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem mniProjectStepsInsertBefore;
+		private System.Windows.Forms.ToolStripMenuItem mniProjectStepsInsertAfter;
+		private System.Windows.Forms.ToolStripMenuItem mniProjectStepsRemove;
 	}
 }
 

@@ -44,20 +44,23 @@ namespace ZGUI
 			this.excelBrowswer.CausesValidation = false;
 			this.excelBrowswer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.excelBrowswer.Location = new System.Drawing.Point(0, 0);
-			this.excelBrowswer.MinimumSize = new System.Drawing.Size(20, 20);
+			this.excelBrowswer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.excelBrowswer.MinimumSize = new System.Drawing.Size(15, 16);
 			this.excelBrowswer.Name = "excelBrowswer";
-			this.excelBrowswer.Size = new System.Drawing.Size(949, 421);
+			this.excelBrowswer.Size = new System.Drawing.Size(712, 342);
 			this.excelBrowswer.TabIndex = 1;
 			this.excelBrowswer.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.excelBrowswer_DocumentCompleted);
 			this.excelBrowswer.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.excelBrowswer_Navigated);
 			// 
 			// ZExcelViewer
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.Controls.Add(this.excelBrowswer);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "ZExcelViewer";
-			this.Size = new System.Drawing.Size(949, 421);
+			this.Size = new System.Drawing.Size(712, 342);
 			this.ResumeLayout(false);
 
 		}
