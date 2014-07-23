@@ -274,13 +274,17 @@ namespace ZStudio
 				if ((inStream = openFileDialog.OpenFile()) != null)
 				{
 					stepsTextFile = openFileDialog.FileName;
+					string projectName = Path.GetFileNameWithoutExtension(stepsTextFile);
 					inStream.Close();
 					// if we don't have a project yet, automatically create one
 					if (m_rubric == null)
 					{
-						NewRubric();
+						NewRubric( );
 					}
+					m_rubric.name = projectName;
+					m_rubric.project.name = projectName;
 					int steps = m_rubric.ImportSteps(stepsTextFile);
+					// use basename of file as name of project, by default
 					tvRubric.zRubric = m_rubric;
 					UpdateStudioTitle();
 					// MessageBox.Show("Imported " + steps.ToString() + " from " + stepsTextFile);

@@ -72,10 +72,11 @@ namespace ZLib.ZRubric
 		public ZStep(ZObject<ZStep> obj) : base(obj) { }
 		public ZStep(JObject obj) : base(obj) { }
 		public ZStep() { }
-		public ZStep(int stepNumber, string step)
+		public ZStep(int stepNumber, string stepText)
 		{
-			name = stepNumber.ToString();
-			this.step = step;
+			key = "{ParentID}";
+			name = "Step {ParentID}";
+			this.text = stepText;
 		}
 		private ZStepLocs m_stepLocs;
 		public ZStepLocs stepLocs
@@ -111,10 +112,12 @@ namespace ZLib.ZRubric
 			{
 				JToken jToken = SelectToken(ZTasks.itemTag);
 				ZTasks val = null; 
-				if (jToken == null)
+				if (jToken == null   )
 				{
+
 					val = new ZTasks();
-					(base.m_jToken as JObject).Add(ZTasks.itemTag, (JObject)val);
+					(base.m_jToken as JObject).Add(ZTasks.itemTag, (JArray)val);
+					jToken = SelectToken(ZTasks.itemTag);
 				}
 				else
 					val = new ZTasks((JArray)jToken);
@@ -161,7 +164,10 @@ namespace ZLib.ZRubric
 				return value; 
 			}
 			//TODO: embed tags in text
-			private set { set(MethodInfo.GetCurrentMethod(), value); }
+			private set 
+			{ 
+				set(MethodInfo.GetCurrentMethod(), value.Split('\n') as string[]); 
+			}
 		}
 		public double pts
 		{
@@ -196,6 +202,24 @@ namespace ZLib.ZRubric
 		public ZSteps(ZObjects<ZSteps, ZStep> zObject) : base(zObject) { }
 		public ZSteps(JArray jArray) : base(jArray) { }
 		public ZSteps() { }
+		public void Add(int stepNumber, ZStep step)
+		{
+			string key = stepNumber.ToString().PadLeft(2, '0');
+			ZStep theStep = this[key];	// see if we have one
+			JArray jArray = m_jToken as JArray;
+			if (theStep == null)
+			{
+				// for now, assume we have the array and we're inserting things in order
+				JProperty jProp = new JProperty(key, (JObject)step);
+				jArray.Add(new JObject(jProp));
+			}
+			else
+			{
+				//TODO: verify this at some point
+				throw new Exception(string.Format( "trying to add step that already exists[{0}]-[{1}]", stepNumber, step.text));
+			}
+
+		}
 		public new ZStep this[string key]
 		{
 			get

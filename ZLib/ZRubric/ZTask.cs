@@ -1345,7 +1345,7 @@ namespace ZLib.ZRubric
 	{
 		public ZTasks(ZObject<ZTask> zObject) : base(zObject) { }
 		public ZTasks(JArray jArray) : base(jArray) { }
-		public ZTasks()  { }
+		public ZTasks() : base(new JArray())  { }
 
 	}
 }

@@ -1,16 +1,186 @@
-{	
-	"Name":"rubric.zrst",
-	"Text":"rubric spreadsheet template",
-	"Type":"SpreadSheet",
-	"Worksheets":[],
-	"Pts":50,
-	"WeightCategories": 
-	[
-		{ "NCE":		{ "Weight":0.05, "Units":0, "Pts":2.5, "PtsPerUnit": 0.0 	}},
-		{ "Accuracy":	{ "Weight":0.15, "Units":0, "Pts":7.5, "PtsPerUnit": 0.0 	}},
-		{ "SLO":		{ "Weight":0.80, "Units":0, "Pts":40.0, "PtsPerUnit": 0.0 	}}
+{
+	"Project": {
+		"Name":"rubric.01",
+		"Text":"Excel rubric template",
+		"Ontology":"Excel2013",
+		"TotalPts":50,
+		"Allocations": [
+			{ "NCE": {
+				"Pct":0.10,
+				"Max":5,
+				"PPE":0.50
+			} },
+			{ "EE": {
+				"Pct":0.15,
+				"Max":7.5,
+				"PPE":1.0
+			} },
+			{ "LO": {
+				"Pct":0.75,
+				"Max":37.5,
+				"PPE":1.50
+			} }
+		],
+		"Preferences": {
+			"SkillLevels":{"Enabled":true},
+			"Coverages":{"Enabled":true},
+			"Difficulties":{"Enabled":true},
+			"Deductions":{"Enabled":true},
+			"PartialCredit":{"Enabled":true},
+			"Rounding":{"Enabled":true, "Factor":25 },
+			"Content2": {
+				"Typos":{"Enabled":true, "Threshold":1},
+				"Expressions": {
+					"AccuracyForRanges":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Inclusion of extraneous/empty cells in ranges should be avoided. Found range: '{0}' in expression: '{1}', does not match the requested range: '{2}'."
+						}
+					}
+				}
+			},
+			"Content": {
+				"Typos":{"Enabled":true, "Threshold":1},
+				"Literal":
+				[
+					{"String":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Requested literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for string literals as function output arguments."
+					}}
+				]
+				,"AccuracyForRangeCopy":{
+					"Enabled":true,
+					"Deduction" : {
+						"Type" : "Moderate",
+						"Category" : "EE"
+					},
+					"Remediation": {
+						"Category" : "EE",
+						"Feedback" : "Incomplete copy of range. Partial copying of range, found content copied to: '{0}' instead of: '{1}'."
+					}
+				},
+				"Expressions": {
+					"AccuracyForRanges":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Inclusion of extraneous/empty cells in ranges should be avoided. Found range: '{0}' in expression: '{1}', does not match the requested range: '{2}'."
+						}
+					},
+					"AllowDefaultValueEntry":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "None",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Specifying the {0} was not required, review {1}"
+						},
+						"Notes" : "How to treat entry of default values in functions when not requested to do so."
+					},
+					"AccuracyForNumericLiteralOutputValue":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Requested literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for numeric literals as function output arguments. May need to define threshold."
+					},
+					"AccuracyForStringLiteralOutputValue":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Minor",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "NCE",
+							"Feedback" : "Requested literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for string literals as function output arguments."
+					},
+					"AccuracyForNumericLiteralInputArguments":{
+						"Enabled":true,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Requested numeric literal value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for numeric literals as input function arguments, provided resulting value is correct."
+					},
+					"AccuracyForStringLiteralInputArguments":{
+						"Enabled":true,
+						"Threshold":1,
+						"Deduction" : {
+							"Type" : "Moderate",
+							"Category" : "EE"
+						},
+						"Remediation": {
+							"Category" : "EE",
+							"Feedback" : "Requested string literal input value '{0}' entered incorrectly '{1}'. "
+						},
+						"Notes" : "How to treat accuracy for string literals as input function arguments, provided resulting value is correct."
+					}
+				}
+			}
+		},
+		"Multipliers": {
+			"SkillLevels": [
+				{"Novice":1.0},
+				{"Beginner":1.25},
+				{"Intermediate":1.5},
+				{"Advanced":1.75},
+				{"Expert":2.0}
+			],
+			"Coverages": [
+				{"Review":1.0},
+				{"Normal":1.0}
+			],
+			"Difficulties": [
+				{"Easy":   0.5},
+				{"Normal":   1.0},
+				{"Hard":   1.5},
+				{"Challenging":   2.0}
+			],
+			"Deductions": [
+				{"None": 0.0},
+				{"Minor":0.25},
+				{"Moderate":0.50},
+				{"Major":0.75},
+				{"Full":1.00}
+			]
+		}
+	},
+	"Keys": [
+		{"placeHolder":null }
 	],
-	"File":"",
 	"Steps":
 	[
 	]

@@ -78,7 +78,10 @@ namespace ZLib.ZRubric
 		public ZStepLocs(string stepText)
 		{
 			stepLocs = new Dictionary<string,ZStepLoc>();
-			this.stepText = ParsedText(stepText);			
+			this.stepText = ParsedText(stepText);
+			// if we didn't get anything, just put the whole thing in, probably an import
+			if ( this.stepText.Length == 0)
+				this.stepText = stepText;
 		}
 		static string stepTaskPattern		= @"(?'preText'[^\[]*)(\[\{(?'key'[^\}]*)\})(?'text'[^\]]*)\](?'postText'[^\[]*)";
 		static string stepTagPattern		= @"(?'preText'[^<]*)(<\{(?'key'[^\}]*)\})(?'text'[^>]*)>(?'postText'[^<]*)";

@@ -1301,6 +1301,10 @@ namespace ZLib.ZRubric
 		{
 			SetValue(propName(myBase), value);
 		}
+		public void set(MethodBase myBase, string[] value)
+		{
+			SetValue(propName(myBase), value);
+		}
 		public void set(MethodBase myBase, object value)
 		{
 			SetValue(propName(myBase), value);
@@ -1320,6 +1324,18 @@ namespace ZLib.ZRubric
 		public void set(MethodBase myBase, double value)
 		{
 			SetValue(propName(myBase), value);
+		}
+		public void SetValue(string propName, string[] value)
+		{
+			JValue jVal = this[propName] as JValue;
+			// if we don't have a text attribute, add it
+			if (jVal == null)
+			{
+				JArray jArray = new JArray(value);
+				(m_jToken as JObject).Add(propName, jArray);
+			}
+			else
+				jVal.Value = value;
 		}
 		public void SetValue(string propName, object value)
 		{

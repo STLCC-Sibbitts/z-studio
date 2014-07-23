@@ -519,7 +519,7 @@ namespace ZLib.ZRubric
 						{
 							// we need to add this step
 							++stepsImported;
-							steps.Add(new ZStep(prevStepNumber, work));
+							steps.Add(prevStepNumber, new ZStep(prevStepNumber, work));
 						}
 						prevStepNumber = stepNumber;
 						work = lineElements[1];
@@ -537,7 +537,7 @@ namespace ZLib.ZRubric
 				// add the last step
 				if (work.Length > 0)
 				{
-					steps.Add(new ZStep(prevStepNumber, work));
+					steps.Add(prevStepNumber, new ZStep(prevStepNumber, work));
 				}
 			}
 			m_isDirty = true;
