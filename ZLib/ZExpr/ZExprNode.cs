@@ -133,8 +133,29 @@ namespace ZLib
 				child.parent = this;	// link child back to this node as its parent
 			}
 		}
+		public void Initialize(string text, string tag, bool isDefaultFunctionArgValue, int position = -1)
+		{
+			children = new List<ZExprNode>();
+			parent = null;
+			this.text = text;
+			this.tag = tag;
+			this.position = position;
+			this.isDefaultFunctionArgValue = isDefaultFunctionArgValue;
+			// we can do some node type detection, at least for bool and numeric literals
+			nodeType = ZNodeType.zUnknown;
+			if (Regex.IsMatch(text, ZExprPattern.boolLiteralPatterns))
+				nodeType = ZExprNode.ZNodeType.zBoolLiteral;
+			else if (Regex.IsMatch(text, ZExprPattern.numericLiteralPatterns))
+				nodeType = ZExprNode.ZNodeType.zNumericLiteral;
+		}
+		public ZExprNode(string text, string tag = "", int position = -1, bool isDefaultFunctionArgValue = false)
+		{
+			Initialize(text, tag, isDefaultFunctionArgValue, position);
+		}
 		public ZExprNode(string text, string tag = "", bool isDefaultFunctionArgValue = false)
 		{
+			Initialize(text, tag, isDefaultFunctionArgValue);
+#if false
 			children = new List<ZExprNode>();
 			parent = null;
 			this.text = text;
@@ -146,11 +167,13 @@ namespace ZLib
 				nodeType = ZExprNode.ZNodeType.zBoolLiteral;
 			else if (Regex.IsMatch(text, ZExprPattern.numericLiteralPatterns))
 				nodeType = ZExprNode.ZNodeType.zNumericLiteral;
+#endif
 		}
 		public ZExprNode parent;
 		public bool isDefaultFunctionArgValue;
 		public string text;
 		public string tag;		// this may get expanded to a full class, for now, it contains the instruction text associated with this node
+		public int position;			// if not available, -1
 		public bool isTagged
 		{
 			get

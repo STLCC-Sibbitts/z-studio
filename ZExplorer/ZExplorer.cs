@@ -144,7 +144,7 @@ namespace ZStudio
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			string initialDirectory = Properties.Settings.Default.lastDirUsed;
 			openFileDialog.InitialDirectory = initialDirectory;
-			openFileDialog.Filter = "rubric files (*.zrst)|*.zrst|txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			openFileDialog.Filter = "rubric files (*.json)|*.json|txt files (*.txt)|*.txt|All files (*.*)|*.*";
 			openFileDialog.FilterIndex = 1;
 			openFileDialog.RestoreDirectory = false;
 
@@ -174,9 +174,9 @@ namespace ZStudio
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			string initialDirectory = Properties.Settings.Default.lastDirUsed;
 			saveFileDialog.InitialDirectory = initialDirectory;
-			saveFileDialog.Filter = "rubric files (*.zrsf)|*.zrsf|txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			saveFileDialog.Filter = "rubric files (*.json)|*.json|txt files (*.txt)|*.txt|All files (*.*)|*.*";
 			saveFileDialog.AddExtension = true;
-			saveFileDialog.DefaultExt = "zrsf";
+			saveFileDialog.DefaultExt = "json";
 			saveFileDialog.FilterIndex = 1;
 			saveFileDialog.RestoreDirectory = false;
 

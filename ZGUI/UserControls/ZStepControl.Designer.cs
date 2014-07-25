@@ -29,11 +29,11 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -43,6 +43,11 @@
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.scTask = new System.Windows.Forms.SplitContainer();
 			this.dgTasks = new System.Windows.Forms.DataGridView();
+			this.colText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCategory = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.colDifficulty = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.colPts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colAction = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.scTaskDetails = new System.Windows.Forms.SplitContainer();
 			this.grpSource = new System.Windows.Forms.GroupBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -78,11 +83,6 @@
 			this.cmnuTarget = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.mniSubmission = new System.Windows.Forms.ToolStripMenuItem();
 			this.mniSubmissionSelect = new System.Windows.Forms.ToolStripMenuItem();
-			this.colText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCategory = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.colDifficulty = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.colPts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colAction = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.scStep)).BeginInit();
 			this.scStep.Panel2.SuspendLayout();
 			this.scStep.SuspendLayout();
@@ -181,6 +181,7 @@
 			this.txtStep.Size = new System.Drawing.Size(876, 186);
 			this.txtStep.TabIndex = 6;
 			this.txtStep.Text = "";
+			this.txtStep.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtStep_MouseClick);
 			this.txtStep.TextChanged += new System.EventHandler(this.txtStep_TextChanged);
 			this.txtStep.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtStep_MouseDoubleClick);
 			this.txtStep.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtStep_MouseDown);
@@ -236,7 +237,7 @@
 			this.scTask.Panel2.Controls.Add(this.scTaskDetails);
 			this.scTask.Panel2MinSize = 350;
 			this.scTask.Size = new System.Drawing.Size(1000, 500);
-			this.scTask.SplitterDistance = 138;
+			this.scTask.SplitterDistance = 137;
 			this.scTask.SplitterWidth = 5;
 			this.scTask.TabIndex = 1;
 			// 
@@ -258,7 +259,7 @@
 			this.dgTasks.Name = "dgTasks";
 			this.dgTasks.RowTemplate.Height = 24;
 			this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.dgTasks.Size = new System.Drawing.Size(1000, 138);
+			this.dgTasks.Size = new System.Drawing.Size(1000, 137);
 			this.dgTasks.TabIndex = 0;
 			this.dgTasks.EditModeChanged += new System.EventHandler(this.dgTasks_EditModeChanged);
 			this.dgTasks.CancelRowEdit += new System.Windows.Forms.QuestionEventHandler(this.dgTasks_CancelRowEdit);
@@ -286,6 +287,84 @@
 			this.dgTasks.MouseEnter += new System.EventHandler(this.dgTasks_MouseEnter);
 			this.dgTasks.MouseHover += new System.EventHandler(this.dgTasks_MouseHover);
 			// 
+			// colText
+			// 
+			this.colText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.colText.DataPropertyName = "Text";
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.colText.DefaultCellStyle = dataGridViewCellStyle1;
+			this.colText.HeaderText = "Text";
+			this.colText.MinimumWidth = 200;
+			this.colText.Name = "colText";
+			// 
+			// colCategory
+			// 
+			this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+			this.colCategory.DataPropertyName = "category";
+			dataGridViewCellStyle2.NullValue = "LO";
+			this.colCategory.DefaultCellStyle = dataGridViewCellStyle2;
+			this.colCategory.HeaderText = "Category";
+			this.colCategory.Items.AddRange(new object[] {
+            "",
+            "NCE",
+            "EE",
+            "LO"});
+			this.colCategory.MinimumWidth = 60;
+			this.colCategory.Name = "colCategory";
+			this.colCategory.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colCategory.Width = 69;
+			// 
+			// colDifficulty
+			// 
+			this.colDifficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.colDifficulty.DataPropertyName = "difficulty";
+			dataGridViewCellStyle3.NullValue = "Normal";
+			this.colDifficulty.DefaultCellStyle = dataGridViewCellStyle3;
+			this.colDifficulty.DividerWidth = 2;
+			this.colDifficulty.HeaderText = "Difficulty";
+			this.colDifficulty.Items.AddRange(new object[] {
+            "",
+            "Easy",
+            "Normal",
+            "Hard",
+            "Challenging"});
+			this.colDifficulty.MinimumWidth = 100;
+			this.colDifficulty.Name = "colDifficulty";
+			this.colDifficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colDifficulty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// colPts
+			// 
+			this.colPts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colPts.DataPropertyName = "pts";
+			dataGridViewCellStyle4.Format = "N2";
+			dataGridViewCellStyle4.NullValue = "0";
+			this.colPts.DefaultCellStyle = dataGridViewCellStyle4;
+			this.colPts.HeaderText = "Pts";
+			this.colPts.Name = "colPts";
+			this.colPts.ReadOnly = true;
+			this.colPts.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colPts.Width = 52;
+			// 
+			// colAction
+			// 
+			this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.colAction.DataPropertyName = "type";
+			dataGridViewCellStyle5.NullValue = "Create";
+			this.colAction.DefaultCellStyle = dataGridViewCellStyle5;
+			this.colAction.HeaderText = "Action";
+			this.colAction.Items.AddRange(new object[] {
+            "Copy",
+            "Create",
+            "Cut",
+            "Delete",
+            "Modify"});
+			this.colAction.MinimumWidth = 90;
+			this.colAction.Name = "colAction";
+			this.colAction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colAction.Width = 90;
+			// 
 			// scTaskDetails
 			// 
 			this.scTaskDetails.CausesValidation = false;
@@ -305,7 +384,7 @@
 			// 
 			this.scTaskDetails.Panel2.Controls.Add(this.tabsTaskProps);
 			this.scTaskDetails.Panel2MinSize = 595;
-			this.scTaskDetails.Size = new System.Drawing.Size(1000, 357);
+			this.scTaskDetails.Size = new System.Drawing.Size(1000, 358);
 			this.scTaskDetails.SplitterDistance = 400;
 			this.scTaskDetails.SplitterWidth = 5;
 			this.scTaskDetails.TabIndex = 1;
@@ -540,7 +619,7 @@
 			this.tabsTaskProps.Margin = new System.Windows.Forms.Padding(4);
 			this.tabsTaskProps.Name = "tabsTaskProps";
 			this.tabsTaskProps.SelectedIndex = 0;
-			this.tabsTaskProps.Size = new System.Drawing.Size(596, 357);
+			this.tabsTaskProps.Size = new System.Drawing.Size(596, 358);
 			this.tabsTaskProps.TabIndex = 0;
 			// 
 			// tabContent
@@ -557,7 +636,7 @@
 			this.tabContent.Margin = new System.Windows.Forms.Padding(4);
 			this.tabContent.Name = "tabContent";
 			this.tabContent.Padding = new System.Windows.Forms.Padding(4);
-			this.tabContent.Size = new System.Drawing.Size(588, 328);
+			this.tabContent.Size = new System.Drawing.Size(588, 329);
 			this.tabContent.TabIndex = 0;
 			this.tabContent.Tag = "Answer";
 			this.tabContent.Text = "Content";
@@ -638,7 +717,7 @@
 			this.tabFormat.Margin = new System.Windows.Forms.Padding(4);
 			this.tabFormat.Name = "tabFormat";
 			this.tabFormat.Padding = new System.Windows.Forms.Padding(4);
-			this.tabFormat.Size = new System.Drawing.Size(588, 331);
+			this.tabFormat.Size = new System.Drawing.Size(588, 332);
 			this.tabFormat.TabIndex = 1;
 			this.tabFormat.Text = "Format";
 			// 
@@ -685,84 +764,6 @@
 			this.mniSubmissionSelect.Size = new System.Drawing.Size(105, 22);
 			this.mniSubmissionSelect.Text = "Select";
 			this.mniSubmissionSelect.Click += new System.EventHandler(this.mniSubmissionSelect_Click);
-			// 
-			// colText
-			// 
-			this.colText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.colText.DataPropertyName = "Text";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.colText.DefaultCellStyle = dataGridViewCellStyle6;
-			this.colText.HeaderText = "Text";
-			this.colText.MinimumWidth = 200;
-			this.colText.Name = "colText";
-			// 
-			// colCategory
-			// 
-			this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-			this.colCategory.DataPropertyName = "category";
-			dataGridViewCellStyle7.NullValue = "LO";
-			this.colCategory.DefaultCellStyle = dataGridViewCellStyle7;
-			this.colCategory.HeaderText = "Category";
-			this.colCategory.Items.AddRange(new object[] {
-            "",
-            "NCE",
-            "EE",
-            "LO"});
-			this.colCategory.MinimumWidth = 60;
-			this.colCategory.Name = "colCategory";
-			this.colCategory.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colCategory.Width = 69;
-			// 
-			// colDifficulty
-			// 
-			this.colDifficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.colDifficulty.DataPropertyName = "difficulty";
-			dataGridViewCellStyle8.NullValue = "Normal";
-			this.colDifficulty.DefaultCellStyle = dataGridViewCellStyle8;
-			this.colDifficulty.DividerWidth = 2;
-			this.colDifficulty.HeaderText = "Difficulty";
-			this.colDifficulty.Items.AddRange(new object[] {
-            "",
-            "Easy",
-            "Normal",
-            "Hard",
-            "Challenging"});
-			this.colDifficulty.MinimumWidth = 100;
-			this.colDifficulty.Name = "colDifficulty";
-			this.colDifficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colDifficulty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			// 
-			// colPts
-			// 
-			this.colPts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colPts.DataPropertyName = "pts";
-			dataGridViewCellStyle9.Format = "N2";
-			dataGridViewCellStyle9.NullValue = "0";
-			this.colPts.DefaultCellStyle = dataGridViewCellStyle9;
-			this.colPts.HeaderText = "Pts";
-			this.colPts.Name = "colPts";
-			this.colPts.ReadOnly = true;
-			this.colPts.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colPts.Width = 52;
-			// 
-			// colAction
-			// 
-			this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.colAction.DataPropertyName = "type";
-			dataGridViewCellStyle10.NullValue = "Create";
-			this.colAction.DefaultCellStyle = dataGridViewCellStyle10;
-			this.colAction.HeaderText = "Action";
-			this.colAction.Items.AddRange(new object[] {
-            "Copy",
-            "Create",
-            "Cut",
-            "Delete",
-            "Modify"});
-			this.colAction.MinimumWidth = 90;
-			this.colAction.Name = "colAction";
-			this.colAction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colAction.Width = 90;
 			// 
 			// ZStepControl
 			// 

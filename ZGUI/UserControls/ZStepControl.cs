@@ -207,6 +207,13 @@ namespace ZGUI
 				Debug.WriteLine("clipboard has " + fmt + " data on it");
 			if (e.Data.GetDataPresent(DataFormats.SymbolicLink))
 				symLink = e.Data.GetData(DataFormats.SymbolicLink).ToString();
+			// see if this is coming from our step text
+			if ( sender.Equals(txtStep) )
+			{
+				// this is where we can get the information needed to generate the taskLoc information for this task
+
+			}
+
 			if (e.Data.GetDataPresent(DataFormats.Text))
 			{
 				e.Effect = DragDropEffects.Copy;
@@ -430,6 +437,7 @@ namespace ZGUI
 			}
 			else if (selectedText.Length > 0)
 			{
+				// this is where I need to figure out what has been selected from the control
 				txtStep.DoDragDrop(selectedText, DragDropEffects.Copy);
 			}
 			else
@@ -654,7 +662,7 @@ namespace ZGUI
 					Debug.Print(stuff);
 				}
 			}
-			if (!selectedTask)
+			if (!selectedTask && m_zStep.stepLocs.Values.Count > 0)
 			{
 				txtStep_MouseLeave(sender, e);
 			}
@@ -980,6 +988,17 @@ namespace ZGUI
 
 		private void txtStep_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
+
+		}
+
+		private void txtStep_MouseClick(object sender, MouseEventArgs e)
+		{
+			// if not right-click and selected text, asta
+			// if selected text is subset of a task
+			//		if is already a taskLoc 
+			//			modify content
+			// if selected text is not a task location, or subset of a task location, we have a new task
+			//		popup dialog box to gather task information and insert new task if desired
 
 		}
 

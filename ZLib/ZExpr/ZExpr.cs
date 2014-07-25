@@ -226,6 +226,7 @@ namespace ZLib
 			int		tagIdx0 = -1;
 			int		tagIdx1 = -1;
 			string	matchValue = "";
+			int		matchPosition = -1;
 			string	tag = "";
 			MatchCollection matches = Regex.Matches(expression, allPatterns, RegexOptions.IgnoreCase);
 			foreach (Match match in matches)
@@ -233,6 +234,7 @@ namespace ZLib
 				if ( !inTag )
 					tag = "";	// reset the tag 
 				matchValue = match.Value;
+				matchPosition = match.Index;
 				if (match.Groups.Count > 0)
 				{
 					try
@@ -290,7 +292,7 @@ namespace ZLib
 					continue;
 				}
 				// construct this node, then, adjust root node
-				ZExprNode node = new ZExprNode(matchValue,tag);
+				ZExprNode node = new ZExprNode(matchValue,tag,matchPosition);
 
 				// if we're in a group and we encounter a comma, add the current root node to
 				// the children of the current exprGroupNode and reset
