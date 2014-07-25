@@ -245,7 +245,7 @@ namespace TestStuff
             ZRubric.LoadFunctions();
             ZRubric.LoadPreferences();
 			ZRubric.LoadOntologies();
-			ZOntology excelOntology = ZRubric.activeOntologies["Excel2010"];
+			ZOntology excelOntology = ZRubric.activeOntologies["Excel2013"];
 			ZObjectives objectives = excelOntology.objectives;
 
 			ZObjective objective = objectives["EX281"];
@@ -474,6 +474,7 @@ namespace TestStuff
 			bool	equivalent = false;
 			string []tags = this.txtRubric.Text.Split('\n');
 			string []taggedExpression = this.txtStep.Text.Split('\n');
+			ZRubric.LoadFunctions();	// make sure these are loaded
 			if (taggedExpression.Length > 0 && tags.Length > 0)
 			{
 				ZExprNode taggedExprNode = ZExpr.Parse(taggedExpression, tags);
@@ -485,7 +486,6 @@ namespace TestStuff
 			// see if we are doing a comparison, ie there are two lines
 			if (formula.Contains("\n"))
 			{
-				ZRubric.LoadFunctions( );
 				// initialize the delta handler
 				ZExpr.ExprDeltaHandler = ZExprDeltaHandler;
 				lExprString = formula.Substring(0,formula.IndexOf("\n"));
@@ -508,16 +508,67 @@ namespace TestStuff
 			ZExprNode zNode = zExpr.rootNode;
 			int nodeCounter = 0;
 			txtOut.Text += String.Format("Input: '{0}', isExpression:{1}", formula, zNode.isExpression.ToString()) + Environment.NewLine;
+
+			// here's some code to process the function args
+#if false
+					// grab function args list and use it to iterate through the possible arguments
+					ZFunction zFunction = ZRubric.ZRubric.activeFunctions[lNode.text];
+					// iterate through each of the children and make sure they are equivalent
+					// iterate through the entire list
+					// TODO: create dictionary to link instructions to various elements, eventually use guids, for now, encoded text
+					// use the position of the child to grab the appropriate function arg
+					ZFunctionArg	zFunArg = null;
+					ZExprNode		defaultFunArgNode = null, lFunArgNode = null, rFunArgNode = null;
+					int				functionArgCount = zFunction.functionArgs.Count;
+					for (int funArgIdx = 0; funArgIdx < functionArgCount; ++funArgIdx)
+					{
+						// we can do some additional checking here now
+						zFunArg = zFunction.functionArgs[funArgIdx];
+						defaultFunArgNode = zFunArg.defaultExprNode;
+#endif
+			ZFunction zFunction = null;
+			ZFunctionArg zFunArg = null;
+			ZExprNode defaultFunArgNode = null, lFunArgNode = null, rFunArgNode = null;
+			int functionArgCount = -1;
+
+			SortedDictionary<int,string> exprNodes = new SortedDictionary<int,string>();
+
 			foreach (ZExprNode zExprNode in zNode.children)
 			{
+				if ( zExprNode.nodeType == ZExprNode.ZNodeType.zFunction)
+				{
+					zFunction = ZRubric.activeFunctions[zExprNode.text];
+					if (zFunction != null)
+						functionArgCount = zFunction.functionArgs.Count;
+				}
+				else
+					zFunction = null;
 				txtOut.Text += String.Format("   Node{0}: text:{1}, type:{2}",
 					nodeCounter++, zExprNode.text, zExprNode.nodeType.ToString()) + Environment.NewLine;
+				exprNodes.Add(zExprNode.position, zExprNode.text);
 				int childCounter = 0;
+				string childText = "";
 				foreach (ZExprNode childNode in zExprNode.children)
 				{
-					txtOut.Text += String.Format("      Node{0}: text:{1}, type:{2}/{3:D}, {4}:'{5}'",
-						childCounter++, childNode.text, childNode.nodeType.ToString(), childNode.nodeType,
-						(childNode.isExpression?"expr":"literal"),childNode.expression) + Environment.NewLine;
+					txtOut.Text += String.Format("      Node{0}: text:{1}, type:{2}/{3:D}, {4}:'{5}', pos:{6}",
+						childCounter, childNode.text, childNode.nodeType.ToString(), childNode.nodeType,
+						(childNode.isExpression?"expr":"literal"),childNode.expression, childNode.position) + Environment.NewLine;
+					childText = childNode.text;
+					if (zFunction != null)
+					{
+						zFunArg = zFunction.functionArgs[childCounter];
+						childText = zFunArg.name + ":" + childText;
+					}
+
+					exprNodes.Add(childNode.position, childText);
+					++childCounter;
+				}
+				for ( childCounter = 0; childCounter < exprNodes.Count; ++childCounter)
+				{
+					txtOut.Text += String.Format("      Node{0}: position:{1}, text:{2}",
+						childCounter, exprNodes.Keys.ElementAt(childCounter).ToString(),
+						exprNodes.Values.ElementAt(childCounter).ToString())  + Environment.NewLine; 
+
 				}
 			}
 			txtOut.Text += "======================================" + Environment.NewLine;
