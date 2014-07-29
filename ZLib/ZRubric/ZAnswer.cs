@@ -74,7 +74,10 @@ namespace ZLib.ZRubric
 		public string expression
 		{
 			get { return (string)get(MethodInfo.GetCurrentMethod()); }
-			set { set(MethodInfo.GetCurrentMethod(), value); }
+			set 
+			{ 
+				set(MethodInfo.GetCurrentMethod(), value); 
+			}
 		}
 		public string begExpression
 		{

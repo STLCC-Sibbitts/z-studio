@@ -126,6 +126,11 @@ namespace ZLib.ZRubric
 						tagColorIdx = 0;
 					stepLocs.Add(stepLoc.key, stepLoc);
 				}
+				// if we didn't have any embedded tags, we have no result
+				if ( results.Length == preTaskText.Length )
+				{
+					results += taskText;
+				}
 				taskLen		= results.Length - taskStart;
 				taskText	= results.Substring(taskStart);
 				stepLoc		= new ZStepLoc(taskKey, taskStart, taskLen, ZStepLoc.LocType.task);

@@ -65,6 +65,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmZTaskAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmZTaskAdd.Designer.cs">
+      <DependentUpon>frmZTaskAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MruStripMenu.cs" />
     <Compile Include="UserControls\TVRubric.cs">
       <SubType>Component</SubType>
@@ -102,6 +108,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmZTaskAdd.resx">
+      <DependentUpon>frmZTaskAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TVRubric.resx">
       <DependentUpon>TVRubric.cs</DependentUpon>

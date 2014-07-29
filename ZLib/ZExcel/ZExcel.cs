@@ -736,6 +736,73 @@ namespace Excel2Json
 			get { return zExcel.currentFolder; }
 			set { zExcel.currentFolder = value; }
 		}
+		public string activeSheetName
+		{
+			get 
+			{
+				Worksheet wkSheet = zExcel.mWorkbook.ActiveSheet as Worksheet;
+				return wkSheet.Name;
+			}
+		}
+		public string selectedAddress
+		{
+			get
+			{
+				Worksheet wkSheet = zExcel.mWorkbook.ActiveSheet as Worksheet;
+				string value = "";
+				// TODO: this will need to change once we start working with other stuff
+				object selectedObject = zExcel.mApp.Selection;
+				Type selectedObjectType = selectedObject.GetType();
+				if (selectedObjectType == typeof( Range) )
+				{
+					Range selectedRange = zExcel.mApp.Selection as Range;
+					value = selectedRange.Address.ToString();		 
+				}
+				return value;
+			}
+		}
+		public string activeCellAddress
+		{
+			get
+			{
+				string value = zExcel.mApp.ActiveCell.Address.ToString();
+				return value;
+			}
+		}
+		public string activeCellText
+		{
+			get
+			{
+				string value = "";
+				value = zExcel.mApp.ActiveCell.Value.ToString();
+				value = zExcel.mApp.ActiveCell.Value2.ToString();
+				return value;
+			}
+		}
+		public string activeCellFormula
+		{
+			get
+			{
+				string value = "";
+				if (zExcel.mApp.ActiveCell.HasFormula)
+				{
+					value = zExcel.mApp.ActiveCell.Formula.ToString();
+				}
+				return value;
+			}
+		}
+		public string activeCellFormulaR1C1
+		{
+			get
+			{
+				string value = "";
+				if (zExcel.mApp.ActiveCell.HasFormula)
+				{
+					value = zExcel.mApp.ActiveCell.FormulaR1C1.ToString();
+				}
+				return value;
+			}
+		}
 		public int stepTaskCounter;
 		public void ToJson()
 		{

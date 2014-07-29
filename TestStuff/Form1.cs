@@ -1309,5 +1309,24 @@ namespace TestStuff
 					txtRubric.Select(stepLoc.startPos,stepLoc.length);
 			}
 		}
+		ZExcelToJson zExcelToJson = null;
+
+		private void cmdAddTask_Click(object sender, EventArgs e)
+		{
+			if ( zExcelToJson == null )
+				zExcelToJson = new ZExcelToJson();
+			// create step from txtStep first
+			string taskID	= "task0";
+			string taskKey	= "a";
+			ZStep zStep = new ZStep(6, "[{" + taskID + "}" + txtStep.Text + "]");
+			ZGUI.UserControls.frmZTaskAdd frmTaskAdd = new ZGUI.UserControls.frmZTaskAdd(zExcelToJson, zStep, taskKey, taskID );
+			DialogResult dr = frmTaskAdd.ShowDialog(this);
+			string value = "";
+			if ( dr == System.Windows.Forms.DialogResult.OK )
+			{
+				value = frmTaskAdd.targetLocationAddress;
+				value = frmTaskAdd.targetLocationContext;
+			   }
+		}
 	}
 }

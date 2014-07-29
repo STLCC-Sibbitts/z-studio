@@ -335,7 +335,11 @@ namespace ZLib.ZRubric
 		{ 
 		}
 		public ZTask(JObject jObj) : base(jObj) { }
-		public ZTask() { }
+		//public ZTask() { }
+		// use default value for name and construct text from the id
+		public ZTask()	: base(new JObject())		
+		{
+		}
 		// TODO: not sure if I want to do this initialize here or not
 		public override void Initialize()
 		{
@@ -395,7 +399,10 @@ namespace ZLib.ZRubric
 				string value = GetStringValue(Tags.Text); 
 				return value;
 			}
-			set { SetValue(Tags.Text, value); }
+			set 
+			{ 
+				SetValue(Tags.Text, value); 
+			}
 		}
 		public ZSource source
 		{
@@ -1346,6 +1353,31 @@ namespace ZLib.ZRubric
 		public ZTasks(ZObject<ZTask> zObject) : base(zObject) { }
 		public ZTasks(JArray jArray) : base(jArray) { }
 		public ZTasks() : base(new JArray())  { }
+		// Allow new tasks to be added by knowing their key/ParentID used for lookup and the id of the task
+		// from within the step
+		public ZTask Add(string key, string id)
+		{
+			ZTask	newTask	= null;
+			JArray	jArray	= m_jToken as JArray;
+			
+			foreach(JObject prop in jArray)
+			{
+				if ( (prop.Properties().First() as JProperty).Name == key)
+				{
+					//TODO: verify this at some point
+					throw new Exception(string.Format("trying to add step that already exists[{0}]-[{1}]", key, id));
+				}
+			}
+			newTask = new ZTask();
+			// for now, assume we have the array and we're inserting things in order
+			JProperty jProp = new JProperty(key, (JObject)newTask);
+			jArray.Add(new JObject(jProp));
+			newTask.name = "{^Name}{ParentID}";
+			newTask.text = "{^Step." + id + "}";
+			string someText = newTask.taggedText;
+			someText = newTask.text;
+			return newTask;
+		}
 
 	}
 }

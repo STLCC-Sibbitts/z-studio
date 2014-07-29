@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTester));
 			this.txtStep = new System.Windows.Forms.RichTextBox();
 			this.cmdParse = new System.Windows.Forms.Button();
 			this.txtOut = new System.Windows.Forms.TextBox();
@@ -47,6 +48,7 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.tvTestCases = new System.Windows.Forms.TreeView();
 			this.btnPreferences = new System.Windows.Forms.Button();
+			this.cmdAddTask = new System.Windows.Forms.Button();
 			this.grpParseOpts.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -57,7 +59,7 @@
 			this.txtStep.Name = "txtStep";
 			this.txtStep.Size = new System.Drawing.Size(822, 87);
 			this.txtStep.TabIndex = 0;
-			this.txtStep.Text = "///<{0,5}\'Average Salary>///\n\'Average Salry";
+			this.txtStep.Text = resources.GetString("txtStep.Text");
 			// 
 			// cmdParse
 			// 
@@ -261,11 +263,22 @@
 			this.btnPreferences.UseVisualStyleBackColor = true;
 			this.btnPreferences.Click += new System.EventHandler(this.btnPreferences_Click);
 			// 
+			// cmdAddTask
+			// 
+			this.cmdAddTask.Location = new System.Drawing.Point(1076, 226);
+			this.cmdAddTask.Name = "cmdAddTask";
+			this.cmdAddTask.Size = new System.Drawing.Size(75, 23);
+			this.cmdAddTask.TabIndex = 11;
+			this.cmdAddTask.Text = "Add Task";
+			this.cmdAddTask.UseVisualStyleBackColor = true;
+			this.cmdAddTask.Click += new System.EventHandler(this.cmdAddTask_Click);
+			// 
 			// frmTester
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1205, 608);
+			this.Controls.Add(this.cmdAddTask);
 			this.Controls.Add(this.btnPreferences);
 			this.Controls.Add(this.tvTestCases);
 			this.Controls.Add(this.label3);
@@ -307,6 +320,7 @@
         private System.Windows.Forms.Button btnPreferences;
 		private System.Windows.Forms.RadioButton radReportIt;
 		private System.Windows.Forms.RadioButton radStepTags;
+		private System.Windows.Forms.Button cmdAddTask;
 	}
 }
 

@@ -117,7 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="txtStep.Text" xml:space="preserve">
-    <value>In cell B5, create a formula using the VLOOKUP function to look up the value of cell B4 (in the current worksheet) in the range A3:B10 on the Room List worksheet and then return the value in the second column of that range. Use FALSE as value of the Range_Lookup argument to specify an exact match lookup.</value>
-  </data>
 </root>

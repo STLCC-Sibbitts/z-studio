@@ -281,10 +281,6 @@ namespace ZGUI
 			e.Effect = DragDropEffects.All;
 		}
 
-		private void dgTasks_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-		{
-		}
-
 		private void dgTasks_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
 		}

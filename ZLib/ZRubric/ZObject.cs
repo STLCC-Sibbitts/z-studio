@@ -376,8 +376,23 @@ namespace ZLib.ZRubric
 		{
 			get
 			{
-				JArray items = m_jToken as JArray;
-				JToken jTok = items.SelectToken(itemTag + "[" + tag + "]");
+				JArray items	= m_jToken as JArray;
+				JToken jTok		= null;
+				// better make sure we have an array here
+				if (items == null)
+				{
+					if (m_jToken == null)
+					{
+						items = new JArray();
+						m_jToken = items;
+					}
+					else
+					{
+						// this means we have something other than an array, which is not good
+						throw(new Exception("Looking for array element [" + tag + "] in non-array!"));
+					}
+				}
+				jTok = items.SelectToken(itemTag + "[" + tag + "]");
 				if (jTok == null)
 					jTok = items.Parent.SelectToken(itemTag + "[" + tag + "]");
 				if (jTok == null)
@@ -710,13 +725,16 @@ namespace ZLib.ZRubric
 		{
 			JToken value = null;
 			// see if we're grabbing at the root level or relative to current position
-			if (tokenPath.StartsWith("/"))
+			if ( m_jToken.HasValues)
 			{
-				JToken jTok = m_jToken.Root;
-				value = jTok.SelectToken(tokenPath.Substring(1));
+				if (tokenPath.StartsWith("/"))
+				{
+					JToken jTok = m_jToken.Root;
+					value = jTok.SelectToken(tokenPath.Substring(1));
+				}
+				else
+					value = m_jToken.SelectToken(tokenPath);
 			}
-			else
-				value = m_jToken.SelectToken(tokenPath);
 
 			return value;
 		}
@@ -1273,7 +1291,7 @@ namespace ZLib.ZRubric
 		}
 		public void SetValue(string propName, string value)
 		{
-			JValue jVal = this[propName] as JValue;
+			JValue jVal = (this.m_jToken.HasValues ? this.SelectToken(propName) as JValue : null); // this[propName] as JValue;
 			// if we don't have a text attribute, add it
 			if (jVal == null)
 			{
@@ -1622,16 +1640,17 @@ namespace ZLib.ZRubric
 			}
 			set
 			{
-				JValue jVal = this[Tags.Name] as JValue;
-				// if we don't have a text attribute, add it
-				if (jVal == null)
-				{
-					if (m_jToken == null)
-						m_jToken = new JObject();
-					(m_jToken as JObject).Add(Tags.Name, value);
-				}
-				else
-					jVal.Value = value;
+				SetValue(Tags.Name,value);
+				//JValue jVal = this[Tags.Name] as JValue;
+				//// if we don't have a text attribute, add it
+				//if (jVal == null)
+				//{
+				//	if (m_jToken == null)
+				//		m_jToken = new JObject();
+				//	(m_jToken as JObject).Add(Tags.Name, value);
+				//}
+				//else
+				//	jVal.Value = value;
 			}
 		}
 		// TODO: resolve Value with embedded braces { }s

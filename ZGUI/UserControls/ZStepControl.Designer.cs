@@ -29,11 +29,11 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
 			this.txtSourceLocationContext = new System.Windows.Forms.RichTextBox();
 			this.lblSourceLocationContext = new System.Windows.Forms.Label();
 			this.grpTarget = new System.Windows.Forms.GroupBox();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.cboProperty = new System.Windows.Forms.ComboBox();
 			this.lblTargetProperty = new System.Windows.Forms.Label();
 			this.cboTargetType = new System.Windows.Forms.ComboBox();
 			this.lblTargetType = new System.Windows.Forms.Label();
@@ -83,6 +83,8 @@
 			this.cmnuTarget = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.mniSubmission = new System.Windows.Forms.ToolStripMenuItem();
 			this.mniSubmissionSelect = new System.Windows.Forms.ToolStripMenuItem();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.scStep)).BeginInit();
 			this.scStep.Panel2.SuspendLayout();
 			this.scStep.SuspendLayout();
@@ -237,7 +239,7 @@
 			this.scTask.Panel2.Controls.Add(this.scTaskDetails);
 			this.scTask.Panel2MinSize = 350;
 			this.scTask.Size = new System.Drawing.Size(1000, 500);
-			this.scTask.SplitterDistance = 137;
+			this.scTask.SplitterDistance = 136;
 			this.scTask.SplitterWidth = 5;
 			this.scTask.TabIndex = 1;
 			// 
@@ -259,13 +261,12 @@
 			this.dgTasks.Name = "dgTasks";
 			this.dgTasks.RowTemplate.Height = 24;
 			this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.dgTasks.Size = new System.Drawing.Size(1000, 137);
+			this.dgTasks.Size = new System.Drawing.Size(1000, 136);
 			this.dgTasks.TabIndex = 0;
 			this.dgTasks.EditModeChanged += new System.EventHandler(this.dgTasks_EditModeChanged);
 			this.dgTasks.CancelRowEdit += new System.Windows.Forms.QuestionEventHandler(this.dgTasks_CancelRowEdit);
 			this.dgTasks.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellContentClick);
 			this.dgTasks.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellEndEdit);
-			this.dgTasks.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellMouseEnter);
 			this.dgTasks.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellMouseLeave);
 			this.dgTasks.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgTasks_CellMouseMove);
 			this.dgTasks.NewRowNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgTasks_NewRowNeeded);
@@ -291,9 +292,9 @@
 			// 
 			this.colText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.colText.DataPropertyName = "Text";
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.colText.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.colText.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colText.HeaderText = "Text";
 			this.colText.MinimumWidth = 200;
 			this.colText.Name = "colText";
@@ -302,8 +303,8 @@
 			// 
 			this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
 			this.colCategory.DataPropertyName = "category";
-			dataGridViewCellStyle2.NullValue = "LO";
-			this.colCategory.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle7.NullValue = "LO";
+			this.colCategory.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colCategory.HeaderText = "Category";
 			this.colCategory.Items.AddRange(new object[] {
             "",
@@ -319,8 +320,8 @@
 			// 
 			this.colDifficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.colDifficulty.DataPropertyName = "difficulty";
-			dataGridViewCellStyle3.NullValue = "Normal";
-			this.colDifficulty.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle8.NullValue = "Normal";
+			this.colDifficulty.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colDifficulty.DividerWidth = 2;
 			this.colDifficulty.HeaderText = "Difficulty";
 			this.colDifficulty.Items.AddRange(new object[] {
@@ -338,9 +339,9 @@
 			// 
 			this.colPts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.colPts.DataPropertyName = "pts";
-			dataGridViewCellStyle4.Format = "N2";
-			dataGridViewCellStyle4.NullValue = "0";
-			this.colPts.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle9.Format = "N2";
+			dataGridViewCellStyle9.NullValue = "0";
+			this.colPts.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colPts.HeaderText = "Pts";
 			this.colPts.Name = "colPts";
 			this.colPts.ReadOnly = true;
@@ -351,8 +352,8 @@
 			// 
 			this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
 			this.colAction.DataPropertyName = "type";
-			dataGridViewCellStyle5.NullValue = "Create";
-			this.colAction.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle10.NullValue = "Create";
+			this.colAction.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colAction.HeaderText = "Action";
 			this.colAction.Items.AddRange(new object[] {
             "Copy",
@@ -384,7 +385,7 @@
 			// 
 			this.scTaskDetails.Panel2.Controls.Add(this.tabsTaskProps);
 			this.scTaskDetails.Panel2MinSize = 595;
-			this.scTaskDetails.Size = new System.Drawing.Size(1000, 358);
+			this.scTaskDetails.Size = new System.Drawing.Size(1000, 359);
 			this.scTaskDetails.SplitterDistance = 400;
 			this.scTaskDetails.SplitterWidth = 5;
 			this.scTaskDetails.TabIndex = 1;
@@ -402,6 +403,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.label7);
 			this.groupBox1.Controls.Add(this.cboSourceLocationType);
 			this.groupBox1.Controls.Add(this.txtSourceLocationAddress);
 			this.groupBox1.Controls.Add(this.lblSourceLocationType);
@@ -424,7 +426,7 @@
             "Range",
             "Sheet",
             "Workbook"});
-			this.cboSourceLocationType.Location = new System.Drawing.Point(82, 21);
+			this.cboSourceLocationType.Location = new System.Drawing.Point(68, 21);
 			this.cboSourceLocationType.Name = "cboSourceLocationType";
 			this.cboSourceLocationType.Size = new System.Drawing.Size(85, 24);
 			this.cboSourceLocationType.TabIndex = 1;
@@ -433,7 +435,7 @@
 			// txtSourceLocationAddress
 			// 
 			this.txtSourceLocationAddress.EnableAutoDragDrop = true;
-			this.txtSourceLocationAddress.Location = new System.Drawing.Point(173, 23);
+			this.txtSourceLocationAddress.Location = new System.Drawing.Point(222, 23);
 			this.txtSourceLocationAddress.MaxLength = 64;
 			this.txtSourceLocationAddress.Multiline = false;
 			this.txtSourceLocationAddress.Name = "txtSourceLocationAddress";
@@ -446,7 +448,7 @@
 			// lblSourceLocationType
 			// 
 			this.lblSourceLocationType.AutoSize = true;
-			this.lblSourceLocationType.Location = new System.Drawing.Point(16, 25);
+			this.lblSourceLocationType.Location = new System.Drawing.Point(18, 25);
 			this.lblSourceLocationType.Name = "lblSourceLocationType";
 			this.lblSourceLocationType.Size = new System.Drawing.Size(40, 16);
 			this.lblSourceLocationType.TabIndex = 0;
@@ -455,7 +457,7 @@
 			// txtSourceLocationContext
 			// 
 			this.txtSourceLocationContext.EnableAutoDragDrop = true;
-			this.txtSourceLocationContext.Location = new System.Drawing.Point(82, 50);
+			this.txtSourceLocationContext.Location = new System.Drawing.Point(68, 50);
 			this.txtSourceLocationContext.MaxLength = 64;
 			this.txtSourceLocationContext.Multiline = false;
 			this.txtSourceLocationContext.Name = "txtSourceLocationContext";
@@ -468,7 +470,7 @@
 			// lblSourceLocationContext
 			// 
 			this.lblSourceLocationContext.AutoSize = true;
-			this.lblSourceLocationContext.Location = new System.Drawing.Point(19, 47);
+			this.lblSourceLocationContext.Location = new System.Drawing.Point(18, 47);
 			this.lblSourceLocationContext.Name = "lblSourceLocationContext";
 			this.lblSourceLocationContext.Size = new System.Drawing.Size(43, 16);
 			this.lblSourceLocationContext.TabIndex = 2;
@@ -476,12 +478,12 @@
 			// 
 			// grpTarget
 			// 
-			this.grpTarget.Controls.Add(this.comboBox1);
+			this.grpTarget.Controls.Add(this.cboProperty);
 			this.grpTarget.Controls.Add(this.lblTargetProperty);
 			this.grpTarget.Controls.Add(this.cboTargetType);
 			this.grpTarget.Controls.Add(this.lblTargetType);
 			this.grpTarget.Controls.Add(this.grpLocation);
-			this.grpTarget.Location = new System.Drawing.Point(8, 5);
+			this.grpTarget.Location = new System.Drawing.Point(8, 3);
 			this.grpTarget.Name = "grpTarget";
 			this.grpTarget.Size = new System.Drawing.Size(408, 140);
 			this.grpTarget.TabIndex = 2;
@@ -489,24 +491,24 @@
 			this.grpTarget.Tag = "Target";
 			this.grpTarget.Text = "Target";
 			// 
-			// comboBox1
+			// cboProperty
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
+			this.cboProperty.FormattingEnabled = true;
+			this.cboProperty.Items.AddRange(new object[] {
             "",
             "Text",
             "Formula",
             "FormulaR1C1"});
-			this.comboBox1.Location = new System.Drawing.Point(208, 25);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(168, 24);
-			this.comboBox1.TabIndex = 10;
-			this.comboBox1.Tag = "Property";
+			this.cboProperty.Location = new System.Drawing.Point(222, 25);
+			this.cboProperty.Name = "cboProperty";
+			this.cboProperty.Size = new System.Drawing.Size(168, 24);
+			this.cboProperty.TabIndex = 10;
+			this.cboProperty.Tag = "Property";
 			// 
 			// lblTargetProperty
 			// 
 			this.lblTargetProperty.AutoSize = true;
-			this.lblTargetProperty.Location = new System.Drawing.Point(143, 29);
+			this.lblTargetProperty.Location = new System.Drawing.Point(159, 29);
 			this.lblTargetProperty.Name = "lblTargetProperty";
 			this.lblTargetProperty.Size = new System.Drawing.Size(59, 16);
 			this.lblTargetProperty.TabIndex = 9;
@@ -520,7 +522,7 @@
             "Content",
             "Format",
             "Property"});
-			this.cboTargetType.Location = new System.Drawing.Point(52, 25);
+			this.cboTargetType.Location = new System.Drawing.Point(68, 25);
 			this.cboTargetType.Name = "cboTargetType";
 			this.cboTargetType.Size = new System.Drawing.Size(85, 24);
 			this.cboTargetType.TabIndex = 8;
@@ -529,7 +531,7 @@
 			// lblTargetType
 			// 
 			this.lblTargetType.AutoSize = true;
-			this.lblTargetType.Location = new System.Drawing.Point(6, 29);
+			this.lblTargetType.Location = new System.Drawing.Point(18, 28);
 			this.lblTargetType.Name = "lblTargetType";
 			this.lblTargetType.Size = new System.Drawing.Size(40, 16);
 			this.lblTargetType.TabIndex = 7;
@@ -537,6 +539,7 @@
 			// 
 			// grpLocation
 			// 
+			this.grpLocation.Controls.Add(this.label6);
 			this.grpLocation.Controls.Add(this.cboTargetLocationType);
 			this.grpLocation.Controls.Add(this.txtTargetLocationAddress);
 			this.grpLocation.Controls.Add(this.lblTargetLocationType);
@@ -559,7 +562,7 @@
             "Range",
             "Sheet",
             "Workbook"});
-			this.cboTargetLocationType.Location = new System.Drawing.Point(82, 21);
+			this.cboTargetLocationType.Location = new System.Drawing.Point(68, 21);
 			this.cboTargetLocationType.Name = "cboTargetLocationType";
 			this.cboTargetLocationType.Size = new System.Drawing.Size(85, 24);
 			this.cboTargetLocationType.TabIndex = 1;
@@ -568,7 +571,7 @@
 			// txtTargetLocationAddress
 			// 
 			this.txtTargetLocationAddress.EnableAutoDragDrop = true;
-			this.txtTargetLocationAddress.Location = new System.Drawing.Point(173, 23);
+			this.txtTargetLocationAddress.Location = new System.Drawing.Point(222, 23);
 			this.txtTargetLocationAddress.MaxLength = 64;
 			this.txtTargetLocationAddress.Multiline = false;
 			this.txtTargetLocationAddress.Name = "txtTargetLocationAddress";
@@ -582,7 +585,7 @@
 			// lblTargetLocationType
 			// 
 			this.lblTargetLocationType.AutoSize = true;
-			this.lblTargetLocationType.Location = new System.Drawing.Point(16, 25);
+			this.lblTargetLocationType.Location = new System.Drawing.Point(18, 25);
 			this.lblTargetLocationType.Name = "lblTargetLocationType";
 			this.lblTargetLocationType.Size = new System.Drawing.Size(40, 16);
 			this.lblTargetLocationType.TabIndex = 0;
@@ -591,7 +594,7 @@
 			// txtTargetLocationContext
 			// 
 			this.txtTargetLocationContext.EnableAutoDragDrop = true;
-			this.txtTargetLocationContext.Location = new System.Drawing.Point(82, 50);
+			this.txtTargetLocationContext.Location = new System.Drawing.Point(68, 50);
 			this.txtTargetLocationContext.MaxLength = 64;
 			this.txtTargetLocationContext.Multiline = false;
 			this.txtTargetLocationContext.Name = "txtTargetLocationContext";
@@ -604,7 +607,7 @@
 			// lblTargetLocationContext
 			// 
 			this.lblTargetLocationContext.AutoSize = true;
-			this.lblTargetLocationContext.Location = new System.Drawing.Point(19, 47);
+			this.lblTargetLocationContext.Location = new System.Drawing.Point(18, 47);
 			this.lblTargetLocationContext.Name = "lblTargetLocationContext";
 			this.lblTargetLocationContext.Size = new System.Drawing.Size(43, 16);
 			this.lblTargetLocationContext.TabIndex = 2;
@@ -619,7 +622,7 @@
 			this.tabsTaskProps.Margin = new System.Windows.Forms.Padding(4);
 			this.tabsTaskProps.Name = "tabsTaskProps";
 			this.tabsTaskProps.SelectedIndex = 0;
-			this.tabsTaskProps.Size = new System.Drawing.Size(596, 358);
+			this.tabsTaskProps.Size = new System.Drawing.Size(596, 359);
 			this.tabsTaskProps.TabIndex = 0;
 			// 
 			// tabContent
@@ -636,7 +639,7 @@
 			this.tabContent.Margin = new System.Windows.Forms.Padding(4);
 			this.tabContent.Name = "tabContent";
 			this.tabContent.Padding = new System.Windows.Forms.Padding(4);
-			this.tabContent.Size = new System.Drawing.Size(588, 329);
+			this.tabContent.Size = new System.Drawing.Size(588, 330);
 			this.tabContent.TabIndex = 0;
 			this.tabContent.Tag = "Answer";
 			this.tabContent.Text = "Content";
@@ -717,7 +720,7 @@
 			this.tabFormat.Margin = new System.Windows.Forms.Padding(4);
 			this.tabFormat.Name = "tabFormat";
 			this.tabFormat.Padding = new System.Windows.Forms.Padding(4);
-			this.tabFormat.Size = new System.Drawing.Size(588, 332);
+			this.tabFormat.Size = new System.Drawing.Size(588, 333);
 			this.tabFormat.TabIndex = 1;
 			this.tabFormat.Text = "Format";
 			// 
@@ -764,6 +767,24 @@
 			this.mniSubmissionSelect.Size = new System.Drawing.Size(105, 22);
 			this.mniSubmissionSelect.Text = "Select";
 			this.mniSubmissionSelect.Click += new System.EventHandler(this.mniSubmissionSelect_Click);
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(159, 23);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(59, 16);
+			this.label6.TabIndex = 10;
+			this.label6.Text = "Address";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(159, 25);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(59, 16);
+			this.label7.TabIndex = 11;
+			this.label7.Text = "Address";
 			// 
 			// ZStepControl
 			// 
@@ -835,7 +856,7 @@
 		private System.Windows.Forms.RichTextBox txtSourceLocationContext;
 		private System.Windows.Forms.Label lblSourceLocationContext;
 		private System.Windows.Forms.GroupBox grpTarget;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox cboProperty;
 		private System.Windows.Forms.Label lblTargetProperty;
 		private System.Windows.Forms.ComboBox cboTargetType;
 		private System.Windows.Forms.Label lblTargetType;
@@ -860,5 +881,7 @@
 		private System.Windows.Forms.DataGridViewComboBoxColumn colDifficulty;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPts;
 		private System.Windows.Forms.DataGridViewComboBoxColumn colAction;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label6;
 	}
 }
